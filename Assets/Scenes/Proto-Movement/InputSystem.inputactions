@@ -1,0 +1,45 @@
+{
+    "name": "InputSystem",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "4ebabb5d-714c-4efd-9fcf-21160313512d",
+            "actions": [
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "f5af7927-5a9a-4817-bd0c-2e1a505c91d2",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "942c2f27-634f-4f1f-9fa3-1e9e859f7a31",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a3d3519a-1780-4079-8645-b2babe95359e",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "ScaleVector2(x=0.1,y=0.1)",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
