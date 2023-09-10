@@ -1,3 +1,8 @@
+# Shotgun Jerboa
+
+## File Structure
+
+You can find levels under Assets/Scenes
 
 ## Non-Command Line Git
 Highly reccomended for anyone who doesn't know how to use command line git.
