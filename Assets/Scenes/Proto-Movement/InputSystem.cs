@@ -35,6 +35,33 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RightHandPressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""449a9295-f88b-4c9d-ade7-d19ce55cdaa4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightHandReleased"",
+                    ""type"": ""Button"",
+                    ""id"": ""072c24ab-8f96-444c-bf9d-fe28d6e43b46"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left Hand Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""97139d3b-3f9a-4a9c-8f0c-d396b41a39c9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -59,6 +86,39 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9db751b0-40a9-4ce1-a092-b9be8f5e8c07"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightHandPressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a0764146-f768-4cd2-8302-c989c83e3291"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left Hand Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""90b4b1eb-ad41-4c6f-8ae4-d7758c02a673"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightHandReleased"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -68,6 +128,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Look = m_Gameplay.FindAction("Look", throwIfNotFound: true);
+        m_Gameplay_RightHandPressed = m_Gameplay.FindAction("RightHandPressed", throwIfNotFound: true);
+        m_Gameplay_RightHandReleased = m_Gameplay.FindAction("RightHandReleased", throwIfNotFound: true);
+        m_Gameplay_LeftHandFire = m_Gameplay.FindAction("Left Hand Fire", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -130,11 +193,17 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Gameplay;
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_Look;
+    private readonly InputAction m_Gameplay_RightHandPressed;
+    private readonly InputAction m_Gameplay_RightHandReleased;
+    private readonly InputAction m_Gameplay_LeftHandFire;
     public struct GameplayActions
     {
         private @PlayerInputSystem m_Wrapper;
         public GameplayActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @Look => m_Wrapper.m_Gameplay_Look;
+        public InputAction @RightHandPressed => m_Wrapper.m_Gameplay_RightHandPressed;
+        public InputAction @RightHandReleased => m_Wrapper.m_Gameplay_RightHandReleased;
+        public InputAction @LeftHandFire => m_Wrapper.m_Gameplay_LeftHandFire;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -147,6 +216,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @RightHandPressed.started += instance.OnRightHandPressed;
+            @RightHandPressed.performed += instance.OnRightHandPressed;
+            @RightHandPressed.canceled += instance.OnRightHandPressed;
+            @RightHandReleased.started += instance.OnRightHandReleased;
+            @RightHandReleased.performed += instance.OnRightHandReleased;
+            @RightHandReleased.canceled += instance.OnRightHandReleased;
+            @LeftHandFire.started += instance.OnLeftHandFire;
+            @LeftHandFire.performed += instance.OnLeftHandFire;
+            @LeftHandFire.canceled += instance.OnLeftHandFire;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -154,6 +232,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @RightHandPressed.started -= instance.OnRightHandPressed;
+            @RightHandPressed.performed -= instance.OnRightHandPressed;
+            @RightHandPressed.canceled -= instance.OnRightHandPressed;
+            @RightHandReleased.started -= instance.OnRightHandReleased;
+            @RightHandReleased.performed -= instance.OnRightHandReleased;
+            @RightHandReleased.canceled -= instance.OnRightHandReleased;
+            @LeftHandFire.started -= instance.OnLeftHandFire;
+            @LeftHandFire.performed -= instance.OnLeftHandFire;
+            @LeftHandFire.canceled -= instance.OnLeftHandFire;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -174,5 +261,8 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     public interface IGameplayActions
     {
         void OnLook(InputAction.CallbackContext context);
+        void OnRightHandPressed(InputAction.CallbackContext context);
+        void OnRightHandReleased(InputAction.CallbackContext context);
+        void OnLeftHandFire(InputAction.CallbackContext context);
     }
 }
