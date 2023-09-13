@@ -373,7 +373,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 484013131}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 1.5
   m_Drag: 1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2395,8 +2395,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1893533241}
   - {fileID: 561280710}
+  - {fileID: 1893533241}
   m_Father: {fileID: 140563946}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &963194229
@@ -2761,6 +2761,8 @@ MonoBehaviour:
   shakeDuration: 0.3
   shakeStrength: 0.3
   impactForce: 100
+  isShooting: 0
+  inputMethod: 2
 --- !u!1 &1176395608
 GameObject:
   m_ObjectHideFlags: 0
@@ -3873,6 +3875,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2106022849}
+  - component: {fileID: 2106022850}
   m_Layer: 0
   m_Name: 'Test Shotgun '
   m_TagString: Untagged
@@ -3900,6 +3903,40 @@ Transform:
   - {fileID: 776173337}
   m_Father: {fileID: 561280710}
   m_LocalEulerAnglesHint: {x: 0, y: 166.147, z: 0}
+--- !u!114 &2106022850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106022848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c41223694ef4f142b7d778d0ea9d25e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputActions: {fileID: 815642482}
+  damage: 20
+  timeBetweenShooting: 0
+  spread: 0.1
+  range: 100
+  reloadTime: 2
+  timeBetweenShots: 0
+  bulletsPerTap: 1
+  bulletsLeft: 100
+  bulletsShot: 0
+  isRecoil: 1
+  fpsCam: {fileID: 963194227}
+  shootingPoint: {fileID: 776173337}
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 9
+  recoilForce: 10
+  shakeDuration: 0.3
+  shakeStrength: 0.3
+  impactForce: 100
+  isShooting: 0
+  inputMethod: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

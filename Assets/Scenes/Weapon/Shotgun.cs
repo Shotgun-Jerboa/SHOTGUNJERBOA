@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shotgun : MonoBehaviour
 {
-    [SerializeField] SettingVars inputActions;
+    public SettingVars inputActions;
 
     // Gun stats
     public int damage;
@@ -27,64 +27,88 @@ public class Shotgun : MonoBehaviour
     [SerializeField] float shakeDuration;
     [SerializeField] float shakeStrength;
     [SerializeField] float impactForce;
-    private bool isShooting = false;
+    public bool isShooting = false;
+    public enum InputMethod
+    {
+        None,
+        LeftClick,
+        RightClick
+    }
 
-    private void Awake()
+    [SerializeField] InputMethod inputMethod;
+     void Awake()
     {
         readyToShoot = true;
 
-        inputActions.input.Gameplay.RightHandPressed.performed += ctx => Shoot();
-        inputActions.input.Gameplay.RightHandReleased.performed += ctx => isShooting = false;
+        inputActions = GameObject.Find("Settings").GetComponent<SettingVars>();
+        fpsCam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+
+        if (inputMethod == InputMethod.LeftClick)
+        {
+            inputActions.input.Gameplay.LeftHandPressed.performed += ctx => Shoot(InputMethod.LeftClick);
+            inputActions.input.Gameplay.LeftHandReleased.performed += ctx => isShooting = false;
+        }
+        else if (inputMethod == InputMethod.RightClick)
+        {
+            inputActions.input.Gameplay.RightHandPressed.performed += ctx => Shoot(InputMethod.RightClick);
+            inputActions.input.Gameplay.RightHandReleased.performed += ctx => isShooting = false;
+
+        }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         playerRB = GameObject.Find("Player").GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        Debug.Log(isShooting);
        
     }
-    private void Shoot()
+    private void Shoot(InputMethod inputMethod)
     {
         if (readyToShoot && !reloading && bulletsLeft > 0)
         {
             bulletsShot = bulletsPerTap;
             readyToShoot = false;
+            Debug.Log(inputMethod);
 
-            float x = Random.Range(-spread, spread);
-            float y = Random.Range(-spread, spread);
-            Vector3 direction = fpsCam.transform.forward + new Vector3(x, y, 0);
-
-            if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsEnemy))
+            if (inputMethod == InputMethod.LeftClick ||
+            (inputMethod == InputMethod.RightClick))
             {
-                Debug.Log(rayHit.collider.name);
+                float x = Random.Range(-spread, spread);
+                float y = Random.Range(-spread, spread);
+                Vector3 direction = fpsCam.transform.forward + new Vector3(x, y, 0);
 
-               /* if (rayHit.collider.CompareTag("Ground") || rayHit.collider.CompareTag("Wall"))
+                if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsEnemy))
                 {
-                    Quaternion impactRotation = Quaternion.LookRotation(rayHit.normal);
-                    // GameObject impact = Instantiate(bulletHoleGraphic, rayHit.point, impactRotation);
-                    // impact.transform.parent = rayHit.transform;
-                }*/
+                    Debug.Log(rayHit.collider.name);
 
-                if (rayHit.rigidbody != null)
-                {
-                    rayHit.rigidbody.AddForce(-rayHit.normal * impactForce);
+                    /* if (rayHit.collider.CompareTag("Ground") || rayHit.collider.CompareTag("Wall"))
+                     {
+                         Quaternion impactRotation = Quaternion.LookRotation(rayHit.normal);
+                         // GameObject impact = Instantiate(bulletHoleGraphic, rayHit.point, impactRotation);
+                         // impact.transform.parent = rayHit.transform;
+                     }*/
+
+                    if (rayHit.rigidbody != null)
+                    {
+                        rayHit.rigidbody.AddForce(-rayHit.normal * impactForce);
+                    }
                 }
-            }
-            bulletsLeft--;
-            bulletsShot--;
+                bulletsLeft--;
+                bulletsShot--;
 
-            Invoke("ResetShot", timeBetweenShooting);
-            if (isRecoil)
-            {
-                playerRB.AddForce(-direction.normalized * recoilForce, ForceMode.VelocityChange);
+                Invoke("ResetShot", timeBetweenShooting);
+                if (isRecoil)
+                {
+                    playerRB.AddForce(-direction.normalized * recoilForce, ForceMode.VelocityChange);
+                }
+                if (bulletsShot > 0 && bulletsLeft > 0)
+                    Invoke("Shoot", timeBetweenShots);
             }
-            if (bulletsShot > 0 && bulletsLeft > 0)
-                Invoke("Shoot", timeBetweenShots);
-        }
+        }      
+        
     }
 
     private void ResetShot()
