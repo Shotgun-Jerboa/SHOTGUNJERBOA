@@ -374,7 +374,7 @@ Rigidbody:
   m_GameObject: {fileID: 484013131}
   serializedVersion: 4
   m_Mass: 1.5
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -2743,7 +2743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActions: {fileID: 815642482}
   damage: 20
-  timeBetweenShooting: 0
+  timeBetweenShooting: 1
   spread: 0.1
   range: 100
   reloadTime: 2
@@ -3917,7 +3917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActions: {fileID: 815642482}
   damage: 20
-  timeBetweenShooting: 0
+  timeBetweenShooting: 1
   spread: 0.1
   range: 100
   reloadTime: 2
