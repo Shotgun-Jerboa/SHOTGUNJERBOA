@@ -10,6 +10,7 @@ public class SettingVars : MonoBehaviour
 
     public PlayerInputSystem input;
 
+    [RuntimeInitializeOnLoadMethod]
     private void Awake()
     {
         input = new PlayerInputSystem();
