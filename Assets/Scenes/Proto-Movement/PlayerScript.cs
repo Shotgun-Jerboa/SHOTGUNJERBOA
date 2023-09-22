@@ -13,11 +13,15 @@ public class PlayerScript : MonoBehaviour
     private float height;
 
     private Rigidbody physbody;
-    public List<float> jumps = new List<float>(); // This is public so it can be tracked while testing
+    //public List<float> jumps = new List<float>();
+    private float jumpTime = -1;
     
     private float maxHeight = 0; // Deprecated
 
     private int use = 0;
+
+    private List<float> debugList;
+    private bool doMeasure = false;
 
     void Start()
     {
@@ -77,20 +81,27 @@ public class PlayerScript : MonoBehaviour
         }
 
         height = gameObjects["Collision"].GetComponent<CapsuleCollider>().height;
+
+        debugList = new();
     }
 
     private void Update()
     {
         if (settings.input.Gameplay.TestButton.WasPressedThisFrame())
         {
-            if (use == 0)
-            {
-                use++;
-            } else
-            {
-                use--;
-            }
-            print(use);
+            //if (use == 0)
+            //{
+            //    use++;
+            //} else
+            //{
+            //    use--;
+            //}
+            //print(use);
+
+            doMeasure = !doMeasure;
+            print(doMeasure);
+            debugList.Clear();
+            debugList.Add(transform.position.y);
         }
     }
 
@@ -104,39 +115,68 @@ public class PlayerScript : MonoBehaviour
         //}
 
         onGround = Physics.Raycast(transform.position, Vector3.down, (height * 0.5f) + 0.1f, groundLayer);
+        if (onGround)
+        {
+            physbody.drag = settings.worldVars.groundDrag;
+        } else
+        {
+            physbody.drag = 0;
+        }
 
+        //if (doMeasure)
+        //{
+        //    if (!onGround)
+        //    {
+        //        debugList.Add(transform.position.y);
+        //    } else
+        //    {
+        //        debugList.Add(transform.position.y);
+        //        string result = "[";
+        //        foreach(float element in debugList)
+        //        {
+        //            result += element.ToString() + ", ";
+        //        }
+        //        result += $"{transform.position.y}]";
+        //        print(result);
+        //    }
+        //}
 
         Vector2 moveDir = settings.input.Gameplay.Move.ReadValue<Vector2>();
         if (moveDir != Vector2.zero)
         {
-            physbody.velocity = gameObjects["Orientation"].GetComponent<Transform>().rotation * new Vector3(moveDir.x * 5, physbody.velocity.y, moveDir.y * 5);
+            physbody.velocity = gameObjects["Orientation"].GetComponent<Transform>().rotation * new Vector3(
+                moveDir.x * settings.worldVars.moveSpeed,
+                physbody.velocity.y,
+                moveDir.y * settings.worldVars.moveSpeed
+            );
             if (onGround)
             {
-                jumps.Add(0);
+                physbody.velocity = new Vector3(physbody.velocity.x, 0, physbody.velocity.z);
+                jumpTime = 0;
             }
         }
 
-        int j = 0;
-        for(int i = 0; i < jumps.Count; i++)
+        if(jumpTime > 0) {
+            Vector3 velocity1 = new Vector3(0, jumpCurve[use].Evaluate(jumpTime) * settings.worldVars.hopHeight, 0);
+            physbody.velocity -= velocity1;
+            jumpTime += Time.fixedDeltaTime;
+            Vector3 velocity2 = new Vector3(0, jumpCurve[use].Evaluate(jumpTime) * settings.worldVars.hopHeight, 0);
+            physbody.velocity += velocity2;
+
+            if (jumpCurve[use][jumpCurve[use].length - 1].time <= jumpTime)
+            {
+                jumpTime = -1;
+            }
+        } else if(jumpTime == 0)
         {
-            if(jumps[j] != 0) {
-                Vector3 velocity1 = new Vector3(0, jumpCurve[use].Evaluate(jumps[j]) * 10, 0);
-                physbody.velocity -= velocity1;
-                jumps[j] += Time.fixedDeltaTime;
-                Vector3 velocity2 = new Vector3(0, jumpCurve[use].Evaluate(jumps[j]) * 10, 0);
-                physbody.velocity += velocity2;
-            } else
+            Vector3 velocity1 = new Vector3(0, jumpCurve[use].Evaluate(jumpTime) * settings.worldVars.hopHeight, 0);
+            physbody.velocity += velocity1;
+            jumpTime += Time.fixedDeltaTime;
+
+            if (jumpCurve[use][jumpCurve[use].length - 1].time <= jumpTime)
             {
-                Vector3 velocity1 = new Vector3(0, jumpCurve[use].Evaluate(jumps[j]) * 10, 0);
-                physbody.velocity += velocity1;
-                jumps[j] += Time.fixedDeltaTime;
+                jumpTime = -1;
             }
-            if (jumpCurve[use][jumpCurve[use].length - 1].time <= jumps[j])
-            {
-                jumps.RemoveAt(j);
-                j--;
-            }
-            j++;
         }
     }
 }
