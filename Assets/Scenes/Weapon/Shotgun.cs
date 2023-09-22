@@ -137,6 +137,8 @@ public class Shotgun : MonoBehaviour
 
                         Invoke("ResetShot", reloadTime);
 
+
+                        playerRB.AddForce(-direction.normalized * recoilForce, ForceMode.VelocityChange);
                     }
                 }
             }
