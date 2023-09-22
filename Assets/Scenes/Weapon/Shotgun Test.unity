@@ -423,6 +423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityConstant: 0
+  isGrounded: 0
 --- !u!1 &540243824
 GameObject:
   m_ObjectHideFlags: 0
@@ -2703,7 +2704,7 @@ GameObject:
   - component: {fileID: 1150121327}
   - component: {fileID: 1150121328}
   m_Layer: 0
-  m_Name: 'Test Shotgun '
+  m_Name: Shotgun Right Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2743,13 +2744,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActions: {fileID: 815642482}
   damage: 20
-  timeBetweenShooting: 2
+  reloadTime: 2
   spread: 0.1
   range: 100
-  reloadTime: 2
-  timeBetweenShots: 0
   bulletsPerTap: 1
-  bulletsLeft: 100
+  bulletsLeft: 1
   bulletsShot: 0
   isRecoil: 1
   fpsCam: {fileID: 963194227}
@@ -2757,8 +2756,8 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 9
-  isGrounded: 0
-  playerCollider: {fileID: 0}
+  playerOrientation: {fileID: 102919573}
+  playerRef: {fileID: 0}
   recoilForce: 10
   shakeDuration: 0.3
   shakeStrength: 0.3
@@ -3509,7 +3508,7 @@ GameObject:
   - component: {fileID: 2022510682}
   m_Layer: 3
   m_Name: ff
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3879,7 +3878,7 @@ GameObject:
   - component: {fileID: 2106022849}
   - component: {fileID: 2106022850}
   m_Layer: 0
-  m_Name: 'Test Shotgun '
+  m_Name: Shotgun Left Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3919,11 +3918,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActions: {fileID: 815642482}
   damage: 20
-  timeBetweenShooting: 2
+  reloadTime: 2
   spread: 0.1
   range: 100
-  reloadTime: 2
-  timeBetweenShots: 0
   bulletsPerTap: 1
   bulletsLeft: 100
   bulletsShot: 0
@@ -3933,8 +3930,8 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 9
-  isGrounded: 0
-  playerCollider: {fileID: 0}
+  playerOrientation: {fileID: 102919573}
+  playerRef: {fileID: 0}
   recoilForce: 10
   shakeDuration: 0.3
   shakeStrength: 0.3
