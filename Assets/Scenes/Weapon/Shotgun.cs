@@ -115,25 +115,26 @@ public class Shotgun : MonoBehaviour
                     bulletsLeft--;
                     bulletsShot--;
 
-                    shootingAngle = Vector3.Angle(playerOrientation.transform.up, fpsCam.transform.forward);
 
                     if (isRecoil)
                     {
                         if (!playerRef.isGrounded)
                         {
 
-                            if (shootingAngle >= minShootingAngle && shootingAngle <= maxShootingAngle)
-                            {
+                            
                                 //Get the gravity force acting on the player
                                 Vector3 gravityForce = Physics.gravity * playerRB.mass;
                                 //Add a counter force that is equal and opposite to the gravity force
-                                playerRB.AddForce(-gravityForce, ForceMode.Impulse);
-                            }
+                                //playerRB.AddForce(-gravityForce, ForceMode.Impulse);
+                                playerRB.velocity += (-direction.normalized * recoilForce) + (-gravityForce * Time.deltaTime);
+    
 
                         }
 
                         // Add the recoil force as before
-                        playerRB.AddForce(-direction.normalized * recoilForce, ForceMode.VelocityChange);                    
+                       // playerRB.AddForce(-direction.normalized * recoilForce, ForceMode.VelocityChange);
+                        playerRB.velocity += -direction.normalized * recoilForce;
+
                         Invoke("ResetShot", reloadTime);
 
                     }
@@ -143,10 +144,11 @@ public class Shotgun : MonoBehaviour
         }      
         
     }
+
+   
     private void ResetShot()
     {
         readyToShoot = true;
-        Debug.Log(transform.gameObject.name + " Reload");
 
     }
 
