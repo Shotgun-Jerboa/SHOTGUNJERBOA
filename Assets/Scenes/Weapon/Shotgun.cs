@@ -8,7 +8,7 @@ public class Shotgun : MonoBehaviour
 
     // Gun stats
     public int damage;
-    public float reloadTime, spread, range;
+    public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
     public int bulletsPerTap;
     public int bulletsLeft, bulletsShot;
     public bool isRecoil;
@@ -22,17 +22,13 @@ public class Shotgun : MonoBehaviour
     public RaycastHit rayHit;
     public LayerMask whatIsEnemy;
     Rigidbody playerRB;
-    [SerializeField] Transform playerOrientation;
-    [SerializeField] PlayerScript playerRef;
 
     [SerializeField] float recoilForce;
     [SerializeField] float shakeDuration;
     [SerializeField] float shakeStrength;
     [SerializeField] float impactForce;
     public bool isShooting = false;
-    float shootingAngle;
-    float maxShootingAngle = 180; // Maximum angle to apply counterforce
-    float minShootingAngle = 135; // Minimum angle to apply counterforce
+
     private float lastShotTime;
 
     public enum InputMethod
@@ -63,29 +59,29 @@ public class Shotgun : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         playerRB = GameObject.Find("Player").GetComponent<Rigidbody>();
-        playerRef = GameObject.Find("Player").GetComponent<PlayerScript>();
     }
 
     private void Update()
     {
-
+       
     }
-
     private void Shoot(InputMethod inputMethod)
     {
-        if (readyToShoot && bulletsLeft > 0)
+        if (readyToShoot && !reloading && bulletsLeft > 0)
         {
 
             // Calculate the time since the last shot
             float timeSinceLastShot = Time.time - lastShotTime;
 
-            if (timeSinceLastShot >= reloadTime)
+            if (timeSinceLastShot >= timeBetweenShooting)
             {
+
                 bulletsShot = bulletsPerTap;
                 readyToShoot = false;
+                Debug.Log(inputMethod);
 
                 // Update the last shot time
                 lastShotTime = Time.time;
@@ -99,6 +95,7 @@ public class Shotgun : MonoBehaviour
 
                     if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsEnemy))
                     {
+                        Debug.Log(rayHit.collider.name);
 
                         /* if (rayHit.collider.CompareTag("Ground") || rayHit.collider.CompareTag("Wall"))
                          {
@@ -115,7 +112,7 @@ public class Shotgun : MonoBehaviour
                     bulletsLeft--;
                     bulletsShot--;
 
-
+                    Invoke("ResetShot", timeBetweenShooting);
                     if (isRecoil)
                     {
                         if (!playerRef.isGrounded)
@@ -136,10 +133,9 @@ public class Shotgun : MonoBehaviour
                         playerRB.velocity += -direction.normalized * recoilForce;
 
                         Invoke("ResetShot", reloadTime);
-
-
-                        playerRB.AddForce(-direction.normalized * recoilForce, ForceMode.VelocityChange);
                     }
+                    if (bulletsShot > 0 && bulletsLeft > 0)
+                        Invoke("Shoot", timeBetweenShots);
                 }
             }
                
@@ -147,11 +143,9 @@ public class Shotgun : MonoBehaviour
         
     }
 
-   
     private void ResetShot()
     {
         readyToShoot = true;
-
     }
 
     public void Reload()
@@ -163,6 +157,5 @@ public class Shotgun : MonoBehaviour
     private void ReloadFinished()
     {
         reloading = false;
-        ResetShot();
     }
 }
