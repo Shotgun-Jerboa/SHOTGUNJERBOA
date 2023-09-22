@@ -1,5 +1,9 @@
 # Shotgun Jerboa
 
+## Download Github Desktop Here
+
+https://desktop.github.com/
+
 Please work on this project in your own branches. All of us working on the same branch will be chaos. If you don't know how branches work, please see this guide: \
 https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches
 
