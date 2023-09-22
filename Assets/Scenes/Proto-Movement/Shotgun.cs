@@ -12,7 +12,7 @@ public class Shotgun : MonoBehaviour
     public int bulletsPerTap;
     public int bulletsLeft, bulletsShot;
     public bool isRecoil;
-
+    
     // Bools 
     bool readyToShoot, reloading;
 
@@ -22,6 +22,7 @@ public class Shotgun : MonoBehaviour
     public RaycastHit rayHit;
     public LayerMask whatIsEnemy;
     Rigidbody playerRB;
+    public PlayerScript playerRef;
 
     [SerializeField] float recoilForce;
     [SerializeField] float shakeDuration;
@@ -115,7 +116,7 @@ public class Shotgun : MonoBehaviour
                     Invoke("ResetShot", timeBetweenShooting);
                     if (isRecoil)
                     {
-                        if (!playerRef.isGrounded)
+                        if (!playerRef.onGround)
                         {
 
                             

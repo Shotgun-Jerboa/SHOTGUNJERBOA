@@ -7,9 +7,9 @@ public class PlayerScript : MonoBehaviour
     public SettingVars settings;
     public AnimationCurve[] jumpCurve;
     public LayerMask groundLayer;
+    public bool onGround = false;
 
     private Dictionary<string, GameObject> gameObjects;
-    private bool onGround = false;
     private float height;
 
     private Rigidbody physbody;
