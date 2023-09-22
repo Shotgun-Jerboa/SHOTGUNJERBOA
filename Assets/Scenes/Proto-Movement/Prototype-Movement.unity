@@ -423,11 +423,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b6c4e06d32bf041b8fc1ff0c664083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 0}
+  settings: {fileID: 815642482}
   jumpCurve: []
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   onGround: 0
 --- !u!1 &540243824
 GameObject:
@@ -1658,7 +1658,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CamSensitivityX: 400
   CamSensitivityY: 400
-  worldVars: {fileID: 0}
+  worldVars: {fileID: 955112013}
 --- !u!4 &815642483
 Transform:
   m_ObjectHideFlags: 0

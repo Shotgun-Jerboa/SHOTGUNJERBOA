@@ -123,8 +123,8 @@ public class Shotgun : MonoBehaviour
                                 //Get the gravity force acting on the player
                                 Vector3 gravityForce = Physics.gravity * playerRB.mass;
                                 //Add a counter force that is equal and opposite to the gravity force
-                                //playerRB.AddForce(-gravityForce, ForceMode.Impulse);
-                                playerRB.velocity += (-direction.normalized * recoilForce) + (-gravityForce * Time.deltaTime);
+                                playerRB.AddForce(-gravityForce, ForceMode.Impulse);
+                                //playerRB.velocity += (-direction.normalized * recoilForce) + (-gravityForce * Time.deltaTime);
     
 
                         }
