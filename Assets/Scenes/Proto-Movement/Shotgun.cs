@@ -116,7 +116,7 @@ public class Shotgun : MonoBehaviour
                     Invoke("ResetShot", timeBetweenShooting);
                     if (isRecoil)
                     {
-                        if (!playerRef.isGrounded)
+                        if (!playerRef.onGround)
                         {
                             // Calculate the current downward velocity due to gravity
                             float currentGravityEffect = Vector3.Dot(playerRB.velocity, Vector3.up);
