@@ -12,7 +12,7 @@ public class Shotgun : MonoBehaviour
     public int bulletsPerTap;
     public int bulletsLeft, bulletsShot;
     public bool isRecoil;
-
+    
     // Bools 
     bool readyToShoot, reloading;
 
@@ -22,6 +22,7 @@ public class Shotgun : MonoBehaviour
     public RaycastHit rayHit;
     public LayerMask whatIsEnemy;
     Rigidbody playerRB;
+    public PlayerScript playerRef;
 
     [SerializeField] float recoilForce;
     [SerializeField] float shakeDuration;
@@ -117,23 +118,23 @@ public class Shotgun : MonoBehaviour
                     {
                         if (!playerRef.isGrounded)
                         {
+                            // Calculate the current downward velocity due to gravity
+                            float currentGravityEffect = Vector3.Dot(playerRB.velocity, Vector3.up);
 
-                            
-                                //Get the gravity force acting on the player
-                                Vector3 gravityForce = Physics.gravity * playerRB.mass;
-                                //Add a counter force that is equal and opposite to the gravity force
-                                //playerRB.AddForce(-gravityForce, ForceMode.Impulse);
-                                playerRB.velocity += (-direction.normalized * recoilForce) + (-gravityForce * Time.deltaTime);
-    
+                            // Neutralize the gravity effect for the recoil duration (we subtract it from the recoilForce)
+                            Vector3 effectiveRecoilForce = -direction.normalized * (recoilForce - currentGravityEffect);
 
+                            playerRB.velocity += effectiveRecoilForce;
                         }
-
-                        // Add the recoil force as before
-                       // playerRB.AddForce(-direction.normalized * recoilForce, ForceMode.VelocityChange);
-                        playerRB.velocity += -direction.normalized * recoilForce;
+                        else
+                        {
+                            // When grounded, just apply the recoil as usual
+                            playerRB.velocity += -direction.normalized * recoilForce;
+                        }
 
                         Invoke("ResetShot", reloadTime);
                     }
+
                     if (bulletsShot > 0 && bulletsLeft > 0)
                         Invoke("Shoot", timeBetweenShots);
                 }
