@@ -25,6 +25,7 @@ public class Shotgun : MonoBehaviour
     Rigidbody playerRB;
     public PlayerScript playerRef;
     public Text AmmoCounter;
+    public GameObject Bullet;
 
     [SerializeField] float recoilForce;
     [SerializeField] float shakeDuration;
@@ -52,15 +53,11 @@ public class Shotgun : MonoBehaviour
         if (inputMethod == InputMethod.LeftClick)
         {
             inputActions.input.Gameplay.LeftHandPressed.performed += ctx => Shoot(InputMethod.LeftClick);
-            playerRef.Ammo--;
-            AmmoCounter.text = "Ammo: " + playerRef.Ammo;
             inputActions.input.Gameplay.LeftHandReleased.performed += ctx => isShooting = false;
         }
         else if (inputMethod == InputMethod.RightClick)
         {
             inputActions.input.Gameplay.RightHandPressed.performed += ctx => Shoot(InputMethod.RightClick);
-            playerRef.Ammo--;
-            AmmoCounter.text = "Ammo: " + playerRef.Ammo;
             inputActions.input.Gameplay.RightHandReleased.performed += ctx => isShooting = false;
 
         }
@@ -110,14 +107,23 @@ public class Shotgun : MonoBehaviour
                              // GameObject impact = Instantiate(bulletHoleGraphic, rayHit.point, impactRotation);
                              // impact.transform.parent = rayHit.transform;
                          }*/
-
+                        
+                        if(playerRef.Ammo >= 1)
+                        {
+                            Instantiate(Bullet,transform.position,Quaternion.identity);
+                            Bullet.GetComponent<Rigidbody>().AddForce(rayHit.normal * impactForce);
+                            bulletsLeft--;
+                            bulletsShot--;
+                            playerRef.Ammo--;
+                            AmmoCounter.text = "Ammo: " + playerRef.Ammo;
+                        }
                         if (rayHit.rigidbody != null)
                         {
                             rayHit.rigidbody.AddForce(-rayHit.normal * impactForce);
                         }
+                        
                     }
-                    bulletsLeft--;
-                    bulletsShot--;
+                    
 
                     Invoke("ResetShot", timeBetweenShooting);
                     if (isRecoil)
