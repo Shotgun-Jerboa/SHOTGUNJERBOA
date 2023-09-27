@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class Shotgun : MonoBehaviour
 {
-    public SettingVars inputActions;
+    SettingVars inputActions;
 
     // Gun stats
     public int damage;
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
     public int bulletsPerTap;
-    public int bulletsLeft, bulletsShot;
+    public int bulletsLeft;
+    int bulletsShot;
     public bool isRecoil;
     
     // Bools 
     bool readyToShoot, reloading;
 
     // Reference
-    public Camera fpsCam;
+    Camera fpsCam;
     public Transform shootingPoint;
     public RaycastHit rayHit;
     public LayerMask whatIsEnemy;
@@ -36,14 +37,16 @@ public class Shotgun : MonoBehaviour
     {
         None,
         LeftClick,
-        RightClick
+        RightClick,
+        Q,
+        E
     }
 
     [SerializeField] InputMethod inputMethod;
      void Awake()
     {
         readyToShoot = true;
-
+        playerRef = GameObject.Find("Player").GetComponent<PlayerScript>();
         inputActions = GameObject.Find("Settings").GetComponent<SettingVars>();
         fpsCam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 
@@ -51,11 +54,15 @@ public class Shotgun : MonoBehaviour
         {
             inputActions.input.Gameplay.LeftHandPressed.performed += ctx => Shoot(InputMethod.LeftClick);
             inputActions.input.Gameplay.LeftHandReleased.performed += ctx => isShooting = false;
+
+            inputActions.input.Gameplay.LeftReloadPressed.performed += ctx => MakeReadyToShoot(InputMethod.Q);
         }
         else if (inputMethod == InputMethod.RightClick)
         {
             inputActions.input.Gameplay.RightHandPressed.performed += ctx => Shoot(InputMethod.RightClick);
             inputActions.input.Gameplay.RightHandReleased.performed += ctx => isShooting = false;
+
+            inputActions.input.Gameplay.RightReloadPressed.performed += ctx => MakeReadyToShoot(InputMethod.E);
 
         }
     }
@@ -71,18 +78,17 @@ public class Shotgun : MonoBehaviour
     }
     private void Shoot(InputMethod inputMethod)
     {
-        if (readyToShoot && !reloading && bulletsLeft > 0)
+        if (! reloading &&readyToShoot && bulletsLeft > 0)
         {
 
             // Calculate the time since the last shot
             float timeSinceLastShot = Time.time - lastShotTime;
 
-            if (timeSinceLastShot >= timeBetweenShooting)
+            if ( timeSinceLastShot >= timeBetweenShooting)
             {
 
                 bulletsShot = bulletsPerTap;
                 readyToShoot = false;
-                Debug.Log(inputMethod);
 
                 // Update the last shot time
                 lastShotTime = Time.time;
@@ -96,7 +102,6 @@ public class Shotgun : MonoBehaviour
 
                     if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsEnemy))
                     {
-                        Debug.Log(rayHit.collider.name);
 
                         /* if (rayHit.collider.CompareTag("Ground") || rayHit.collider.CompareTag("Wall"))
                          {
@@ -113,7 +118,6 @@ public class Shotgun : MonoBehaviour
                     bulletsLeft--;
                     bulletsShot--;
 
-                    Invoke("ResetShot", timeBetweenShooting);
                     if (isRecoil)
                     {
                         if (!playerRef.onGround)
@@ -129,11 +133,6 @@ public class Shotgun : MonoBehaviour
 
                         }
 
-                        // Add the recoil force as before
-                       // playerRB.AddForce(-direction.normalized * recoilForce, ForceMode.VelocityChange);
-                        playerRB.velocity += -direction.normalized * recoilForce;
-
-                        Invoke("ResetShot", reloadTime);
                     }
                     if (bulletsShot > 0 && bulletsLeft > 0)
                         Invoke("Shoot", timeBetweenShots);
@@ -147,16 +146,27 @@ public class Shotgun : MonoBehaviour
     private void ResetShot()
     {
         readyToShoot = true;
-    }
-
-    public void Reload()
-    {
-        reloading = true;
-        Invoke("ReloadFinished", reloadTime);
-    }
-
-    private void ReloadFinished()
-    {
         reloading = false;
     }
+    float lastReloadTime;
+    private void MakeReadyToShoot(InputMethod inputMethod)
+    {
+        if (inputMethod == InputMethod.Q && this.inputMethod == InputMethod.LeftClick && ! reloading)
+        {
+            reloading = true;
+            lastReloadTime = Time.time;
+
+            // After the reload time has passed, the gun is set ready to shoot again
+            Invoke("ResetShot", reloadTime);
+        }
+        else if (inputMethod == InputMethod.E && this.inputMethod == InputMethod.RightClick && !reloading)
+        {
+            reloading = true;
+            lastReloadTime = Time.time;
+
+            // After the reload time has passed, the gun is set ready to shoot again
+            Invoke("ResetShot", reloadTime);
+        }
+    }
+
 }

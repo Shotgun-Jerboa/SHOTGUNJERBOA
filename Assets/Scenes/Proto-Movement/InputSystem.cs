@@ -46,9 +46,27 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""LeftReloadPressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""1670cea2-331b-4f8b-bc61-b44e02faccf1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""RightHandPressed"",
                     ""type"": ""Button"",
                     ""id"": ""a9af0d11-08bd-47f5-914b-98c89e4190ee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightReloadPressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""3b7e66e0-704a-4e14-9d37-29586fad5d17"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -278,6 +296,28 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""TestButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a7088f7-2f88-4802-a20f-7501b963c465"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftReloadPressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa9ba0c3-86de-4a67-a911-3fb7ce0755fe"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightReloadPressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -288,7 +328,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Look = m_Gameplay.FindAction("Look", throwIfNotFound: true);
         m_Gameplay_LeftHandPressed = m_Gameplay.FindAction("LeftHandPressed", throwIfNotFound: true);
+        m_Gameplay_LeftReloadPressed = m_Gameplay.FindAction("LeftReloadPressed", throwIfNotFound: true);
         m_Gameplay_RightHandPressed = m_Gameplay.FindAction("RightHandPressed", throwIfNotFound: true);
+        m_Gameplay_RightReloadPressed = m_Gameplay.FindAction("RightReloadPressed", throwIfNotFound: true);
         m_Gameplay_LeftHandReleased = m_Gameplay.FindAction("LeftHandReleased", throwIfNotFound: true);
         m_Gameplay_RightHandReleased = m_Gameplay.FindAction("RightHandReleased", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
@@ -356,7 +398,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_Look;
     private readonly InputAction m_Gameplay_LeftHandPressed;
+    private readonly InputAction m_Gameplay_LeftReloadPressed;
     private readonly InputAction m_Gameplay_RightHandPressed;
+    private readonly InputAction m_Gameplay_RightReloadPressed;
     private readonly InputAction m_Gameplay_LeftHandReleased;
     private readonly InputAction m_Gameplay_RightHandReleased;
     private readonly InputAction m_Gameplay_Move;
@@ -367,7 +411,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         public GameplayActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @Look => m_Wrapper.m_Gameplay_Look;
         public InputAction @LeftHandPressed => m_Wrapper.m_Gameplay_LeftHandPressed;
+        public InputAction @LeftReloadPressed => m_Wrapper.m_Gameplay_LeftReloadPressed;
         public InputAction @RightHandPressed => m_Wrapper.m_Gameplay_RightHandPressed;
+        public InputAction @RightReloadPressed => m_Wrapper.m_Gameplay_RightReloadPressed;
         public InputAction @LeftHandReleased => m_Wrapper.m_Gameplay_LeftHandReleased;
         public InputAction @RightHandReleased => m_Wrapper.m_Gameplay_RightHandReleased;
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
@@ -387,9 +433,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @LeftHandPressed.started += instance.OnLeftHandPressed;
             @LeftHandPressed.performed += instance.OnLeftHandPressed;
             @LeftHandPressed.canceled += instance.OnLeftHandPressed;
+            @LeftReloadPressed.started += instance.OnLeftReloadPressed;
+            @LeftReloadPressed.performed += instance.OnLeftReloadPressed;
+            @LeftReloadPressed.canceled += instance.OnLeftReloadPressed;
             @RightHandPressed.started += instance.OnRightHandPressed;
             @RightHandPressed.performed += instance.OnRightHandPressed;
             @RightHandPressed.canceled += instance.OnRightHandPressed;
+            @RightReloadPressed.started += instance.OnRightReloadPressed;
+            @RightReloadPressed.performed += instance.OnRightReloadPressed;
+            @RightReloadPressed.canceled += instance.OnRightReloadPressed;
             @LeftHandReleased.started += instance.OnLeftHandReleased;
             @LeftHandReleased.performed += instance.OnLeftHandReleased;
             @LeftHandReleased.canceled += instance.OnLeftHandReleased;
@@ -412,9 +464,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @LeftHandPressed.started -= instance.OnLeftHandPressed;
             @LeftHandPressed.performed -= instance.OnLeftHandPressed;
             @LeftHandPressed.canceled -= instance.OnLeftHandPressed;
+            @LeftReloadPressed.started -= instance.OnLeftReloadPressed;
+            @LeftReloadPressed.performed -= instance.OnLeftReloadPressed;
+            @LeftReloadPressed.canceled -= instance.OnLeftReloadPressed;
             @RightHandPressed.started -= instance.OnRightHandPressed;
             @RightHandPressed.performed -= instance.OnRightHandPressed;
             @RightHandPressed.canceled -= instance.OnRightHandPressed;
+            @RightReloadPressed.started -= instance.OnRightReloadPressed;
+            @RightReloadPressed.performed -= instance.OnRightReloadPressed;
+            @RightReloadPressed.canceled -= instance.OnRightReloadPressed;
             @LeftHandReleased.started -= instance.OnLeftHandReleased;
             @LeftHandReleased.performed -= instance.OnLeftHandReleased;
             @LeftHandReleased.canceled -= instance.OnLeftHandReleased;
@@ -448,7 +506,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     {
         void OnLook(InputAction.CallbackContext context);
         void OnLeftHandPressed(InputAction.CallbackContext context);
+        void OnLeftReloadPressed(InputAction.CallbackContext context);
         void OnRightHandPressed(InputAction.CallbackContext context);
+        void OnRightReloadPressed(InputAction.CallbackContext context);
         void OnLeftHandReleased(InputAction.CallbackContext context);
         void OnRightHandReleased(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);

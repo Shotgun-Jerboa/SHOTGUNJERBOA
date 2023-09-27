@@ -24,9 +24,27 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "LeftReloadPressed",
+                    "type": "Button",
+                    "id": "1670cea2-331b-4f8b-bc61-b44e02faccf1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "RightHandPressed",
                     "type": "Button",
                     "id": "a9af0d11-08bd-47f5-914b-98c89e4190ee",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightReloadPressed",
+                    "type": "Button",
+                    "id": "3b7e66e0-704a-4e14-9d37-29586fad5d17",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -254,6 +272,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "TestButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a7088f7-2f88-4802-a20f-7501b963c465",
+                    "path": "<Keyboard>/q",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftReloadPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa9ba0c3-86de-4a67-a911-3fb7ce0755fe",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightReloadPressed",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
