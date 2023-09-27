@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class PlayerScript : MonoBehaviour
 
     private List<float> debugList;
     private bool doMeasure = false;
+
+    
+    public int Ammo = 3;
 
     void Start()
     {

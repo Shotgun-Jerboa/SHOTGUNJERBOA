@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shotgun : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Shotgun : MonoBehaviour
     public LayerMask whatIsEnemy;
     Rigidbody playerRB;
     public PlayerScript playerRef;
+    public Text AmmoCounter;
 
     [SerializeField] float recoilForce;
     [SerializeField] float shakeDuration;
@@ -50,11 +52,15 @@ public class Shotgun : MonoBehaviour
         if (inputMethod == InputMethod.LeftClick)
         {
             inputActions.input.Gameplay.LeftHandPressed.performed += ctx => Shoot(InputMethod.LeftClick);
+            playerRef.Ammo--;
+            AmmoCounter.text = "Ammo: " + playerRef.Ammo;
             inputActions.input.Gameplay.LeftHandReleased.performed += ctx => isShooting = false;
         }
         else if (inputMethod == InputMethod.RightClick)
         {
             inputActions.input.Gameplay.RightHandPressed.performed += ctx => Shoot(InputMethod.RightClick);
+            playerRef.Ammo--;
+            AmmoCounter.text = "Ammo: " + playerRef.Ammo;
             inputActions.input.Gameplay.RightHandReleased.performed += ctx => isShooting = false;
 
         }
