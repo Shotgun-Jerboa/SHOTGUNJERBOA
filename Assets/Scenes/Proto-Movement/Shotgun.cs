@@ -123,16 +123,21 @@ public class Shotgun : MonoBehaviour
                         if (!playerRef.onGround)
                         {
 
-                            
-                                //Get the gravity force acting on the player
-                                Vector3 gravityForce = Physics.gravity * playerRB.mass;
-                                //Add a counter force that is equal and opposite to the gravity force
-                                playerRB.AddForce(-gravityForce, ForceMode.Impulse);
-                                //playerRB.velocity += (-direction.normalized * recoilForce) + (-gravityForce * Time.deltaTime);
-    
+
+                            // Calculate the current downward velocity due to gravity
+                            float currentGravityEffect = Vector3.Dot(playerRB.velocity, Vector3.up);
+
+                            // Neutralize the gravity effect for the recoil duration (we subtract it from the recoilForce)
+                            Vector3 effectiveRecoilForce = -direction.normalized * (recoilForce - currentGravityEffect);
+
+                            playerRB.velocity += effectiveRecoilForce;
 
                         }
-
+                        else
+                        {
+                            // When grounded, just apply the recoil as usual
+                            playerRB.velocity += -direction.normalized * recoilForce;
+                        }
                     }
                     if (bulletsShot > 0 && bulletsLeft > 0)
                         Invoke("Shoot", timeBetweenShots);
