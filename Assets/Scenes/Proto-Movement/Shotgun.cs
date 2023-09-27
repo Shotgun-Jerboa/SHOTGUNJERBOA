@@ -25,7 +25,6 @@ public class Shotgun : MonoBehaviour
     Rigidbody playerRB;
     public PlayerScript playerRef;
     public Text AmmoCounter;
-    public GameObject Bullet;
 
     [SerializeField] float recoilForce;
     [SerializeField] float shakeDuration;
@@ -110,8 +109,7 @@ public class Shotgun : MonoBehaviour
                         
                         if(playerRef.Ammo >= 1)
                         {
-                            Instantiate(Bullet,transform.position,Quaternion.identity);
-                            Bullet.GetComponent<Rigidbody>().AddForce(rayHit.normal * impactForce);
+                            
                             bulletsLeft--;
                             bulletsShot--;
                             playerRef.Ammo--;
