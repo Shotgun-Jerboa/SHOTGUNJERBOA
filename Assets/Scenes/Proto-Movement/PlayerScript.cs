@@ -12,7 +12,7 @@ public class PlayerScript : MonoBehaviour
     private Dictionary<string, GameObject> gameObjects;
     private float height;
 
-    private Rigidbody physbody;
+    public Rigidbody physbody;
     //public List<float> jumps = new List<float>();
     private float jumpTime = -1;
     

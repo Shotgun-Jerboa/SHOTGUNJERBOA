@@ -13,7 +13,12 @@ public class Shotgun : MonoBehaviour
     public int bulletsLeft;
     int bulletsShot;
     public bool isRecoil;
-    
+
+    //Particle Effects
+    [SerializeField] GameObject muzzleFlash;
+    [SerializeField] GameObject BulletHoleEffect;
+    [SerializeField] TrailRenderer bulletTrail;
+
     // Bools 
     bool readyToShoot, reloading;
 
@@ -43,7 +48,7 @@ public class Shotgun : MonoBehaviour
     }
 
     [SerializeField] InputMethod inputMethod;
-     void Awake()
+    void Awake()
     {
         readyToShoot = true;
         playerRef = GameObject.Find("Player").GetComponent<PlayerScript>();
@@ -67,87 +72,95 @@ public class Shotgun : MonoBehaviour
         }
     }
 
-    protected virtual void Start()
+    void Start()
     {
         playerRB = GameObject.Find("Player").GetComponent<Rigidbody>();
     }
 
-    private void Update()
-    {
-       
-    }
+
     private void Shoot(InputMethod inputMethod)
     {
-        if (! reloading &&readyToShoot && bulletsLeft > 0)
+        if (!reloading && readyToShoot && bulletsLeft > 0)
         {
 
             // Calculate the time since the last shot
             float timeSinceLastShot = Time.time - lastShotTime;
 
-            if ( timeSinceLastShot >= timeBetweenShooting)
+            if (timeSinceLastShot >= timeBetweenShooting)
             {
 
-                bulletsShot = bulletsPerTap;
                 readyToShoot = false;
 
                 // Update the last shot time
                 lastShotTime = Time.time;
-
+                Vector3 direction = fpsCam.transform.forward;
                 if (inputMethod == InputMethod.LeftClick ||
            (inputMethod == InputMethod.RightClick))
                 {
-                    float x = Random.Range(-spread, spread);
-                    float y = Random.Range(-spread, spread);
-                    Vector3 direction = fpsCam.transform.forward + new Vector3(x, y, 0);
+                    // Consume just one bullet
+                    bulletsLeft--;
 
-                    if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsEnemy))
+                    GameObject MuzzleFlashInstance = Instantiate(muzzleFlash, shootingPoint.position, Quaternion.identity);
+                    Destroy particleScript = MuzzleFlashInstance.GetComponent<Destroy>();
+                    particleScript.attackPos = shootingPoint;
+
+                    for (int i = 0; i < bulletsPerTap; i++)
                     {
+                        float x = Random.Range(-spread, spread);
+                        float y = Random.Range(-spread, spread);
+                        Vector3 bulletDirection = direction + new Vector3(x, y, 0); // Random direction for bullet
 
-                        /* if (rayHit.collider.CompareTag("Ground") || rayHit.collider.CompareTag("Wall"))
-                         {
-                             Quaternion impactRotation = Quaternion.LookRotation(rayHit.normal);
-                             // GameObject impact = Instantiate(bulletHoleGraphic, rayHit.point, impactRotation);
-                             // impact.transform.parent = rayHit.transform;
-                         }*/
-
-                        if (rayHit.rigidbody != null)
+                        if (Physics.Raycast(fpsCam.transform.position, bulletDirection, out rayHit, range, whatIsEnemy))
                         {
-                            rayHit.rigidbody.AddForce(-rayHit.normal * impactForce);
+                            TrailRenderer trail = Instantiate(bulletTrail, shootingPoint.position, Quaternion.identity);
+                            StartCoroutine(SpawnTrail(trail, rayHit));
+
+                            if (rayHit.collider.CompareTag("Ground") || rayHit.collider.CompareTag("Wall"))
+                            {
+                                Quaternion impactRotation = Quaternion.LookRotation(rayHit.normal);
+                                GameObject impact = Instantiate(BulletHoleEffect, rayHit.point, impactRotation);
+                                impact.transform.parent = rayHit.transform;
+                            }
                         }
                     }
-                    bulletsLeft--;
-                    bulletsShot--;
 
                     if (isRecoil)
                     {
+                        float recoilMultiplier = IsPlayerMoving() ? 3f : 1.0f; // Increase recoil by 50% when moving
+                        Vector3 recoilForceVector = -direction.normalized * recoilForce * recoilMultiplier;
+
+
+
                         if (!playerRef.onGround)
                         {
-
-
                             // Calculate the current downward velocity due to gravity
                             float currentGravityEffect = Vector3.Dot(playerRB.velocity, Vector3.up);
 
                             // Neutralize the gravity effect for the recoil duration (we subtract it from the recoilForce)
                             Vector3 effectiveRecoilForce = -direction.normalized * (recoilForce - currentGravityEffect);
 
-                            playerRB.velocity += effectiveRecoilForce;
-
+                            //playerRB.velocity += effectiveRecoilForce;
+                            playerRB.AddForce(effectiveRecoilForce, ForceMode.Impulse);
                         }
+                     
                         else
                         {
-                            // When grounded, just apply the recoil as usual
-                            playerRB.velocity += -direction.normalized * recoilForce;
+                            playerRB.AddForce(-direction.normalized * recoilForce, ForceMode.Impulse);
                         }
                     }
                     if (bulletsShot > 0 && bulletsLeft > 0)
                         Invoke("Shoot", timeBetweenShots);
                 }
             }
-               
-        }      
-        
+
+        }
+
     }
 
+    private bool IsPlayerMoving()
+    {
+        return playerRef.physbody.velocity.magnitude > 0.1f; // Adjust the threshold if necessary.
+    }
     private void ResetShot()
     {
         readyToShoot = true;
@@ -156,7 +169,7 @@ public class Shotgun : MonoBehaviour
     float lastReloadTime;
     private void MakeReadyToShoot(InputMethod inputMethod)
     {
-        if (inputMethod == InputMethod.Q && this.inputMethod == InputMethod.LeftClick && ! reloading)
+        if (inputMethod == InputMethod.Q && this.inputMethod == InputMethod.LeftClick && !reloading)
         {
             reloading = true;
             lastReloadTime = Time.time;
@@ -173,5 +186,18 @@ public class Shotgun : MonoBehaviour
             Invoke("ResetShot", reloadTime);
         }
     }
+    IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
+    {
+        float time = 0;
+        Vector3 startPos = trail.transform.position;
+        while (time < 1)
+        {
+            trail.transform.position = Vector3.Lerp(startPos, hit.point, time);
+            time += Time.deltaTime / trail.time;
+            yield return null;
+        }
+        trail.transform.position = hit.point;
+        Destroy(trail.gameObject, trail.time);
 
+    }
 }
