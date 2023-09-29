@@ -401,7 +401,7 @@ Transform:
   m_GameObject: {fileID: 484013131}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -423,8 +423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b6c4e06d32bf041b8fc1ff0c664083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: Gameplay_Ground
   settings: {fileID: 815642482}
-  jumpCurve: []
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -1658,6 +1658,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CamSensitivityX: 400
   CamSensitivityY: 400
+  FrameRate: 60
   worldVars: {fileID: 955112013}
 --- !u!4 &815642483
 Transform:
@@ -1999,7 +2000,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  hopHeight: 5
+  sprintSpeedMultiplier: 1.5
+  midHopMultiplier: 1
+  airTimeMultiplier: 1
+  hopHeight: 0.5
+  hopTimeToPeak: 0.3
+  sprintHopHeight: 1
+  sprintTimeToPeak: 0.2
   groundDrag: 10
 --- !u!1 &959550291
 GameObject:
@@ -2851,7 +2858,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c41223694ef4f142b7d778d0ea9d25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputActions: {fileID: 815642482}
   damage: 20
   timeBetweenShooting: 1
   spread: 0.1
@@ -2860,9 +2866,7 @@ MonoBehaviour:
   timeBetweenShots: 0
   bulletsPerTap: 1
   bulletsLeft: 100
-  bulletsShot: 0
   isRecoil: 1
-  fpsCam: {fileID: 963194227}
   shootingPoint: {fileID: 484013133}
   whatIsEnemy:
     serializedVersion: 2
@@ -4026,7 +4030,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c41223694ef4f142b7d778d0ea9d25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputActions: {fileID: 815642482}
   damage: 20
   timeBetweenShooting: 1
   spread: 0.1
@@ -4035,9 +4038,7 @@ MonoBehaviour:
   timeBetweenShots: 0
   bulletsPerTap: 1
   bulletsLeft: 100
-  bulletsShot: 0
   isRecoil: 1
-  fpsCam: {fileID: 963194227}
   shootingPoint: {fileID: 776173337}
   whatIsEnemy:
     serializedVersion: 2

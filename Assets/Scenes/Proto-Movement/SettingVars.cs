@@ -9,6 +9,7 @@ public class SettingVars : MonoBehaviour
 
     public float CamSensitivityX;
     public float CamSensitivityY;
+    public int FrameRate = 60;
 
     public PlayerInputSystem input;
     public WorldVariables worldVars;
@@ -17,6 +18,7 @@ public class SettingVars : MonoBehaviour
     private void Awake()
     {
         input = new PlayerInputSystem();
+        Application.targetFrameRate = FrameRate;
     }
 
     private void OnEnable()
