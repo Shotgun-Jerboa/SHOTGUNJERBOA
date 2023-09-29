@@ -8,6 +8,8 @@ public class Button_Manager : MonoBehaviour
     [SerializeField] GameObject deathMenu;
     [SerializeField] GameObject gameMusic;
     [SerializeField] SettingVars inputActions;
+    [SerializeField] GameObject settingMenu;
+    public int gameStartScene;
 
     public static bool GameIsPaused = false;
     private PlayerInput playerInput;
@@ -62,5 +64,10 @@ public class Button_Manager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(sceneID);
         Time.timeScale = 1f;
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene(gameStartScene);
     }
 }
