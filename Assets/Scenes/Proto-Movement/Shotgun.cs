@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shotgun : MonoBehaviour
 {
-    SettingVars inputActions;
+    [SerializeField]SettingVars inputActions;
 
     // Gun stats
     public int damage;
@@ -23,7 +23,7 @@ public class Shotgun : MonoBehaviour
     bool readyToShoot, reloading;
 
     // Reference
-    Camera fpsCam;
+    [SerializeField]Camera fpsCam;
     public Transform shootingPoint;
     public RaycastHit rayHit;
     public LayerMask whatIsEnemy;
@@ -37,6 +37,7 @@ public class Shotgun : MonoBehaviour
     public bool isShooting = false;
 
     private float lastShotTime;
+    [SerializeField]float angleThreshold = 0.4f; // This corresponds to about 45 degrees. Adjust as necessary.
 
     public enum InputMethod
     {
@@ -51,9 +52,7 @@ public class Shotgun : MonoBehaviour
     void Awake()
     {
         readyToShoot = true;
-        playerRef = GameObject.Find("Player").GetComponent<PlayerScript>();
-        inputActions = GameObject.Find("Settings").GetComponent<SettingVars>();
-        fpsCam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+ 
 
         if (inputMethod == InputMethod.LeftClick)
         {
@@ -89,6 +88,12 @@ public class Shotgun : MonoBehaviour
             if (timeSinceLastShot >= timeBetweenShooting)
             {
 
+                // Calculate the angle
+                float dotProduct = Vector3.Dot(fpsCam.transform.forward, Vector3.down);
+                float angleInRadians = Mathf.Acos(dotProduct);
+                float angleInDegrees = angleInRadians * Mathf.Rad2Deg;
+
+                Debug.Log("Shooting with angle: " + angleInDegrees + " degrees");
                 readyToShoot = false;
 
                 // Update the last shot time
@@ -97,6 +102,8 @@ public class Shotgun : MonoBehaviour
                 if (inputMethod == InputMethod.LeftClick ||
            (inputMethod == InputMethod.RightClick))
                 {
+                    Debug.Log(playerRef.onGround ? "Player is grounded." : "Player is not grounded.");
+
                     // Consume just one bullet
                     bulletsLeft--;
 
@@ -126,7 +133,7 @@ public class Shotgun : MonoBehaviour
 
                     if (isRecoil)
                     {
-                        float recoilMultiplier = IsPlayerMoving() ? 3f : 1.0f; // Increase recoil by 50% when moving
+                        float recoilMultiplier = IsPlayerMoving() ? 10f : 1.0f; // Increase recoil by 50% when moving
                         Vector3 recoilForceVector = -direction.normalized * recoilForce * recoilMultiplier;
 
 
@@ -141,6 +148,10 @@ public class Shotgun : MonoBehaviour
 
                             //playerRB.velocity += effectiveRecoilForce;
                             playerRB.AddForce(effectiveRecoilForce, ForceMode.Impulse);
+                            if (IsPlayerMoving() && !IsPlayerLookingDownTooSteeply())
+                            {
+                                playerRB.AddForce(recoilForceVector, ForceMode.VelocityChange);
+                            }
                         }
                      
                         else
@@ -156,11 +167,16 @@ public class Shotgun : MonoBehaviour
         }
 
     }
+    private bool IsPlayerLookingDownTooSteeply()
+    {
+        float dotProduct = Vector3.Dot(fpsCam.transform.forward, Vector3.down);
 
+        return dotProduct > angleThreshold;
+    }
     private bool IsPlayerMoving()
     {
-        return playerRef.physbody.velocity.magnitude > 0.1f; // Adjust the threshold if necessary.
-    }
+        return inputActions.input.Gameplay.Move.ReadValue<Vector2>() != Vector2.zero; // Adjust the threshold if necessary.
+    } 
     private void ResetShot()
     {
         readyToShoot = true;

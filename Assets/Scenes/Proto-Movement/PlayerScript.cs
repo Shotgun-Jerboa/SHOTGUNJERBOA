@@ -23,6 +23,9 @@ public class PlayerScript : MonoBehaviour
     private List<float> debugList;
     private bool doMeasure = false;
 
+    public float groundBufferTime = 0.5f;  // time in seconds
+    private float lastTimeAirborne = 0f;
+    public Transform Orientation;
     void Start()
     {
         jumpCurve = new AnimationCurve[2];
