@@ -428,6 +428,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   onGround: 0
+  physbody: {fileID: 0}
 --- !u!1 &540243824
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,7 +527,7 @@ GameObject:
   - component: {fileID: 554602744}
   m_Layer: 3
   m_Name: ff(Clone)(Clone)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1063,7 +1064,7 @@ GameObject:
   - component: {fileID: 584601162}
   m_Layer: 3
   m_Name: ff(Clone)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1550,7 +1551,7 @@ GameObject:
   m_Component:
   - component: {fileID: 776173337}
   m_Layer: 0
-  m_Name: Shooting Point
+  m_Name: Shooting Point Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1565,7 +1566,7 @@ Transform:
   m_GameObject: {fileID: 776173336}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.202, y: -0.178, z: -0.055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1913,7 +1914,7 @@ GameObject:
   - component: {fileID: 959550292}
   m_Layer: 3
   m_Name: ff(Clone) (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2595,7 +2596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1004135066}
   m_Layer: 0
-  m_Name: Shooting Point
+  m_Name: Shooting Point Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2610,7 +2611,7 @@ Transform:
   m_GameObject: {fileID: 1004135065}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.201, y: -0.18, z: -0.043}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2745,23 +2746,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1150121326}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4e3027b5c6d0164790ad9ecdcac0801, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c41223694ef4f142b7d778d0ea9d25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputActions: {fileID: 815642482}
   damage: 20
   timeBetweenShooting: 1
-  spread: 0.2
+  spread: 0.1
   range: 100
   reloadTime: 1
   timeBetweenShots: 1
-  bulletsPerTap: 1
+  bulletsPerTap: 6
   bulletsLeft: 100
   isRecoil: 1
+  muzzleFlash: {fileID: 2957657415812638113, guid: b63ecd71e261612418280ca5cb3d9b41, type: 3}
+  BulletHoleEffect: {fileID: 1000010844420130, guid: 944d85b2fc8f86e4a8c273d3c93c548a, type: 3}
+  bulletTrail: {fileID: 5190539650505738729, guid: af8b2bd9e038c1443bca0dc76c4e3971, type: 3}
+  fpsCam: {fileID: 963194227}
   shootingPoint: {fileID: 1004135066}
   whatIsEnemy:
     serializedVersion: 2
-    m_Bits: 8
-  recoilForce: 10
+    m_Bits: 9
+  playerRef: {fileID: 484013134}
+  recoilForce: 15
   shakeDuration: 0.5
   shakeStrength: 5
   impactForce: 10
@@ -3014,7 +3021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   hopHeight: 10
-  groundDrag: 2
+  groundDrag: 1
 --- !u!43 &1456946950
 Mesh:
   m_ObjectHideFlags: 0
@@ -3963,23 +3970,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 2106022848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4e3027b5c6d0164790ad9ecdcac0801, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c41223694ef4f142b7d778d0ea9d25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputActions: {fileID: 815642482}
   damage: 10
   timeBetweenShooting: 1
-  spread: 0.5
+  spread: 0.1
   range: 100
   reloadTime: 1
   timeBetweenShots: 1
-  bulletsPerTap: 1
+  bulletsPerTap: 6
   bulletsLeft: 100
   isRecoil: 1
+  muzzleFlash: {fileID: 2957657415812638113, guid: b63ecd71e261612418280ca5cb3d9b41, type: 3}
+  BulletHoleEffect: {fileID: 1000010844420130, guid: 944d85b2fc8f86e4a8c273d3c93c548a, type: 3}
+  bulletTrail: {fileID: 5190539650505738729, guid: af8b2bd9e038c1443bca0dc76c4e3971, type: 3}
+  fpsCam: {fileID: 963194227}
   shootingPoint: {fileID: 776173337}
   whatIsEnemy:
     serializedVersion: 2
-    m_Bits: 8
-  recoilForce: 10
+    m_Bits: 9
+  playerRef: {fileID: 484013134}
+  recoilForce: 15
   shakeDuration: 0.5
   shakeStrength: 5
   impactForce: 10

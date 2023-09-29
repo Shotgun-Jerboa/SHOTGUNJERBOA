@@ -48,6 +48,9 @@ public class PlayerScript : MonoBehaviour
 
     //private float maxHeight = 0; / Debug Feature
 
+    public float groundBufferTime = 0.5f;  // time in seconds
+    private float lastTimeAirborne = 0f;
+    public Transform Orientation;
     void Start()
     {
         interpolates = new();
