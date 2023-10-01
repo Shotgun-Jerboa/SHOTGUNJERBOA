@@ -20,8 +20,8 @@ public class WorldVariables : MonoBehaviour
     public float hopTimeToPeak;
     public float sprintHopHeight;
     public float sprintTimeToPeak;
-    //public float jumpHeight;
-    //public float jumpTimeToPeak;
+    public float jumpHeight;
+    public float jumpTimeToPeak;
 
     [Header("Player Physics Properties")]
     public float groundDrag;

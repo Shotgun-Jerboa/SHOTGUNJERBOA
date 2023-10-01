@@ -2007,6 +2007,8 @@ MonoBehaviour:
   hopTimeToPeak: 0.3
   sprintHopHeight: 1
   sprintTimeToPeak: 0.2
+  jumpHeight: 2.5
+  jumpTimeToPeak: 0.4
   groundDrag: 10
 --- !u!1 &959550291
 GameObject:
@@ -2858,6 +2860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c41223694ef4f142b7d778d0ea9d25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputActions: {fileID: 0}
   damage: 20
   timeBetweenShooting: 1
   spread: 0.1
@@ -2867,6 +2870,10 @@ MonoBehaviour:
   bulletsPerTap: 1
   bulletsLeft: 100
   isRecoil: 1
+  muzzleFlash: {fileID: 0}
+  BulletHoleEffect: {fileID: 0}
+  bulletTrail: {fileID: 0}
+  fpsCam: {fileID: 0}
   shootingPoint: {fileID: 484013133}
   whatIsEnemy:
     serializedVersion: 2
@@ -2877,6 +2884,7 @@ MonoBehaviour:
   shakeStrength: 0.3
   impactForce: 100
   isShooting: 0
+  angleThreshold: 0.4
   inputMethod: 2
 --- !u!1 &1176395608
 GameObject:
@@ -4030,6 +4038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c41223694ef4f142b7d778d0ea9d25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputActions: {fileID: 0}
   damage: 20
   timeBetweenShooting: 1
   spread: 0.1
@@ -4039,6 +4048,10 @@ MonoBehaviour:
   bulletsPerTap: 1
   bulletsLeft: 100
   isRecoil: 1
+  muzzleFlash: {fileID: 0}
+  BulletHoleEffect: {fileID: 0}
+  bulletTrail: {fileID: 0}
+  fpsCam: {fileID: 0}
   shootingPoint: {fileID: 776173337}
   whatIsEnemy:
     serializedVersion: 2
@@ -4049,6 +4062,7 @@ MonoBehaviour:
   shakeStrength: 0.3
   impactForce: 100
   isShooting: 0
+  angleThreshold: 0.4
   inputMethod: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

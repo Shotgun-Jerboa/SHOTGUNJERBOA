@@ -46,11 +46,9 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    //private float maxHeight = 0; / Debug Feature
+    // Debug Feature
+    // private float maxHeight = 0;
 
-    public float groundBufferTime = 0.5f;  // time in seconds
-    private float lastTimeAirborne = 0f;
-    public Transform Orientation;
     void Start()
     {
         interpolates = new();
@@ -95,13 +93,13 @@ public class PlayerScript : MonoBehaviour
     private void FixedUpdate()
     {
         // Debug Snippet
-        //if (gameObject.transform.position.y > maxHeight)
-        //{
+        // if (gameObject.transform.position.y > maxHeight)
+        // {
         //    maxHeight = gameObject.transform.position.y;
         //    print(maxHeight);
-        //}
+        // }
 
-        onGround = Physics.Raycast(transform.position, Vector3.down, (height * 0.5f) + 0.1f, groundLayer);
+        onGround = Physics.Raycast(transform.position, Vector3.down, (height * 0.5f) + 0.01f, groundLayer);
         if (onGround)
         {
             state = "Gameplay_Ground";
@@ -113,10 +111,9 @@ public class PlayerScript : MonoBehaviour
 
         if (settings.input.Gameplay.Jump.IsPressed() && onGround)
         {
-            // Temporary Jump Mechanic In Place.
             physbody.drag = 0;
             physbody.velocity = new Vector3(physbody.velocity.x, 0, physbody.velocity.z);
-            physbody.AddForce(0, 800, 0);
+            jump(settings.worldVars.jumpHeight, settings.worldVars.jumpTimeToPeak, "quad", 3f);
             state = "Gameplay_Air";
         }
 
@@ -153,7 +150,6 @@ public class PlayerScript : MonoBehaviour
                         }
                         physbody.velocity = new Vector3(physbody.velocity.x, 0, physbody.velocity.z);
                         jumpMagnitudeMultiplier = movementMagnitude.Evaluate(moveDir.magnitude);
-                        physbody.useGravity = false;
                         physbody.drag = 0;
                         if (sprinting)
                         {
@@ -184,7 +180,6 @@ public class PlayerScript : MonoBehaviour
                     break;
             }
         }
-
 
         for(int i = interpolates.Count - 1; i >= 0; i--)
         {
@@ -222,7 +217,11 @@ public class PlayerScript : MonoBehaviour
         {
             if (parent.iteration == 0)
             {
-                Vector3 velocity = new Vector3(0, parent.curve.Evaluate(parent.elapsedTime) * multiplier, 0);
+                Vector3 velocity = new Vector3(
+                    0, 
+                    (parent.curve.Evaluate(parent.elapsedTime) * multiplier) + (-Physics.gravity.y * Time.fixedDeltaTime),
+                    0
+                );
                 physbody.velocity += velocity;
             }
             else
@@ -230,12 +229,12 @@ public class PlayerScript : MonoBehaviour
                 Vector3 velocityOld = new Vector3(0, parent.curve.Evaluate(parent.elapsedTime) * multiplier, 0);
                 physbody.velocity -= velocityOld;
                 parent.elapsedTime += Time.fixedDeltaTime;
-                Vector3 velocityNew = new Vector3(0, parent.curve.Evaluate(parent.elapsedTime) * multiplier, 0);
+                Vector3 velocityNew = new Vector3(
+                    0, 
+                    (parent.curve.Evaluate(parent.elapsedTime) * multiplier) + (-Physics.gravity.y * Time.fixedDeltaTime), 
+                    0
+                );
                 physbody.velocity += velocityNew;
-                if(parent.elapsedTime >= parent.curve[parent.curve.length - 1].time)
-                {
-                    physbody.useGravity = true;
-                }
             }
         };
 
@@ -267,7 +266,7 @@ public class PlayerScript : MonoBehaviour
                 break;
             case "quad":
                 m0 = -2f - (1f * strMultiplier);
-                p0 = -1f * (((-12f * height) + (m0 * time))/(6f * time));
+                p0 = -1f * (((-12f * height) + (m0 * time)) / (6f * time));
 
                 interpolates.Add(new interpolate(
                     new AnimationCurve(new Keyframe[] { new Keyframe() {
