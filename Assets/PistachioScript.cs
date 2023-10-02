@@ -7,6 +7,8 @@ public class PistachioScript : MonoBehaviour
 {
     
     public PlayerScript playerRef;
+    
+    
 
     void Start()
     {
@@ -16,6 +18,7 @@ public class PistachioScript : MonoBehaviour
 
     public Text AmmoCounter;
 
+    
 
     private void OnTriggerEnter(Collider other)
     {
