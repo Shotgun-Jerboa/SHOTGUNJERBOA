@@ -11,14 +11,29 @@ public class PlayerScript : MonoBehaviour
     private Dictionary<string, GameObject> gameObjects;
     public LayerMask groundLayer;
 
-    private Rigidbody physbody;
+    public Rigidbody physbody;
     private float height;
     public bool onGround = false;
 
     private List<interpolate> interpolates;
     private AnimationCurve movementMagnitude;
     private float jumpMagnitudeMultiplier = 0;
-
+    private Vector2 moveDir;
+    public enum PlayerState
+    {
+        OnGround,
+        OnAir,
+        Hopping,
+        Sprinting
+    }
+    public PlayerState currentState = PlayerState.OnGround;
+    private bool applyMovementForces = true;
+    private bool justJumped = false;
+    private float initialJumpHeight = 0f;
+    private float maxJumpHeight = 0f;
+    private bool trackingHeight = false;
+    float jumpHeightDifference;
+    public float maximumHopHeight = 48;
     public class interpolate
     {
         public AnimationCurve curve;
@@ -27,9 +42,9 @@ public class PlayerScript : MonoBehaviour
 
         private System.Action<interpolate> func;
 
-        public interpolate(AnimationCurve curve, System.Action<interpolate> func, float time=0f)
+        public interpolate(AnimationCurve curve, System.Action<interpolate> func, float time = 0f)
         {
-            if(curve.length < 2)
+            if (curve.length < 2)
             {
                 throw new System.Exception("Not enough keyframes provided for curve");
             }
@@ -76,7 +91,7 @@ public class PlayerScript : MonoBehaviour
 
         physbody = gameObject.GetComponent<Rigidbody>();
         gameObjects = new();
-        for(int i = 0; i < this.transform.childCount; i++)
+        for (int i = 0; i < this.transform.childCount; i++)
         {
             Transform child = this.transform.GetChild(i);
             gameObjects[child.name] = child.gameObject;
@@ -88,6 +103,7 @@ public class PlayerScript : MonoBehaviour
     private void Update()
     {
         sprinting = settings.input.Gameplay.Sprint.IsPressed();
+        PlayerStateHandler();
     }
 
     private void FixedUpdate()
@@ -104,12 +120,12 @@ public class PlayerScript : MonoBehaviour
         {
             state = "Gameplay_Ground";
             physbody.drag = settings.worldVars.groundDrag;
-        } else
+        }
+        else
         {
             physbody.drag = 0;
         }
-
-        if (settings.input.Gameplay.Jump.IsPressed() && onGround)
+        if (applyMovementForces && settings.input.Gameplay.Jump.IsPressed() && onGround)
         {
             physbody.drag = 0;
             physbody.velocity = new Vector3(physbody.velocity.x, 0, physbody.velocity.z);
@@ -117,8 +133,8 @@ public class PlayerScript : MonoBehaviour
             state = "Gameplay_Air";
         }
 
-        Vector2 moveDir = settings.input.Gameplay.Move.ReadValue<Vector2>();
-        if (moveDir != Vector2.zero)
+        this.moveDir = settings.input.Gameplay.Move.ReadValue<Vector2>();
+        if (applyMovementForces && moveDir != Vector2.zero)
         {
             switch (state)
             {
@@ -159,7 +175,8 @@ public class PlayerScript : MonoBehaviour
                         {
                             jump(settings.worldVars.hopHeight, settings.worldVars.hopTimeToPeak, "log", 0f);
                         }
-                    } else
+                    }
+                    else
                     {
                         if (sprinting)
                         {
@@ -168,7 +185,8 @@ public class PlayerScript : MonoBehaviour
                                 physbody.velocity.y,
                                 moveDir.y * settings.worldVars.moveSpeed * settings.worldVars.sprintSpeedMultiplier * settings.worldVars.midHopMultiplier
                             );
-                        } else
+                        }
+                        else
                         {
                             physbody.velocity = gameObjects["Orientation"].GetComponent<Transform>().rotation * new Vector3(
                                 moveDir.x * settings.worldVars.moveSpeed * settings.worldVars.midHopMultiplier,
@@ -181,7 +199,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        for(int i = interpolates.Count - 1; i >= 0; i--)
+        for (int i = interpolates.Count - 1; i >= 0; i--)
         {
             if (interpolates[i].iterate())
             {
@@ -190,17 +208,131 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void jump(float height, float time, string curveType="linear", float strMultiplier=0f)
+    public void DisableMovementForces()
     {
-        if(strMultiplier < 0)
+        applyMovementForces = false;
+        physbody.drag = 0;
+    }
+    public void EnableMovementForces()
+    {
+        applyMovementForces = true;
+        physbody.drag = settings.worldVars.groundDrag;
+
+    }
+    void TrackingHopHeight()
+    {
+        if (onGround)
+        {
+            if (settings.input.Gameplay.Move.ReadValue<Vector2>() != Vector2.zero)
+            {
+                initialJumpHeight = transform.position.y;
+                trackingHeight = true;
+            }
+
+        }
+
+        // If we are tracking the height, update the max height value
+        if (trackingHeight)
+        {
+            if (transform.position.y > maxJumpHeight)
+            {
+                maxJumpHeight = transform.position.y;
+            }
+
+            // Continuous check for exceeding maxHopHeight
+            if (maxJumpHeight - initialJumpHeight >= maximumHopHeight)
+            {
+                currentState = PlayerState.OnAir;
+            }
+        }
+
+        // Once the player lands back on the ground
+        if (onGround && trackingHeight)
+        {
+            jumpHeightDifference = maxJumpHeight - initialJumpHeight;
+
+            // Reset tracking variables
+            trackingHeight = false;
+            maxJumpHeight = 0f;
+        }
+    }
+    public float hopVelocityThreshold = 1f; // Set to your specific needs
+
+    public void PlayerStateHandler()
+    {
+        if (onGround)
+        {
+            if (IsPlayerMoving())
+            {
+                if (IsPlayerSprinting())
+                {
+                    currentState = PlayerState.Sprinting;
+                }
+                else
+                {
+                    currentState = PlayerState.Hopping;
+                }
+            }
+            else
+            {
+                currentState = PlayerState.OnGround;
+            }
+
+            if (justJumped)
+            {
+                currentState = PlayerState.OnAir;
+                justJumped = false;
+            }
+        }
+        else // If not on the ground
+        {
+            if (currentState != PlayerState.Hopping)
+            {
+                currentState = PlayerState.OnAir;
+            }
+        }
+        if (Mathf.Abs(physbody.velocity.y) > hopVelocityThreshold)
+        {
+            currentState = PlayerState.OnAir;
+        }
+        TrackingHopHeight();
+
+    }
+    bool IsPlayerSprinting()
+    {
+        float regularSpeed = settings.worldVars.moveSpeed * moveDir.magnitude;
+        float sprintingSpeed = settings.worldVars.moveSpeed * settings.worldVars.sprintSpeedMultiplier * moveDir.magnitude;
+        float currentSpeed = physbody.velocity.magnitude;
+
+        // Calculate the difference between current speed and both regular and sprinting speeds
+        float diffRegular = Mathf.Abs(currentSpeed - regularSpeed);
+        float diffSprint = Mathf.Abs(currentSpeed - sprintingSpeed);
+
+        // If sprinting, and the difference to the sprinting speed is smaller than the difference to regular speed,
+        // then we consider the player is indeed sprinting.
+        if (sprinting && diffSprint < diffRegular)
+        {
+            return true;
+        }
+
+        return false;
+    }
+    private bool IsPlayerMoving()
+    {
+        return settings.input.Gameplay.Move.ReadValue<Vector2>() != Vector2.zero; // Adjust the threshold if necessary.
+    }
+    public void jump(float height, float time, string curveType = "linear", float strMultiplier = 0f)
+    {
+        if (strMultiplier < 0)
         {
             strMultiplier = 0f;
-        } else if (strMultiplier > 1)
+        }
+        else if (strMultiplier > 1)
         {
             strMultiplier = 1f;
         }
 
-        if(time <= 0)
+        if (time <= 0)
         {
             print("Failed to jump. Time must be greater than 0");
             return;
@@ -208,17 +340,17 @@ public class PlayerScript : MonoBehaviour
 
         float multiplier = 1f;
 
-        if(state == "Gameplay_Ground")
+        if (state == "Gameplay_Ground")
         {
             multiplier = jumpMagnitudeMultiplier;
-        } 
+        }
 
         System.Action<interpolate> func = (parent) =>
         {
             if (parent.iteration == 0)
             {
                 Vector3 velocity = new Vector3(
-                    0, 
+                    0,
                     (parent.curve.Evaluate(parent.elapsedTime) * multiplier) + (-Physics.gravity.y * Time.fixedDeltaTime),
                     0
                 );
@@ -230,8 +362,8 @@ public class PlayerScript : MonoBehaviour
                 physbody.velocity -= velocityOld;
                 parent.elapsedTime += Time.fixedDeltaTime;
                 Vector3 velocityNew = new Vector3(
-                    0, 
-                    (parent.curve.Evaluate(parent.elapsedTime) * multiplier) + (-Physics.gravity.y * Time.fixedDeltaTime), 
+                    0,
+                    (parent.curve.Evaluate(parent.elapsedTime) * multiplier) + (-Physics.gravity.y * Time.fixedDeltaTime),
                     0
                 );
                 physbody.velocity += velocityNew;

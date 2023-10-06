@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Shotgun : MonoBehaviour
 {
-    [SerializeField]SettingVars inputActions;
+    [SerializeField] SettingVars inputActions;
 
     // Gun stats
     public int damage;
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
     public int bulletsPerTap;
     public int bulletsLeft;
-    int bulletsShot;
     public bool isRecoil;
 
     //Particle Effects
@@ -23,7 +22,7 @@ public class Shotgun : MonoBehaviour
     bool readyToShoot, reloading;
 
     // Reference
-    [SerializeField]Camera fpsCam;
+    [SerializeField] Camera fpsCam;
     public Transform shootingPoint;
     public RaycastHit rayHit;
     public LayerMask whatIsEnemy;
@@ -37,8 +36,6 @@ public class Shotgun : MonoBehaviour
     public bool isShooting = false;
 
     private float lastShotTime;
-    [SerializeField]float angleThreshold = 0.4f; // This corresponds to about 45 degrees. Adjust as necessary.
-
     public enum InputMethod
     {
         None,
@@ -52,48 +49,40 @@ public class Shotgun : MonoBehaviour
     void Awake()
     {
         readyToShoot = true;
- 
 
         if (inputMethod == InputMethod.LeftClick)
         {
             inputActions.input.Gameplay.LeftHandPressed.performed += ctx => Shoot(InputMethod.LeftClick);
             inputActions.input.Gameplay.LeftHandReleased.performed += ctx => isShooting = false;
 
-            inputActions.input.Gameplay.LeftReloadPressed.performed += ctx => MakeReadyToShoot(InputMethod.Q);
         }
         else if (inputMethod == InputMethod.RightClick)
         {
             inputActions.input.Gameplay.RightHandPressed.performed += ctx => Shoot(InputMethod.RightClick);
             inputActions.input.Gameplay.RightHandReleased.performed += ctx => isShooting = false;
 
-            inputActions.input.Gameplay.RightReloadPressed.performed += ctx => MakeReadyToShoot(InputMethod.E);
-
         }
     }
+
 
     void Start()
     {
         playerRB = GameObject.Find("Player").GetComponent<Rigidbody>();
     }
 
+    private bool hasShot = false;
 
     private void Shoot(InputMethod inputMethod)
     {
         if (!reloading && readyToShoot && bulletsLeft > 0)
         {
+            hasShot = true;
 
             // Calculate the time since the last shot
             float timeSinceLastShot = Time.time - lastShotTime;
 
             if (timeSinceLastShot >= timeBetweenShooting)
             {
-
-                // Calculate the angle
-                float dotProduct = Vector3.Dot(fpsCam.transform.forward, Vector3.down);
-                float angleInRadians = Mathf.Acos(dotProduct);
-                float angleInDegrees = angleInRadians * Mathf.Rad2Deg;
-
-                Debug.Log("Shooting with angle: " + angleInDegrees + " degrees");
                 readyToShoot = false;
 
                 // Update the last shot time
@@ -133,72 +122,175 @@ public class Shotgun : MonoBehaviour
 
                     if (isRecoil)
                     {
-                        float recoilMultiplier = IsPlayerMoving() ? 10f : 1.0f; // Increase recoil by 50% when moving
-                        Vector3 recoilForceVector = -direction.normalized * recoilForce * recoilMultiplier;
+                        RecoilStateHandler();
 
-
-
-                        if (!playerRef.onGround)
-                        {
-                            // Calculate the current downward velocity due to gravity
-                            float currentGravityEffect = Vector3.Dot(playerRB.velocity, Vector3.up);
-
-                            // Neutralize the gravity effect for the recoil duration (we subtract it from the recoilForce)
-                            Vector3 effectiveRecoilForce = -direction.normalized * (recoilForce - currentGravityEffect);
-
-                            //playerRB.velocity += effectiveRecoilForce;
-                            playerRB.AddForce(effectiveRecoilForce, ForceMode.Impulse);
-                            if (IsPlayerMoving() && !IsPlayerLookingDownTooSteeply())
-                            {
-                                playerRB.AddForce(recoilForceVector, ForceMode.VelocityChange);
-                            }
-                        }
-                     
-                        else
-                        {
-                            playerRB.AddForce(-direction.normalized * recoilForce, ForceMode.Impulse);
-                        }
                     }
-                    if (bulletsShot > 0 && bulletsLeft > 0)
-                        Invoke("Shoot", timeBetweenShots);
+                    if (bulletsLeft > 0 && !reloading)
+                    {
+                        Reload();
+                    }
                 }
             }
 
         }
 
     }
-    private bool IsPlayerLookingDownTooSteeply()
+    void RecoilStateHandler()
     {
-        float dotProduct = Vector3.Dot(fpsCam.transform.forward, Vector3.down);
 
-        return dotProduct > angleThreshold;
+        if (playerRef.currentState == PlayerScript.PlayerState.OnGround)
+        {
+            playerRef.DisableMovementForces();
+
+            StartCoroutine(EnableMovementAfterDelay(0.5f));
+        }
+        else
+        {
+            playerRef.DisableMovementForces();
+
+            StartCoroutine(EnableMovementAfterDelay(0.4f));
+        }
+
+            Vector3 direction = fpsCam.transform.forward;
+
+            // Regular recoil
+            Vector3 regularRecoil = -direction.normalized * recoilForce;
+
+            // Enhanced recoil when moving or hopping in air
+            float recoilMultiplier = IsPlayerMoving() ? 1.5f : 1.0f;
+            Vector3 enhancedRecoil = -direction.normalized * recoilForce * recoilMultiplier;
+            bool hitSomething = Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range);
+            float currentGravityEffect = Vector3.Dot(playerRB.velocity, Vector3.up);
+            Vector3 effectiveRecoilForce = -direction.normalized * (recoilForce - currentGravityEffect);
+            // Determine if the shot hits a wall or the ground
+
+            if (rayHit.collider != null && hitSomething)
+            {
+                if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+
+                {
+                    Debug.Log("[Tag 101] Shot the ground.");
+
+                }
+                else if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
+                {
+                    Debug.Log("[Tag 102] Shot a wall.");
+                }
+                // Check Player's State
+                switch (playerRef.currentState)
+                {
+                    case PlayerScript.PlayerState.OnGround:
+                        if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                        {
+                            playerRB.AddForce(effectiveRecoilForce, ForceMode.Impulse);
+                        }
+                        else
+                            playerRB.AddForce(regularRecoil, ForceMode.VelocityChange);
+
+                        Debug.Log("Tag 01");
+                        break;
+
+                    case PlayerScript.PlayerState.Hopping:
+                        if (!playerRef.onGround) // Hopping and not on ground
+                        {
+                            if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                            {
+                                playerRB.AddForce(effectiveRecoilForce, ForceMode.Impulse);
+                                Debug.Log("Tag 02-1");
+
+                            }
+                            else
+                            {
+                                playerRB.AddForce(enhancedRecoil, ForceMode.VelocityChange);
+                                playerRB.AddForce(regularRecoil * 0.25f, ForceMode.Impulse);
+                                Debug.Log("Tag 02-2");
+
+                            }
+                        }
+                        else
+                        {
+                            if (rayHit.collider.gameObject.layer != LayerMask.NameToLayer("Ground"))
+                            {
+                                Debug.Log("Tag 03-1");
+                            playerRB.AddForce(enhancedRecoil, ForceMode.VelocityChange);
+                            playerRB.AddForce(regularRecoil * 0.25f, ForceMode.Impulse);
+                        }
+                            else
+                            {
+                                playerRB.AddForce(effectiveRecoilForce, ForceMode.Impulse);
+                                Debug.Log("Tag 03-2");
+                            }
+                        }
+                        break;
+
+                    case PlayerScript.PlayerState.OnAir:
+                        if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                        {
+                            Debug.Log("Tag 04-1");
+                            playerRB.AddForce(effectiveRecoilForce, ForceMode.Impulse);
+                        }
+                        else
+                        {
+                            Debug.Log("Tag 04-2");
+                        if (!IsPlayerMoving())
+                        {
+                            playerRB.AddForce(regularRecoil, ForceMode.Impulse);
+                            playerRB.AddForce(regularRecoil*0.25f, ForceMode.VelocityChange);
+
+                        }
+
+                        else
+                            {
+                            playerRB.AddForce(enhancedRecoil, ForceMode.VelocityChange);
+                            playerRB.AddForce(regularRecoil * 0.25f, ForceMode.Impulse);
+                        }
+                        }
+
+
+
+                        break;
+                    case PlayerScript.PlayerState.Sprinting:
+                        playerRB.AddForce(enhancedRecoil, ForceMode.Impulse);
+                        playerRB.AddForce(enhancedRecoil, ForceMode.VelocityChange);
+                        Debug.Log("Tag 05");
+                        break;
+                    default:
+                        Debug.Log("[Tag 06] Applying regular recoil in default case.");
+                        playerRB.AddForce(regularRecoil, ForceMode.Impulse);
+                        break;
+                }
+            }
+            else
+            {
+                Debug.Log("Tag 07");
+                // Here, you can handle the recoil behavior when you shoot the sky or other non-collider objects.
+                // For instance, just apply the regular recoil.
+                playerRB.AddForce(regularRecoil, ForceMode.Impulse);
+                // playerRB.AddForce(enhancedRecoil * 0.15f, ForceMode.VelocityChange);
+
+            }
+     
+    }
+
+    IEnumerator EnableMovementAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        playerRef.EnableMovementForces();
     }
     private bool IsPlayerMoving()
     {
         return inputActions.input.Gameplay.Move.ReadValue<Vector2>() != Vector2.zero; // Adjust the threshold if necessary.
-    } 
+    }
     private void ResetShot()
     {
         readyToShoot = true;
         reloading = false;
     }
-    float lastReloadTime;
-    private void MakeReadyToShoot(InputMethod inputMethod)
+    public void Reload()
     {
-        if (inputMethod == InputMethod.Q && this.inputMethod == InputMethod.LeftClick && !reloading)
+        if (!reloading)  // Prevent multiple reload triggers
         {
             reloading = true;
-            lastReloadTime = Time.time;
-
-            // After the reload time has passed, the gun is set ready to shoot again
-            Invoke("ResetShot", reloadTime);
-        }
-        else if (inputMethod == InputMethod.E && this.inputMethod == InputMethod.RightClick && !reloading)
-        {
-            reloading = true;
-            lastReloadTime = Time.time;
-
-            // After the reload time has passed, the gun is set ready to shoot again
             Invoke("ResetShot", reloadTime);
         }
     }
