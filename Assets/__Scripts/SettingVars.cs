@@ -5,15 +5,20 @@ using UnityEngine.InputSystem;
 
 public class SettingVars : MonoBehaviour
 {
+    // Meant for variables that will be affected by the player's settings
+
     public float CamSensitivityX;
     public float CamSensitivityY;
+    public int FrameRate = 60;
 
     public PlayerInputSystem input;
+    public WorldVariables worldVars;
 
     [RuntimeInitializeOnLoadMethod]
     private void Awake()
     {
         input = new PlayerInputSystem();
+        Application.targetFrameRate = FrameRate;
     }
 
     private void OnEnable()
