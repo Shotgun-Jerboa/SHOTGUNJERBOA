@@ -6,14 +6,18 @@ public class Shotgun : MonoBehaviour
 {
     [SerializeField] SettingVars inputActions;
 
-    // Gun stats
+    [Header("Gun Stas")]
     public int damage;
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
     public int bulletsPerTap;
-    public int bulletsLeft;
+    [SerializeField] float recoilForce;
+
+
+    [Header("Amount Stas")]
+    public int ammo;
     public bool isRecoil;
 
-    //Particle Effects
+    [Header("Particle Effect")]
     [SerializeField] GameObject muzzleFlash;
     [SerializeField] GameObject BulletHoleEffect;
     [SerializeField] TrailRenderer bulletTrail;
@@ -21,7 +25,7 @@ public class Shotgun : MonoBehaviour
     // Bools 
     bool readyToShoot, reloading;
 
-    // Reference
+    [Header("Reference")]
     [SerializeField] Camera fpsCam;
     public Transform shootingPoint;
     public RaycastHit rayHit;
@@ -29,11 +33,11 @@ public class Shotgun : MonoBehaviour
     Rigidbody playerRB;
     public PlayerScript playerRef;
 
-    [SerializeField] float recoilForce;
     [SerializeField] float shakeDuration;
     [SerializeField] float shakeStrength;
-    [SerializeField] float impactForce;
+    //[SerializeField] float impactForce;
     public bool isShooting = false;
+    private int shootPressCount = 0;
 
     private float lastShotTime;
     public enum InputMethod
@@ -74,64 +78,76 @@ public class Shotgun : MonoBehaviour
 
     private void Shoot(InputMethod inputMethod)
     {
-        if (!reloading && readyToShoot && bulletsLeft > 0)
+        if (!reloading)
         {
             hasShot = true;
+            shootPressCount++;
 
-            // Calculate the time since the last shot
-            float timeSinceLastShot = Time.time - lastShotTime;
-
-            if (timeSinceLastShot >= timeBetweenShooting)
+            if (shootPressCount % 2 != 0)
             {
-                readyToShoot = false;
-
-                // Update the last shot time
-                lastShotTime = Time.time;
-                Vector3 direction = fpsCam.transform.forward;
-                if (inputMethod == InputMethod.LeftClick ||
-           (inputMethod == InputMethod.RightClick))
+                if (ammo > 0)
                 {
-                    Debug.Log(playerRef.onGround ? "Player is grounded." : "Player is not grounded.");
+                    // Calculate the time since the last shot
+                    float timeSinceLastShot = Time.time - lastShotTime;
 
-                    // Consume just one bullet
-                    bulletsLeft--;
-
-                    GameObject MuzzleFlashInstance = Instantiate(muzzleFlash, shootingPoint.position, Quaternion.identity);
-                    Destroy particleScript = MuzzleFlashInstance.GetComponent<Destroy>();
-                    particleScript.attackPos = shootingPoint;
-
-                    for (int i = 0; i < bulletsPerTap; i++)
+                    if (timeSinceLastShot >= timeBetweenShooting)
                     {
-                        float x = Random.Range(-spread, spread);
-                        float y = Random.Range(-spread, spread);
-                        Vector3 bulletDirection = direction + new Vector3(x, y, 0); // Random direction for bullet
 
-                        if (Physics.Raycast(fpsCam.transform.position, bulletDirection, out rayHit, range, whatIsEnemy))
+                        // Update the last shot time
+                        lastShotTime = Time.time;
+                        Vector3 direction = fpsCam.transform.forward;
+                        if (inputMethod == InputMethod.LeftClick ||
+                            (inputMethod == InputMethod.RightClick))
                         {
-                            TrailRenderer trail = Instantiate(bulletTrail, shootingPoint.position, Quaternion.identity);
-                            StartCoroutine(SpawnTrail(trail, rayHit));
+                            Debug.Log(playerRef.onGround ? "Player is grounded." : "Player is not grounded.");
 
-                            if (rayHit.collider.CompareTag("Ground") || rayHit.collider.CompareTag("Wall"))
+                            // Consume just one bullet
+                            ammo--;
+
+                            GameObject MuzzleFlashInstance = Instantiate(muzzleFlash, shootingPoint.position, Quaternion.identity);
+                            Destroy particleScript = MuzzleFlashInstance.GetComponent<Destroy>();
+                            particleScript.attackPos = shootingPoint;
+
+                            for (int i = 0; i < bulletsPerTap; i++)
                             {
-                                Quaternion impactRotation = Quaternion.LookRotation(rayHit.normal);
-                                GameObject impact = Instantiate(BulletHoleEffect, rayHit.point, impactRotation);
-                                impact.transform.parent = rayHit.transform;
+                                float x = Random.Range(-spread, spread);
+                                float y = Random.Range(-spread, spread);
+                                Vector3 bulletDirection = direction + new Vector3(x, y, 0); // Random direction for bullet
+
+                                if (Physics.Raycast(fpsCam.transform.position, bulletDirection, out rayHit, range, whatIsEnemy))
+                                {
+                                    TrailRenderer trail = Instantiate(bulletTrail, shootingPoint.position, Quaternion.identity);
+                                    StartCoroutine(SpawnTrail(trail, rayHit));
+
+                                    if (rayHit.collider.CompareTag("Ground") || rayHit.collider.CompareTag("Wall"))
+                                    {
+                                        Quaternion impactRotation = Quaternion.LookRotation(rayHit.normal);
+                                        GameObject impact = Instantiate(BulletHoleEffect, rayHit.point, impactRotation);
+                                        impact.transform.parent = rayHit.transform;
+                                    }
+                                }
+                            }
+
+                            if (isRecoil)
+                            {
+                                RecoilStateHandler();
+
                             }
                         }
                     }
-
-                    if (isRecoil)
-                    {
-                        RecoilStateHandler();
-
-                    }
-                    if (bulletsLeft > 0 && !reloading)
-                    {
-                        Reload();
-                    }
+                }
+                else
+                {
+                    Debug.Log("No bullets left!");
+                    // You might want to reset shootPressCount here to ensure the next press attempts to shoot again.
+                    shootPressCount = 0;
                 }
             }
 
+            else
+            {
+                Reload();
+            }
         }
 
     }
@@ -283,8 +299,9 @@ public class Shotgun : MonoBehaviour
     }
     private void ResetShot()
     {
-        readyToShoot = true;
         reloading = false;
+        // Reset shootPressCount to ensure the next press will attempt to shoot.
+        shootPressCount = 0;
     }
     public void Reload()
     {
