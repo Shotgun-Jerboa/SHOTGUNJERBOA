@@ -46,9 +46,27 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""LeftReloadPressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""1670cea2-331b-4f8b-bc61-b44e02faccf1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""RightHandPressed"",
                     ""type"": ""Button"",
                     ""id"": ""a9af0d11-08bd-47f5-914b-98c89e4190ee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightReloadPressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""3b7e66e0-704a-4e14-9d37-29586fad5d17"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -85,6 +103,24 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""name"": ""TestButton"",
                     ""type"": ""Button"",
                     ""id"": ""805475cc-7ce6-4b7e-9c36-37414d3c20a0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""ac78410f-8a3c-4c16-9528-68567c16d361"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""d19ab39c-89cc-48ee-8856-2f1be3bb9922"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -278,6 +314,72 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""TestButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a7088f7-2f88-4802-a20f-7501b963c465"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftReloadPressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa9ba0c3-86de-4a67-a911-3fb7ce0755fe"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightReloadPressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ae8a049-7e38-4507-ad03-17bc8bf473dc"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d4ee646-ab3c-4c81-a221-4ec7189feb54"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7c6a6c6-61e4-4142-9dfa-adecbd21aad6"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f2ab6ba-9479-4baa-8802-524ebd832719"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -288,11 +390,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Look = m_Gameplay.FindAction("Look", throwIfNotFound: true);
         m_Gameplay_LeftHandPressed = m_Gameplay.FindAction("LeftHandPressed", throwIfNotFound: true);
+        m_Gameplay_LeftReloadPressed = m_Gameplay.FindAction("LeftReloadPressed", throwIfNotFound: true);
         m_Gameplay_RightHandPressed = m_Gameplay.FindAction("RightHandPressed", throwIfNotFound: true);
+        m_Gameplay_RightReloadPressed = m_Gameplay.FindAction("RightReloadPressed", throwIfNotFound: true);
         m_Gameplay_LeftHandReleased = m_Gameplay.FindAction("LeftHandReleased", throwIfNotFound: true);
         m_Gameplay_RightHandReleased = m_Gameplay.FindAction("RightHandReleased", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_TestButton = m_Gameplay.FindAction("TestButton", throwIfNotFound: true);
+        m_Gameplay_Sprint = m_Gameplay.FindAction("Sprint", throwIfNotFound: true);
+        m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -356,22 +462,30 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_Look;
     private readonly InputAction m_Gameplay_LeftHandPressed;
+    private readonly InputAction m_Gameplay_LeftReloadPressed;
     private readonly InputAction m_Gameplay_RightHandPressed;
+    private readonly InputAction m_Gameplay_RightReloadPressed;
     private readonly InputAction m_Gameplay_LeftHandReleased;
     private readonly InputAction m_Gameplay_RightHandReleased;
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_TestButton;
+    private readonly InputAction m_Gameplay_Sprint;
+    private readonly InputAction m_Gameplay_Jump;
     public struct GameplayActions
     {
         private @PlayerInputSystem m_Wrapper;
         public GameplayActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @Look => m_Wrapper.m_Gameplay_Look;
         public InputAction @LeftHandPressed => m_Wrapper.m_Gameplay_LeftHandPressed;
+        public InputAction @LeftReloadPressed => m_Wrapper.m_Gameplay_LeftReloadPressed;
         public InputAction @RightHandPressed => m_Wrapper.m_Gameplay_RightHandPressed;
+        public InputAction @RightReloadPressed => m_Wrapper.m_Gameplay_RightReloadPressed;
         public InputAction @LeftHandReleased => m_Wrapper.m_Gameplay_LeftHandReleased;
         public InputAction @RightHandReleased => m_Wrapper.m_Gameplay_RightHandReleased;
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @TestButton => m_Wrapper.m_Gameplay_TestButton;
+        public InputAction @Sprint => m_Wrapper.m_Gameplay_Sprint;
+        public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -387,9 +501,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @LeftHandPressed.started += instance.OnLeftHandPressed;
             @LeftHandPressed.performed += instance.OnLeftHandPressed;
             @LeftHandPressed.canceled += instance.OnLeftHandPressed;
+            @LeftReloadPressed.started += instance.OnLeftReloadPressed;
+            @LeftReloadPressed.performed += instance.OnLeftReloadPressed;
+            @LeftReloadPressed.canceled += instance.OnLeftReloadPressed;
             @RightHandPressed.started += instance.OnRightHandPressed;
             @RightHandPressed.performed += instance.OnRightHandPressed;
             @RightHandPressed.canceled += instance.OnRightHandPressed;
+            @RightReloadPressed.started += instance.OnRightReloadPressed;
+            @RightReloadPressed.performed += instance.OnRightReloadPressed;
+            @RightReloadPressed.canceled += instance.OnRightReloadPressed;
             @LeftHandReleased.started += instance.OnLeftHandReleased;
             @LeftHandReleased.performed += instance.OnLeftHandReleased;
             @LeftHandReleased.canceled += instance.OnLeftHandReleased;
@@ -402,6 +522,12 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @TestButton.started += instance.OnTestButton;
             @TestButton.performed += instance.OnTestButton;
             @TestButton.canceled += instance.OnTestButton;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -412,9 +538,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @LeftHandPressed.started -= instance.OnLeftHandPressed;
             @LeftHandPressed.performed -= instance.OnLeftHandPressed;
             @LeftHandPressed.canceled -= instance.OnLeftHandPressed;
+            @LeftReloadPressed.started -= instance.OnLeftReloadPressed;
+            @LeftReloadPressed.performed -= instance.OnLeftReloadPressed;
+            @LeftReloadPressed.canceled -= instance.OnLeftReloadPressed;
             @RightHandPressed.started -= instance.OnRightHandPressed;
             @RightHandPressed.performed -= instance.OnRightHandPressed;
             @RightHandPressed.canceled -= instance.OnRightHandPressed;
+            @RightReloadPressed.started -= instance.OnRightReloadPressed;
+            @RightReloadPressed.performed -= instance.OnRightReloadPressed;
+            @RightReloadPressed.canceled -= instance.OnRightReloadPressed;
             @LeftHandReleased.started -= instance.OnLeftHandReleased;
             @LeftHandReleased.performed -= instance.OnLeftHandReleased;
             @LeftHandReleased.canceled -= instance.OnLeftHandReleased;
@@ -427,6 +559,12 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @TestButton.started -= instance.OnTestButton;
             @TestButton.performed -= instance.OnTestButton;
             @TestButton.canceled -= instance.OnTestButton;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -448,10 +586,14 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     {
         void OnLook(InputAction.CallbackContext context);
         void OnLeftHandPressed(InputAction.CallbackContext context);
+        void OnLeftReloadPressed(InputAction.CallbackContext context);
         void OnRightHandPressed(InputAction.CallbackContext context);
+        void OnRightReloadPressed(InputAction.CallbackContext context);
         void OnLeftHandReleased(InputAction.CallbackContext context);
         void OnRightHandReleased(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnTestButton(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }

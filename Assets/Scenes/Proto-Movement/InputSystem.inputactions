@@ -24,9 +24,27 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "LeftReloadPressed",
+                    "type": "Button",
+                    "id": "1670cea2-331b-4f8b-bc61-b44e02faccf1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "RightHandPressed",
                     "type": "Button",
                     "id": "a9af0d11-08bd-47f5-914b-98c89e4190ee",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightReloadPressed",
+                    "type": "Button",
+                    "id": "3b7e66e0-704a-4e14-9d37-29586fad5d17",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -63,6 +81,24 @@
                     "name": "TestButton",
                     "type": "Button",
                     "id": "805475cc-7ce6-4b7e-9c36-37414d3c20a0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "ac78410f-8a3c-4c16-9528-68567c16d361",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "d19ab39c-89cc-48ee-8856-2f1be3bb9922",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -254,6 +290,72 @@
                     "processors": "",
                     "groups": "",
                     "action": "TestButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a7088f7-2f88-4802-a20f-7501b963c465",
+                    "path": "<Keyboard>/q",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftReloadPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa9ba0c3-86de-4a67-a911-3fb7ce0755fe",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightReloadPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ae8a049-7e38-4507-ad03-17bc8bf473dc",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5d4ee646-ab3c-4c81-a221-4ec7189feb54",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f7c6a6c6-61e4-4142-9dfa-adecbd21aad6",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f2ab6ba-9479-4baa-8802-524ebd832719",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
