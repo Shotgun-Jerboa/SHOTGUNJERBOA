@@ -103,6 +103,12 @@ public class Shotgun : MonoBehaviour
                     if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsEnemy))
                     {
 
+
+                            EnemyAI enemy = rayHit.collider.GetComponent<EnemyAI>();
+                            if (enemy != null)
+                            {
+                                enemy.TakeDamage(damage);
+                            }
                         /* if (rayHit.collider.CompareTag("Ground") || rayHit.collider.CompareTag("Wall"))
                          {
                              Quaternion impactRotation = Quaternion.LookRotation(rayHit.normal);
