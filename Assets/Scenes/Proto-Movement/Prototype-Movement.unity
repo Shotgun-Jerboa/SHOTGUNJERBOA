@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &52239644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 52239645}
+  - component: {fileID: 52239646}
+  m_Layer: 0
+  m_Name: Weapons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &52239645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52239644}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 963194228}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &52239646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52239644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8be41a934e1418eba216adefd9246e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &102919572
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +435,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 3
 --- !u!4 &484013133
 Transform:
   m_ObjectHideFlags: 0
@@ -423,11 +467,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b6c4e06d32bf041b8fc1ff0c664083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: Gameplay_Ground
+  state: 0
   settings: {fileID: 815642482}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  physbody: {fileID: 484013132}
   onGround: 0
 --- !u!1 &540243824
 GameObject:
@@ -1486,7 +1531,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645152815}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 89b8cdffa294c4b8b81ac96f6f62c233, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2008,8 +2053,11 @@ MonoBehaviour:
   sprintHopHeight: 1
   sprintTimeToPeak: 0.2
   jumpHeight: 2.5
-  jumpTimeToPeak: 0.4
+  jumpTimeToPeak: 0.3
+  jumpWaitForGround: 0.65
+  jumpGroundThreshold: 0.5
   groundDrag: 10
+  playerGravityMultiplier: 2.5
 --- !u!1 &959550291
 GameObject:
   m_ObjectHideFlags: 0
@@ -2516,6 +2564,7 @@ Transform:
   m_Children:
   - {fileID: 561280710}
   - {fileID: 1893533241}
+  - {fileID: 52239645}
   m_Father: {fileID: 140563946}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &963194229
@@ -2868,7 +2917,8 @@ MonoBehaviour:
   reloadTime: 2
   timeBetweenShots: 0
   bulletsPerTap: 1
-  bulletsLeft: 100
+  recoilForce: 10
+  ammo: 0
   isRecoil: 1
   muzzleFlash: {fileID: 0}
   BulletHoleEffect: {fileID: 0}
@@ -2879,12 +2929,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 9
   playerRef: {fileID: 484013134}
-  recoilForce: 10
   shakeDuration: 0.3
   shakeStrength: 0.3
-  impactForce: 100
   isShooting: 0
-  angleThreshold: 0.4
   inputMethod: 2
 --- !u!1 &1176395608
 GameObject:
@@ -3061,6 +3108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1270469871}
+  - component: {fileID: 1270469872}
   m_Layer: 3
   m_Name: worldGeometry
   m_TagString: Untagged
@@ -3085,6 +3133,63 @@ Transform:
   - {fileID: 584601166}
   - {fileID: 959550296}
   - {fileID: 554602748}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1270469872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270469870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e045cfb8f989441e829666dfa8e4010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 13400000, guid: 89b8cdffa294c4b8b81ac96f6f62c233, type: 2}
+--- !u!1 &1376247097
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1376247099}
+  - component: {fileID: 1376247098}
+  m_Layer: 0
+  m_Name: Global
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1376247098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376247097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d89db2a06f948e8907e87f8be52e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1376247099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376247097}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.0999999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1456946950
@@ -4046,7 +4151,8 @@ MonoBehaviour:
   reloadTime: 2
   timeBetweenShots: 0
   bulletsPerTap: 1
-  bulletsLeft: 100
+  recoilForce: 10
+  ammo: 0
   isRecoil: 1
   muzzleFlash: {fileID: 0}
   BulletHoleEffect: {fileID: 0}
@@ -4057,17 +4163,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 9
   playerRef: {fileID: 484013134}
-  recoilForce: 10
   shakeDuration: 0.3
   shakeStrength: 0.3
-  impactForce: 100
   isShooting: 0
-  angleThreshold: 0.4
   inputMethod: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1376247099}
   - {fileID: 815642483}
   - {fileID: 705507995}
   - {fileID: 1270469871}

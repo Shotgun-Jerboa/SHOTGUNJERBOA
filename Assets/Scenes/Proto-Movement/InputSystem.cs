@@ -125,6 +125,24 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftShoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""21f9d42d-0685-491a-8d5b-914842a221ab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightShoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""defb06ba-d48f-407c-a6bd-bf93e3a47424"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -380,6 +398,50 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""48407042-58ab-4e22-9404-7ce0965539b5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e0c6c32-28d2-4055-bba3-1c909c40e038"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e80dfe1d-e56a-4b77-bb94-e988411b5db7"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b131615f-b9ba-4fbd-95d7-1acaff0ac293"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -399,6 +461,8 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         m_Gameplay_TestButton = m_Gameplay.FindAction("TestButton", throwIfNotFound: true);
         m_Gameplay_Sprint = m_Gameplay.FindAction("Sprint", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
+        m_Gameplay_LeftShoot = m_Gameplay.FindAction("LeftShoot", throwIfNotFound: true);
+        m_Gameplay_RightShoot = m_Gameplay.FindAction("RightShoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -471,6 +535,8 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_TestButton;
     private readonly InputAction m_Gameplay_Sprint;
     private readonly InputAction m_Gameplay_Jump;
+    private readonly InputAction m_Gameplay_LeftShoot;
+    private readonly InputAction m_Gameplay_RightShoot;
     public struct GameplayActions
     {
         private @PlayerInputSystem m_Wrapper;
@@ -486,6 +552,8 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         public InputAction @TestButton => m_Wrapper.m_Gameplay_TestButton;
         public InputAction @Sprint => m_Wrapper.m_Gameplay_Sprint;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
+        public InputAction @LeftShoot => m_Wrapper.m_Gameplay_LeftShoot;
+        public InputAction @RightShoot => m_Wrapper.m_Gameplay_RightShoot;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -528,6 +596,12 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @LeftShoot.started += instance.OnLeftShoot;
+            @LeftShoot.performed += instance.OnLeftShoot;
+            @LeftShoot.canceled += instance.OnLeftShoot;
+            @RightShoot.started += instance.OnRightShoot;
+            @RightShoot.performed += instance.OnRightShoot;
+            @RightShoot.canceled += instance.OnRightShoot;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -565,6 +639,12 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @LeftShoot.started -= instance.OnLeftShoot;
+            @LeftShoot.performed -= instance.OnLeftShoot;
+            @LeftShoot.canceled -= instance.OnLeftShoot;
+            @RightShoot.started -= instance.OnRightShoot;
+            @RightShoot.performed -= instance.OnRightShoot;
+            @RightShoot.canceled -= instance.OnRightShoot;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -595,5 +675,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         void OnTestButton(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnLeftShoot(InputAction.CallbackContext context);
+        void OnRightShoot(InputAction.CallbackContext context);
     }
 }

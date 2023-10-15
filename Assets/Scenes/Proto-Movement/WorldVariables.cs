@@ -9,20 +9,23 @@ public class WorldVariables : MonoBehaviour
 
     // Commented out variables are yet to be implemented
 
-    [Header("Speed Properties\nIgnore the ranged multipliers they don't work yet!")]
-    public float moveSpeed;
-    public float sprintSpeedMultiplier;
-    [Range(0.0f, 1.0f)] public float midHopMultiplier;
-    [Range(0.0f, 1.0f)] public float airTimeMultiplier;
+    [Header("Speed Properties")]
+    public float moveSpeed; // Last set to 8
+    public float sprintSpeedMultiplier; // Last set to 1.5f
+    [Range(0.0f, 1.0f)] public float midHopMultiplier = 1; // Keep this at 1 until it's fixed
+    [Range(0.0f, 1.0f)] public float airTimeMultiplier = 1; // Keep this at 1 until it's fixed
 
     [Header("Jump Info")]
-    public float hopHeight;
-    public float hopTimeToPeak;
-    public float sprintHopHeight;
-    public float sprintTimeToPeak;
-    public float jumpHeight;
-    public float jumpTimeToPeak;
+    public float hopHeight; // Last set to 0.5f
+    public float hopTimeToPeak; // Last set to 0.3f
+    public float sprintHopHeight; // Last set to 1f
+    public float sprintTimeToPeak; // Last set to 0.2f
+    public float jumpHeight; // Last set to 2.5f
+    public float jumpTimeToPeak; // Last set to 0.3f
+    public float jumpWaitForGround; // Last set to 0.65f
+    public float jumpGroundThreshold; // Last set to 0.5f
 
     [Header("Player Physics Properties")]
-    public float groundDrag;
+    public float groundDrag; // Last set to 10
+    public float playerGravityMultiplier; // Last set to 2.5f
 }

@@ -4,69 +4,36 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    public string state;
-    private bool sprinting = false;
+    public enum PlayerState
+    {
+        Gameplay_Ground,
+        Gameplay_Air
+    }
+    public PlayerState state = PlayerState.Gameplay_Ground;
 
     public SettingVars settings;
-    private Dictionary<string, GameObject> gameObjects;
+    private Global.SceneHeirarchy children;
     public LayerMask groundLayer;
-
     public Rigidbody physbody;
-    private float height;
-    public bool onGround = false;
 
-    private List<interpolate> interpolates;
+    private float hitboxHeight;
+    public bool onGround = false;
+    private bool sprinting = false;
+    private float jumpDelay = 0f;
+
     private AnimationCurve movementMagnitude;
     private float jumpMagnitudeMultiplier = 0;
     private Vector2 moveDir;
-    public enum PlayerState
-    {
-        OnGround,
-        OnAir,
-        Hopping,
-        Sprinting
-    }
-    public PlayerState currentState = PlayerState.OnGround;
-    private bool applyMovementForces = true;
-    private bool justJumped = false;
-    private float initialJumpHeight = 0f;
-    private float maxJumpHeight = 0f;
-    private bool trackingHeight = false;
-    float jumpHeightDifference;
-    public float maximumHopHeight = 48;
-    public class interpolate
-    {
-        public AnimationCurve curve;
-        public float elapsedTime;
-        public int iteration = 0;
-
-        private System.Action<interpolate> func;
-
-        public interpolate(AnimationCurve curve, System.Action<interpolate> func, float time = 0f)
-        {
-            if (curve.length < 2)
-            {
-                throw new System.Exception("Not enough keyframes provided for curve");
-            }
-            this.curve = curve;
-            this.elapsedTime = time;
-            this.func = func;
-        }
-
-        public bool iterate()
-        {
-            func(this);
-            iteration++;
-            return elapsedTime >= curve[curve.length - 1].time;
-        }
-    }
 
     // Debug Feature
     // private float maxHeight = 0;
 
     void Start()
     {
-        interpolates = new();
+        physbody = gameObject.GetComponent<Rigidbody>();
+        children = new(gameObject);
+        settings = Global.instance.sceneTree.Get("Settings").GetComponent<SettingVars>();
+        hitboxHeight = children.Get("Collision").GetComponent<CapsuleCollider>().height;
 
         movementMagnitude = new AnimationCurve(new Keyframe[] {
             new Keyframe()
@@ -88,22 +55,11 @@ public class PlayerScript : MonoBehaviour
                 outTangent = 0
             }
         });
-
-        physbody = gameObject.GetComponent<Rigidbody>();
-        gameObjects = new();
-        for (int i = 0; i < this.transform.childCount; i++)
-        {
-            Transform child = this.transform.GetChild(i);
-            gameObjects[child.name] = child.gameObject;
-        }
-
-        height = gameObjects["Collision"].GetComponent<CapsuleCollider>().height;
     }
 
     private void Update()
     {
         sprinting = settings.input.Gameplay.Sprint.IsPressed();
-        PlayerStateHandler();
     }
 
     private void FixedUpdate()
@@ -115,42 +71,66 @@ public class PlayerScript : MonoBehaviour
         //    print(maxHeight);
         // }
 
-        onGround = Physics.Raycast(transform.position, Vector3.down, (height * 0.5f) + 0.01f, groundLayer);
+        onGround = Physics.Raycast(transform.position, Vector3.down, (hitboxHeight * 0.5f) + 0.01f, groundLayer);
         if (onGround)
         {
-            state = "Gameplay_Ground";
+            state = PlayerState.Gameplay_Ground;
             physbody.drag = settings.worldVars.groundDrag;
         }
         else
         {
             physbody.drag = 0;
         }
-        if (applyMovementForces && settings.input.Gameplay.Jump.IsPressed() && onGround)
+
+        if ((settings.input.Gameplay.Jump.IsPressed() && state == PlayerState.Gameplay_Ground) || jumpDelay > 0f)
         {
-            physbody.drag = 0;
-            physbody.velocity = new Vector3(physbody.velocity.x, 0, physbody.velocity.z);
-            jump(settings.worldVars.jumpHeight, settings.worldVars.jumpTimeToPeak, "quad", 3f);
-            state = "Gameplay_Air";
+            float dist;
+            RaycastHit hit;
+            Ray downRay = new(transform.position, Vector3.down);
+            if(Physics.Raycast(downRay, out hit)){
+                dist = hit.distance;
+            } else {
+                dist = settings.worldVars.jumpGroundThreshold + 1f;
+            }
+
+            if(onGround){
+                jumpDelay = 0;
+                physbody.drag = 0;
+                physbody.velocity = new Vector3(physbody.velocity.x, 0, physbody.velocity.z);
+                jump(settings.worldVars.jumpHeight, settings.worldVars.jumpTimeToPeak, "log", 0f);
+                state = PlayerState.Gameplay_Air;
+            } else if(dist <= settings.worldVars.jumpGroundThreshold) {
+                jumpDelay = 0;
+                physbody.drag = 0;
+                physbody.velocity = new Vector3(physbody.velocity.x, 0, physbody.velocity.z);
+                jump(settings.worldVars.jumpHeight - dist, settings.worldVars.jumpTimeToPeak, "log", 0f);
+                state = PlayerState.Gameplay_Air;
+            } else if(jumpDelay > 0f) {
+                jumpDelay -= Time.fixedDeltaTime;
+            } else {
+                jumpDelay = settings.worldVars.jumpWaitForGround;
+            }
         }
 
-        this.moveDir = settings.input.Gameplay.Move.ReadValue<Vector2>();
-        if (applyMovementForces && moveDir != Vector2.zero)
+        moveDir = settings.input.Gameplay.Move.ReadValue<Vector2>();
+        // moveDir = new Vector2(0, 1);
+        if (moveDir != Vector2.zero)
         {
             switch (state)
             {
-                case "Gameplay_Air":
-                    physbody.velocity = gameObjects["Orientation"].GetComponent<Transform>().rotation * new Vector3(
+                case PlayerState.Gameplay_Air:
+                    physbody.velocity = children.Get("Orientation").GetComponent<Transform>().rotation * new Vector3(
                         moveDir.x * settings.worldVars.moveSpeed * settings.worldVars.airTimeMultiplier,
                         physbody.velocity.y,
                         moveDir.y * settings.worldVars.moveSpeed * settings.worldVars.airTimeMultiplier
                     );
                     break;
-                case "Gameplay_Ground":
+                case PlayerState.Gameplay_Ground:
                     if (onGround)
                     {
                         if (sprinting)
                         {
-                            physbody.velocity = gameObjects["Orientation"].GetComponent<Transform>().rotation * new Vector3(
+                            physbody.velocity = children.Get("Orientation").GetComponent<Transform>().rotation * new Vector3(
                                 moveDir.x * settings.worldVars.moveSpeed * settings.worldVars.sprintSpeedMultiplier,
                                 physbody.velocity.y,
                                 moveDir.y * settings.worldVars.moveSpeed * settings.worldVars.sprintSpeedMultiplier
@@ -158,7 +138,7 @@ public class PlayerScript : MonoBehaviour
                         }
                         else
                         {
-                            physbody.velocity = gameObjects["Orientation"].GetComponent<Transform>().rotation * new Vector3(
+                            physbody.velocity = children.Get("Orientation").GetComponent<Transform>().rotation * new Vector3(
                                 moveDir.x * settings.worldVars.moveSpeed,
                                 physbody.velocity.y,
                                 moveDir.y * settings.worldVars.moveSpeed
@@ -180,7 +160,7 @@ public class PlayerScript : MonoBehaviour
                     {
                         if (sprinting)
                         {
-                            physbody.velocity = gameObjects["Orientation"].GetComponent<Transform>().rotation * new Vector3(
+                            physbody.velocity = children.Get("Orientation").GetComponent<Transform>().rotation * new Vector3(
                                 moveDir.x * settings.worldVars.moveSpeed * settings.worldVars.sprintSpeedMultiplier * settings.worldVars.midHopMultiplier,
                                 physbody.velocity.y,
                                 moveDir.y * settings.worldVars.moveSpeed * settings.worldVars.sprintSpeedMultiplier * settings.worldVars.midHopMultiplier
@@ -188,7 +168,7 @@ public class PlayerScript : MonoBehaviour
                         }
                         else
                         {
-                            physbody.velocity = gameObjects["Orientation"].GetComponent<Transform>().rotation * new Vector3(
+                            physbody.velocity = children.Get("Orientation").GetComponent<Transform>().rotation * new Vector3(
                                 moveDir.x * settings.worldVars.moveSpeed * settings.worldVars.midHopMultiplier,
                                 physbody.velocity.y,
                                 moveDir.y * settings.worldVars.moveSpeed * settings.worldVars.midHopMultiplier
@@ -198,129 +178,13 @@ public class PlayerScript : MonoBehaviour
                     break;
             }
         }
-
-        for (int i = interpolates.Count - 1; i >= 0; i--)
-        {
-            if (interpolates[i].iterate())
-            {
-                interpolates.RemoveAt(i);
-            }
-        }
+        physbody.velocity += new Vector3(
+            0,
+            (-1f + settings.worldVars.playerGravityMultiplier) * Physics.gravity.y * Time.fixedDeltaTime,
+            0
+        );
     }
 
-    public void DisableMovementForces()
-    {
-        applyMovementForces = false;
-        physbody.drag = 0;
-    }
-    public void EnableMovementForces()
-    {
-        applyMovementForces = true;
-        physbody.drag = settings.worldVars.groundDrag;
-
-    }
-    void TrackingHopHeight()
-    {
-        if (onGround)
-        {
-            if (settings.input.Gameplay.Move.ReadValue<Vector2>() != Vector2.zero)
-            {
-                initialJumpHeight = transform.position.y;
-                trackingHeight = true;
-            }
-
-        }
-
-        // If we are tracking the height, update the max height value
-        if (trackingHeight)
-        {
-            if (transform.position.y > maxJumpHeight)
-            {
-                maxJumpHeight = transform.position.y;
-            }
-
-            // Continuous check for exceeding maxHopHeight
-            if (maxJumpHeight - initialJumpHeight >= maximumHopHeight)
-            {
-                currentState = PlayerState.OnAir;
-            }
-        }
-
-        // Once the player lands back on the ground
-        if (onGround && trackingHeight)
-        {
-            jumpHeightDifference = maxJumpHeight - initialJumpHeight;
-
-            // Reset tracking variables
-            trackingHeight = false;
-            maxJumpHeight = 0f;
-        }
-    }
-    public float hopVelocityThreshold = 1f; // Set to your specific needs
-
-    public void PlayerStateHandler()
-    {
-        if (onGround)
-        {
-            if (IsPlayerMoving())
-            {
-                if (IsPlayerSprinting())
-                {
-                    currentState = PlayerState.Sprinting;
-                }
-                else
-                {
-                    currentState = PlayerState.Hopping;
-                }
-            }
-            else
-            {
-                currentState = PlayerState.OnGround;
-            }
-
-            if (justJumped)
-            {
-                currentState = PlayerState.OnAir;
-                justJumped = false;
-            }
-        }
-        else // If not on the ground
-        {
-            if (currentState != PlayerState.Hopping)
-            {
-                currentState = PlayerState.OnAir;
-            }
-        }
-        if (Mathf.Abs(physbody.velocity.y) > hopVelocityThreshold)
-        {
-            currentState = PlayerState.OnAir;
-        }
-        TrackingHopHeight();
-
-    }
-    bool IsPlayerSprinting()
-    {
-        float regularSpeed = settings.worldVars.moveSpeed * moveDir.magnitude;
-        float sprintingSpeed = settings.worldVars.moveSpeed * settings.worldVars.sprintSpeedMultiplier * moveDir.magnitude;
-        float currentSpeed = physbody.velocity.magnitude;
-
-        // Calculate the difference between current speed and both regular and sprinting speeds
-        float diffRegular = Mathf.Abs(currentSpeed - regularSpeed);
-        float diffSprint = Mathf.Abs(currentSpeed - sprintingSpeed);
-
-        // If sprinting, and the difference to the sprinting speed is smaller than the difference to regular speed,
-        // then we consider the player is indeed sprinting.
-        if (sprinting && diffSprint < diffRegular)
-        {
-            return true;
-        }
-
-        return false;
-    }
-    private bool IsPlayerMoving()
-    {
-        return settings.input.Gameplay.Move.ReadValue<Vector2>() != Vector2.zero; // Adjust the threshold if necessary.
-    }
     public void jump(float height, float time, string curveType = "linear", float strMultiplier = 0f)
     {
         if (strMultiplier < 0)
@@ -340,33 +204,48 @@ public class PlayerScript : MonoBehaviour
 
         float multiplier = 1f;
 
-        if (state == "Gameplay_Ground")
+        if (state == PlayerState.Gameplay_Ground)
         {
             multiplier = jumpMagnitudeMultiplier;
         }
 
-        System.Action<interpolate> func = (parent) =>
+        System.Action<Global.Interpolate, object[]> func = (parent, args) =>
         {
-            if (parent.iteration == 0)
+            PlayerScript playerRef = (PlayerScript) args[0];
+            if(curveType.Equals("const")){
+                playerRef.physbody.velocity = new Vector3(
+                    playerRef.physbody.velocity.x,
+                    parent.curve.Evaluate(parent.elapsedTime),
+                    playerRef.physbody.velocity.z
+                );
+                parent.elapsedTime += Time.fixedDeltaTime;
+                if(parent.elapsedTime >= parent.curve[1].time){
+                    playerRef.physbody.velocity = new Vector3(
+                        playerRef.physbody.velocity.x,
+                        0f,
+                        playerRef.physbody.velocity.z
+                    );
+                }
+            } else if (parent.iteration == 0)
             {
                 Vector3 velocity = new Vector3(
                     0,
-                    (parent.curve.Evaluate(parent.elapsedTime) * multiplier) + (-Physics.gravity.y * Time.fixedDeltaTime),
+                    (parent.curve.Evaluate(parent.elapsedTime) * multiplier) + (-Physics.gravity.y * Time.fixedDeltaTime * settings.worldVars.playerGravityMultiplier),
                     0
                 );
-                physbody.velocity += velocity;
+                playerRef.physbody.velocity += velocity;
             }
             else
             {
                 Vector3 velocityOld = new Vector3(0, parent.curve.Evaluate(parent.elapsedTime) * multiplier, 0);
-                physbody.velocity -= velocityOld;
+                playerRef.physbody.velocity -= velocityOld;
                 parent.elapsedTime += Time.fixedDeltaTime;
                 Vector3 velocityNew = new Vector3(
                     0,
-                    (parent.curve.Evaluate(parent.elapsedTime) * multiplier) + (-Physics.gravity.y * Time.fixedDeltaTime),
+                    (parent.curve.Evaluate(parent.elapsedTime) * multiplier) + (-Physics.gravity.y * Time.fixedDeltaTime * settings.worldVars.playerGravityMultiplier),
                     0
                 );
-                physbody.velocity += velocityNew;
+                playerRef.physbody.velocity += velocityNew;
             }
         };
 
@@ -376,8 +255,19 @@ public class PlayerScript : MonoBehaviour
 
         switch (curveType)
         {
+            case "const":
+                float constVelocity = height / time;
+
+                Global.instance.interpolate.Add(new Global.Interpolate(
+                    new AnimationCurve(new Keyframe[] {
+                        new Keyframe() {time = 0f, value = constVelocity},
+                        new Keyframe() {time = time, value = constVelocity}
+                    }),
+                    func, args: new object[] {this}
+                ));
+                break;
             case "linear":
-                interpolates.Add(new interpolate(
+                Global.instance.interpolate.Add(new Global.Interpolate(
                     new AnimationCurve(new Keyframe[] { new Keyframe() {
                             time = 0f,
                             value = 2f * height / time,
@@ -393,14 +283,14 @@ public class PlayerScript : MonoBehaviour
                             inTangent = -1f,
                             outTangent = 0f
                         }
-                    }), func
+                    }), func, args: new object[] {this}
                 ));
                 break;
             case "quad":
                 m0 = -2f - (1f * strMultiplier);
                 p0 = -1f * (((-12f * height) + (m0 * time)) / (6f * time));
 
-                interpolates.Add(new interpolate(
+                Global.instance.interpolate.Add(new Global.Interpolate(
                     new AnimationCurve(new Keyframe[] { new Keyframe() {
                             time = 0f,
                             value = p0,
@@ -416,14 +306,14 @@ public class PlayerScript : MonoBehaviour
                             inTangent = 0f,
                             outTangent = 0f
                         }
-                    }), func
+                    }), func, args: new object[] {this}
                 ));
                 break;
             case "log":
                 m1 = -2f - (1f * strMultiplier);
                 p0 = -1f * (((-12f * height) - (m1 * time)) / (6f * time));
 
-                interpolates.Add(new interpolate(
+                Global.instance.interpolate.Add(new Global.Interpolate(
                     new AnimationCurve(new Keyframe[] { new Keyframe() {
                             time = 0f,
                             value = p0,
@@ -439,7 +329,7 @@ public class PlayerScript : MonoBehaviour
                             inTangent = m1,
                             outTangent = 0f
                         }
-                    }), func
+                    }), func, args: new object[] {this}
                 ));
                 break;
         }

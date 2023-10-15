@@ -154,15 +154,15 @@ public class Shotgun : MonoBehaviour
     void RecoilStateHandler()
     {
 
-        if (playerRef.currentState == PlayerScript.PlayerState.OnGround)
+        if (playerRef.state == PlayerScript.PlayerState.Gameplay_Ground)
         {
-            playerRef.DisableMovementForces();
+            // playerRef.DisableMovementForces();
 
             StartCoroutine(EnableMovementAfterDelay(0.5f));
         }
         else
         {
-            playerRef.DisableMovementForces();
+            // playerRef.DisableMovementForces();
 
             StartCoroutine(EnableMovementAfterDelay(0.4f));
         }
@@ -193,9 +193,9 @@ public class Shotgun : MonoBehaviour
                     Debug.Log("[Tag 102] Shot a wall.");
                 }
                 // Check Player's State
-                switch (playerRef.currentState)
+                switch (playerRef.state)
                 {
-                    case PlayerScript.PlayerState.OnGround:
+                    case PlayerScript.PlayerState.Gameplay_Ground:
                         if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
                         {
                             playerRB.AddForce(effectiveRecoilForce, ForceMode.Impulse);
@@ -206,40 +206,40 @@ public class Shotgun : MonoBehaviour
                         Debug.Log("Tag 01");
                         break;
 
-                    case PlayerScript.PlayerState.Hopping:
-                        if (!playerRef.onGround) // Hopping and not on ground
-                        {
-                            if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
-                            {
-                                playerRB.AddForce(effectiveRecoilForce, ForceMode.Impulse);
-                                Debug.Log("Tag 02-1");
+                    // case PlayerScript.PlayerState.Hopping:
+                    //     if (!playerRef.onGround) // Hopping and not on ground
+                    //     {
+                    //         if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                    //         {
+                    //             playerRB.AddForce(effectiveRecoilForce, ForceMode.Impulse);
+                    //             Debug.Log("Tag 02-1");
 
-                            }
-                            else
-                            {
-                                playerRB.AddForce(enhancedRecoil, ForceMode.VelocityChange);
-                                playerRB.AddForce(regularRecoil * 0.25f, ForceMode.Impulse);
-                                Debug.Log("Tag 02-2");
+                    //         }
+                    //         else
+                    //         {
+                    //             playerRB.AddForce(enhancedRecoil, ForceMode.VelocityChange);
+                    //             playerRB.AddForce(regularRecoil * 0.25f, ForceMode.Impulse);
+                    //             Debug.Log("Tag 02-2");
 
-                            }
-                        }
-                        else
-                        {
-                            if (rayHit.collider.gameObject.layer != LayerMask.NameToLayer("Ground"))
-                            {
-                                Debug.Log("Tag 03-1");
-                            playerRB.AddForce(enhancedRecoil, ForceMode.VelocityChange);
-                            playerRB.AddForce(regularRecoil * 0.25f, ForceMode.Impulse);
-                        }
-                            else
-                            {
-                                playerRB.AddForce(effectiveRecoilForce, ForceMode.Impulse);
-                                Debug.Log("Tag 03-2");
-                            }
-                        }
-                        break;
+                    //         }
+                    //     }
+                    //     else
+                    //     {
+                    //         if (rayHit.collider.gameObject.layer != LayerMask.NameToLayer("Ground"))
+                    //         {
+                    //             Debug.Log("Tag 03-1");
+                    //         playerRB.AddForce(enhancedRecoil, ForceMode.VelocityChange);
+                    //         playerRB.AddForce(regularRecoil * 0.25f, ForceMode.Impulse);
+                    //     }
+                    //         else
+                    //         {
+                    //             playerRB.AddForce(effectiveRecoilForce, ForceMode.Impulse);
+                    //             Debug.Log("Tag 03-2");
+                    //         }
+                    //     }
+                    //     break;
 
-                    case PlayerScript.PlayerState.OnAir:
+                    case PlayerScript.PlayerState.Gameplay_Air:
                         if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
                         {
                             Debug.Log("Tag 04-1");
@@ -265,11 +265,11 @@ public class Shotgun : MonoBehaviour
 
 
                         break;
-                    case PlayerScript.PlayerState.Sprinting:
-                        playerRB.AddForce(enhancedRecoil, ForceMode.Impulse);
-                        playerRB.AddForce(enhancedRecoil, ForceMode.VelocityChange);
-                        Debug.Log("Tag 05");
-                        break;
+                    // case PlayerScript.PlayerState.Sprinting:
+                    //     playerRB.AddForce(enhancedRecoil, ForceMode.Impulse);
+                    //     playerRB.AddForce(enhancedRecoil, ForceMode.VelocityChange);
+                    //     Debug.Log("Tag 05");
+                    //     break;
                     default:
                         Debug.Log("[Tag 06] Applying regular recoil in default case.");
                         playerRB.AddForce(regularRecoil, ForceMode.Impulse);
@@ -291,7 +291,7 @@ public class Shotgun : MonoBehaviour
     IEnumerator EnableMovementAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        playerRef.EnableMovementForces();
+        // playerRef.EnableMovementForces();
     }
     private bool IsPlayerMoving()
     {
