@@ -8,49 +8,65 @@ public class Button_Manager : MonoBehaviour
     [SerializeField] GameObject deathMenu;
     [SerializeField] GameObject gameMusic;
     [SerializeField] SettingVars inputActions;
-    [SerializeField] GameObject settingMenu;
+    [SerializeField] PlayerInput playerInput;
     public int gameStartScene;
 
     public static bool GameIsPaused = false;
-    private PlayerInput playerInput;
-    private InputAction menuOpen;
-    private InputAction menuClose;
+    public UnityEngine.UIElements.Button resume;
+
+    [SerializeField] Animator anim;
 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
-
-        inputActions.input.Gameplay.MenuOPEN.performed += ctx => Pause();
-        inputActions.input.UI.MenuCLOSE.performed += ctx => Resume();
 
     }
 
-    private void Update()
-    {
 
-    }
 
     public void Quit_Game()
     {
         Application.Quit();
     }
 
+    public void MenuOPEN(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            if (!GameIsPaused)
+            {
+                Pause();
+            }
+        }
+
+    }
+
+    public void MenuCLOSE(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            if (GameIsPaused)
+            {
+                Resume();
+            }
+        }
+    }
+
     public void Pause()
     {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
+        playerInput.SwitchCurrentActionMap("UI");
+        anim.SetTrigger("PauseMenu");
         GameIsPaused = true;
-        playerInput.actions.FindActionMap("UI").Enable();
-        playerInput.actions.FindActionMap("Gameplay").Disable();
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 
     public void Resume()
     {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
+        playerInput.SwitchCurrentActionMap("Gameplay");
+        anim.SetTrigger("CloseMenu");
         GameIsPaused = false;
-        playerInput.actions.FindActionMap("UI").Disable();
-        playerInput.actions.FindActionMap("Gameplay").Enable();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void MainMenu(int sceneID)
