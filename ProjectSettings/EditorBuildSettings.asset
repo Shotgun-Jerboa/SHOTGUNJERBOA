@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu/MainMenu Spinning.unity
-    guid: 2f4df914b41730547930ff57e418b8c1
-  - enabled: 1
     path: Assets/Scenes/MainMenu/MainMenu City.unity
     guid: 47da77e5bb8b20e4c8f03720c483f7f0
   - enabled: 1
