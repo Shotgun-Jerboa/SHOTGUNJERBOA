@@ -72,6 +72,7 @@ public class Shotgun : MonoBehaviour
     void Start()
     {
         playerRB = GameObject.Find("Player").GetComponent<Rigidbody>();
+        playerRef = GameObject.Find("Player").GetComponent<PlayerScript>();
     }
 
     private bool hasShot = false;

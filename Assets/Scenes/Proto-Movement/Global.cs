@@ -7,11 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class Global : MonoBehaviour
 {
-    public static Global instance {get; private set;}
-    private void Awake(){
-        if(instance == null){
+    public static Global instance { get; private set; }
+    private void Awake()
+    {
+        if (instance == null)
+        {
             instance = this;
-        } else {
+        }
+        else
+        {
             Destroy(gameObject);
         }
 
@@ -21,7 +25,8 @@ public class Global : MonoBehaviour
         interpolate = new();
     }
 
-    public void Quit(int exitCode=0){
+    public void Quit(int exitCode = 0)
+    {
         Debug.Break();
         EditorApplication.isPlaying = false;
         Application.Quit(exitCode);
@@ -38,11 +43,12 @@ public class Global : MonoBehaviour
         private object[] args;
 
         public Interpolate(
-            AnimationCurve curve, 
-            System.Action<Interpolate, object[]> func, 
+            AnimationCurve curve,
+            System.Action<Interpolate, object[]> func,
             float time = 0f,
             object[]? args = null
-        ){
+        )
+        {
             if (curve.length < 2)
             {
                 throw new System.Exception("Not enough keyframes provided for curve");
@@ -50,9 +56,12 @@ public class Global : MonoBehaviour
             this.curve = curve;
             this.elapsedTime = time;
             this.func = func;
-            if(args is null){
-                this.args = new object[] {};
-            } else {
+            if (args is null)
+            {
+                this.args = new object[] { };
+            }
+            else
+            {
                 this.args = args;
             }
         }
@@ -64,32 +73,87 @@ public class Global : MonoBehaviour
             return elapsedTime >= curve[curve.length - 1].time;
         }
     }
-    
+
     public SceneHeirarchy sceneTree;
-    public class SceneHeirarchy {
+    public class SceneHeirarchy
+    {
         public Dictionary<string, ScenePath>? children;
         public int objCount = 0;
 
-        public SceneHeirarchy(GameObject? baseObj=null){
-            if(baseObj is null){
+        public SceneHeirarchy(GameObject? baseObj = null)
+        {
+            if (baseObj is null)
+            {
                 GameObject[] root = SceneManager.GetActiveScene().GetRootGameObjects();
-                if(root.Length == 0){
+                if (root.Length == 0)
+                {
                     children = null;
-                } else {
+                }
+                else
+                {
                     children = new();
-                    for(int i = 0; i < root.Length; i++){
+                    for (int i = 0; i < root.Length; i++)
+                    {
                         GameObject child = root[i];
-                        children.Add(child.name, new(child));
+                        string name;
+                        if (children.ContainsKey(child.name))
+                        {
+                            int appendNum = 1;
+                            while (true)
+                            {
+                                if (!children.ContainsKey($"{child.name} ({appendNum})"))
+                                {
+                                    name = $"{child.name} ({appendNum})";
+                                    break;
+                                }
+                                else
+                                {
+                                    appendNum++;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            name = child.name;
+                        }
+                        children.Add(name, new(child));
                     }
                 }
-            } else {
-                if(baseObj.transform.childCount != 0){
+            }
+            else
+            {
+                if (baseObj.transform.childCount != 0)
+                {
                     children = new();
-                    for(int i = 0; i < baseObj.transform.childCount; i++){
+                    for (int i = 0; i < baseObj.transform.childCount; i++)
+                    {
                         GameObject child = baseObj.transform.GetChild(i).gameObject;
-                        children.Add(child.name, new(child));
+                        string name;
+                        if (children.ContainsKey(child.name))
+                        {
+                            int appendNum = 1;
+                            while (true)
+                            {
+                                if (!children.ContainsKey($"{child.name} ({appendNum})"))
+                                {
+                                    name = $"{child.name} ({appendNum})";
+                                    break;
+                                }
+                                else
+                                {
+                                    appendNum++;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            name = child.name;
+                        }
+                        children.Add(name, new(child));
                     }
-                } else {
+                }
+                else
+                {
                     children = null;
                 }
             }
@@ -97,74 +161,128 @@ public class Global : MonoBehaviour
             objCount = getCount();
         }
 
-        public GameObject? Get(string path){
+        public GameObject? Get(string path)
+        {
             string[] segments = path.Split(
-                new char[] {'/', '\\'}, 
+                new char[] { '/', '\\' },
                 System.StringSplitOptions.RemoveEmptyEntries
             );
-            
-            if(segments.Length == 0 || children is null){
+
+            if (segments.Length == 0 || children is null)
+            {
                 return null;
-            } else {
-                if(children.ContainsKey(segments[0])){
+            }
+            else
+            {
+                if (children.ContainsKey(segments[0]))
+                {
                     return children[segments[0]].Get(segments, 1);
-                } else {
+                }
+                else
+                {
                     return null;
                 }
             }
         }
 
-        private int getCount(){
+        private int getCount()
+        {
             int count = 0;
-            if(children is null){
+            if (children is null)
+            {
                 return count;
-            } else {
-                foreach(string key in children.Keys){
+            }
+            else
+            {
+                foreach (string key in children.Keys)
+                {
                     count += children[key].getCount();
                 }
                 return count;
             }
         }
     }
-    public class ScenePath {
+    public class ScenePath
+    {
         public Dictionary<string, ScenePath>? children;
         public GameObject obj;
 
-        public ScenePath(GameObject obj){
+        public ScenePath(GameObject obj)
+        {
             this.obj = obj;
-            if(obj.transform.childCount != 0){
+            if (obj.transform.childCount != 0)
+            {
                 children = new();
-                for(int i = 0; i < obj.transform.childCount; i++){
+                for (int i = 0; i < obj.transform.childCount; i++)
+                {
                     GameObject child = obj.transform.GetChild(i).gameObject;
-                    children.Add(child.name, new(child));
+                    string name;
+                    if (children.ContainsKey(child.name))
+                    {
+                        int appendNum = 1;
+                        while (true)
+                        {
+                            if (!children.ContainsKey($"{child.name} ({appendNum})"))
+                            {
+                                name = $"{child.name} ({appendNum})";
+                                break;
+                            }
+                            else
+                            {
+                                appendNum++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        name = child.name;
+                    }
+                    children.Add(name, new(child));
                 }
-            } else {
+            }
+            else
+            {
                 children = null;
             }
         }
 
-        public GameObject? Get(string[] segments, int index){
-            if(index == segments.Length){
+        public GameObject? Get(string[] segments, int index)
+        {
+            if (index == segments.Length)
+            {
                 return obj;
-            } else {
-                if(children is null){
+            }
+            else
+            {
+                if (children is null)
+                {
                     return null;
-                } else {
-                    if(children.ContainsKey(segments[index])){
+                }
+                else
+                {
+                    if (children.ContainsKey(segments[index]))
+                    {
                         return children[segments[index]].Get(segments, index + 1);
-                    } else {
+                    }
+                    else
+                    {
                         return null;
                     }
                 }
             }
         }
 
-        public int getCount(){
+        public int getCount()
+        {
             int count = 1;
-            if(children is null){
+            if (children is null)
+            {
                 return count;
-            } else {
-                foreach(string key in children.Keys){
+            }
+            else
+            {
+                foreach (string key in children.Keys)
+                {
                     count += children[key].getCount();
                 }
                 return count;
@@ -172,13 +290,16 @@ public class Global : MonoBehaviour
         }
     }
 
-    void Update(){
-        if(sceneTree.objCount != getTreeCount()){
+    void Update()
+    {
+        if (sceneTree.objCount != getTreeCount())
+        {
             sceneTree = new();
         }
     }
 
-    void FixedUpdate(){
+    void FixedUpdate()
+    {
         for (int i = interpolate.Count - 1; i >= 0; i--)
         {
             if (interpolate[i].iterate())
@@ -188,21 +309,30 @@ public class Global : MonoBehaviour
         }
     }
 
-    private int getTreeCount(GameObject? obj=null){
+    private int getTreeCount(GameObject? obj = null)
+    {
         int count;
-        if(obj is null){
+        if (obj is null)
+        {
             count = 0;
             GameObject[] root = SceneManager.GetActiveScene().GetRootGameObjects();
-            for(int i = 0; i < root.Length; i++){
+            for (int i = 0; i < root.Length; i++)
+            {
                 count += getTreeCount(root[i]);
             }
             return count;
-        } else {
+        }
+        else
+        {
             count = 1;
-            if(obj.transform.childCount == 0){
+            if (obj.transform.childCount == 0)
+            {
                 return count;
-            } else {
-                for(int i = 0; i < obj.transform.childCount; i++){
+            }
+            else
+            {
+                for (int i = 0; i < obj.transform.childCount; i++)
+                {
                     count += getTreeCount(obj.transform.GetChild(i).gameObject);
                 }
                 return count;
