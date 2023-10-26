@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f411dd3289b2009498555ac8df4abc74
+guid: 9d8f5f315c6171648be70992b3ec689b
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -9,6 +9,6 @@ ScriptedImporter:
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 8404be70184654265930450def6a9037, type: 3}
   generateWrapperCode: 1
-  wrapperCodePath: Assets/Scenes/Proto_UI/InputSystemMERGE.cs
-  wrapperClassName: PlayerInputSystemMERGE
+  wrapperCodePath: 
+  wrapperClassName: PlayerInputSystem
   wrapperCodeNamespace: 

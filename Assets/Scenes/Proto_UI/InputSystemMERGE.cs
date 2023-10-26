@@ -15,10 +15,10 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
+public partial class @PlayerInputSystemMERGE: IInputActionCollection2, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @PlayerInputSystem()
+    public @PlayerInputSystemMERGE()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""InputSystem"",
@@ -1044,8 +1044,8 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_MenuOPEN;
     public struct GameplayActions
     {
-        private @PlayerInputSystem m_Wrapper;
-        public GameplayActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
+        private @PlayerInputSystemMERGE m_Wrapper;
+        public GameplayActions(@PlayerInputSystemMERGE wrapper) { m_Wrapper = wrapper; }
         public InputAction @Look => m_Wrapper.m_Gameplay_Look;
         public InputAction @LeftHandPressed => m_Wrapper.m_Gameplay_LeftHandPressed;
         public InputAction @LeftReloadPressed => m_Wrapper.m_Gameplay_LeftReloadPressed;
@@ -1177,8 +1177,8 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_MenuCLOSE;
     public struct UIActions
     {
-        private @PlayerInputSystem m_Wrapper;
-        public UIActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
+        private @PlayerInputSystemMERGE m_Wrapper;
+        public UIActions(@PlayerInputSystemMERGE wrapper) { m_Wrapper = wrapper; }
         public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
         public InputAction @Submit => m_Wrapper.m_UI_Submit;
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
