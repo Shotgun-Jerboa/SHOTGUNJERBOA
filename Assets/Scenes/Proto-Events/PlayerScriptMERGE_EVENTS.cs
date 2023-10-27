@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerScript : MonoBehaviour
+public class PlayerScriptMERGE_EVENTS : MonoBehaviour
 {
     public string state;
     private bool sprinting = false;

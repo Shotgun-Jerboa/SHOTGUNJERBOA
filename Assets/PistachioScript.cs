@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class PistachioScript : MonoBehaviour
 {
     
-    public PlayerScript playerRef;
+    public PlayerScriptMERGE_EVENTS playerRef;
     
     
 
     void Start()
     {
-        PlayerScript playerRef = GetComponent<PlayerScript>();
+        PlayerScriptMERGE_EVENTS playerRef = GetComponent<PlayerScriptMERGE_EVENTS>();
         int Ammo = playerRef.Ammo;
     }
 
