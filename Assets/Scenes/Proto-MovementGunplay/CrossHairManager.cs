@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class CrossHairManager : MonoBehaviour
 {
-    [SerializeField] GameObject leftCrossHairFull;
-    [SerializeField] GameObject rightCrossHairFull;
-    [SerializeField] GameObject leftCrossHairEmpty;
-    [SerializeField] GameObject rightCrossHairEmpty;
+    private GameObject leftCrossHairFull;
+    private GameObject rightCrossHairFull;
+    private GameObject leftCrossHairEmpty;
+    private GameObject rightCrossHairEmpty;
 
     //[SerializeField] GameObject spriteLeftCrossHair;
     //[SerializeField] GameObject spriteRightCrossHair;
@@ -32,8 +32,6 @@ public class CrossHairManager : MonoBehaviour
 
     private void Start()
     {
-        print(Global.instance);
-
         leftCrossHairFull = Global.instance.sceneTree.Get("Canvas/Left_CrosshairFull");
         rightCrossHairFull = Global.instance.sceneTree.Get("Canvas/Right_CrosshairFull");
         leftCrossHairEmpty = Global.instance.sceneTree.Get("Canvas/Left_CrosshairEmpty");

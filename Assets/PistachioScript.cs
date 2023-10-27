@@ -5,29 +5,19 @@ using UnityEngine.UI;
 
 public class PistachioScript : MonoBehaviour
 {
-    
-    public PlayerScriptMERGE_EVENTS playerRef;
-    
-    
+    private ShotgunMain shotgunsRef;
 
     void Start()
     {
-        PlayerScriptMERGE_EVENTS playerRef = GetComponent<PlayerScriptMERGE_EVENTS>();
-        int Ammo = playerRef.Ammo;
+        shotgunsRef = Global.instance.sceneTree.Get("Camera/Main Camera/Weapons").GetComponent<ShotgunMain>();
     }
-
-    public Text AmmoCounter;
-
     
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Pistachio"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            Destroy(other.gameObject);
-            playerRef.Ammo++;
-            AmmoCounter.text = "Ammo: " + playerRef.Ammo;
+            Destroy(gameObject);
+            shotgunsRef.ammo++;
         }
-    
     }
 }
