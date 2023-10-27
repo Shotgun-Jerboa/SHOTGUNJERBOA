@@ -8,21 +8,27 @@ public class UIManager : MonoBehaviour
 {
     //[SerializeField] GameObject leftHand;
     //[SerializeField] GameObject rightHand;
-    [SerializeField] GameObject player;
-    [SerializeField] ShotgunMain shotgunMain;
+    // private GameObject player;
+    private ShotgunMain shotgunMain;
     //[SerializeField] Shotgun right;
 
-    public TextMeshProUGUI healthText;
-    public TextMeshProUGUI ammoText;
+    private TextMeshProUGUI healthText;
+    private TextMeshProUGUI ammoText;
 
     //[SerializeField] GameObject dot;
-    public Animator animator;
+    // public Animator animator;
 
-    public int health = 100;
-    public int ammo = 10;
     // Start is called before the first frame update
     void Start()
     {
+        // player = Global.instance.sceneTree.Get("Player");
+        shotgunMain = Global.instance.sceneTree.Get("Camera/Main Camera/Weapons").GetComponent<ShotgunMain>();
+
+        Global.SceneHeirarchy children = new(gameObject);
+
+        healthText = children.Get("Health/Text (TMP)").GetComponent<TextMeshProUGUI>();
+        ammoText = children.Get("Ammo/Text (TMP)").GetComponent<TextMeshProUGUI>();
+
         //left = leftHand.GetComponent(typeof(Shotgun)) as Shotgun;
         //right = rightHand.GetComponent(typeof(Shotgun)) as Shotgun;
     }
@@ -33,14 +39,10 @@ public class UIManager : MonoBehaviour
         /*if(left.bulletsLeft == 98){
             dot.SetActive(false);
         }*/
-        ammo = shotgunMain.ammo;
-        healthText.text = "Health: " + health;
-        ammoText.text = "Ammo: " + ammo;
-        if(Input.GetKey(KeyCode.P)){
-            animator.SetTrigger("Damage");
-        }
-    }
-    public void damage(){
-        health--;
+        healthText.text = "Health: " + "100";
+        ammoText.text = "Ammo: " + shotgunMain.ammo;
+        // if(Input.GetKey(KeyCode.P)){
+        //     animator.SetTrigger("Damage");
+        // }
     }
 }

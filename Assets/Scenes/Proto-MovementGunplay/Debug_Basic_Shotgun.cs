@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class DebugBasicShotgun : MonoBehaviour, IShotgun
@@ -239,7 +238,7 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
         if(maxClipSize < ammoPerShot)
         {
             Debug.LogError("ammoPerShot cannot exceed maxClipSize");
-            Global.instance.Quit();
+            Global.Quit();
         }
     }
 }

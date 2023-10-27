@@ -25,7 +25,7 @@ public class Global : MonoBehaviour
         interpolate = new();
     }
 
-    public void Quit(int exitCode = 0)
+    public static void Quit(int exitCode = 0)
     {
         Debug.Break();
         EditorApplication.isPlaying = false;
