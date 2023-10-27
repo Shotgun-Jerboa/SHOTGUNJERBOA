@@ -51,6 +51,7 @@ public class Button_Manager : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
+            Debug.Log("press");
             if (!GameIsPaused)
             {
                 Pause();
@@ -63,6 +64,7 @@ public class Button_Manager : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
+            Debug.Log("press");
             if (GameIsPaused && !inOptions)
             {
                 Resume();
