@@ -23,6 +23,7 @@ public class Button_Manager : MonoBehaviour
     protected int width;
     protected int height;
     protected string test;
+    public GameObject canvas;
 
     public static bool GameIsPaused = false;
     public bool inOptions = false;
@@ -51,7 +52,6 @@ public class Button_Manager : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            Debug.Log("press");
             if (!GameIsPaused)
             {
                 Pause();
@@ -64,7 +64,6 @@ public class Button_Manager : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            Debug.Log("press");
             if (GameIsPaused && !inOptions)
             {
                 Resume();
@@ -84,6 +83,7 @@ public class Button_Manager : MonoBehaviour
         GameIsPaused = true;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+        canvas.SetActive(false);
     }
 
     public void Resume()
@@ -94,6 +94,7 @@ public class Button_Manager : MonoBehaviour
         GameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        canvas.SetActive(true);
     }
 
     public void MainMenu(int sceneID)

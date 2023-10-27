@@ -551,75 +551,63 @@ MonoBehaviour:
     m_ActionName: Gameplay/RightShoot[/Mouse/rightButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1465830748}
-        m_TargetAssemblyTypeName: Button_Manager, Assembly-CSharp
-        m_MethodName: MenuOPEN
-        m_Mode: 0
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: e04542b6-ff5e-4efc-b8ce-d8c06bafb3d3
+    m_ActionId: 8a559125-25a0-4f3e-b0c4-7e7df577af40
     m_ActionName: Gameplay/MenuOPEN[/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 89b289a9-1dc8-4e7b-916d-deec8bbaf843
+    m_ActionId: 7b9f2c95-9701-4743-8b30-a39d3a4848f2
     m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 30088fe0-1595-4b32-b178-d6862936b7ae
+    m_ActionId: 01fd141d-bd00-4e8b-9b57-52634d53dfc5
     m_ActionName: UI/Submit[/Keyboard/enter]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: c2e734de-d83a-4ed7-af1d-9cae0fdfe3cc
+    m_ActionId: 0c198f34-90cf-498a-905b-2f89a7c12039
     m_ActionName: UI/Cancel[/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 784b221f-d302-435c-bd18-58fa6f31ea75
+    m_ActionId: 014b72a7-15d1-4999-9805-e49fceb893fa
     m_ActionName: UI/Point[/Mouse/position,/Pen/position,/Touchscreen/touch0/position,/Touchscreen/touch1/position,/Touchscreen/touch2/position,/Touchscreen/touch3/position,/Touchscreen/touch4/position,/Touchscreen/touch5/position,/Touchscreen/touch6/position,/Touchscreen/touch7/position,/Touchscreen/touch8/position,/Touchscreen/touch9/position]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 315976bd-6c84-487b-8404-cb02de73051e
+    m_ActionId: 6466145e-5008-4b9f-8f02-bbef5d90a627
     m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip,/Touchscreen/touch0/press,/Touchscreen/touch1/press,/Touchscreen/touch2/press,/Touchscreen/touch3/press,/Touchscreen/touch4/press,/Touchscreen/touch5/press,/Touchscreen/touch6/press,/Touchscreen/touch7/press,/Touchscreen/touch8/press,/Touchscreen/touch9/press]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 755cba70-ac9f-4226-9136-91f92635e069
+    m_ActionId: 2e66f055-f313-4309-a5a7-b62015fde101
     m_ActionName: UI/ScrollWheel[/Mouse/scroll]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: dd2789af-dbbf-4e97-9433-471ece0eaa2c
+    m_ActionId: 39a2a42b-a2fa-4ef1-98f6-4fc5d40253bc
     m_ActionName: UI/MiddleClick[/Mouse/middleButton]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 8b771cd9-4f41-4f95-aad0-66c288c148a9
+    m_ActionId: 73cbf511-dc79-4fec-9230-13d822b141b6
     m_ActionName: UI/RightClick[/Mouse/rightButton]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 902716ef-8fca-4521-87e8-fc2590d25639
+    m_ActionId: 4e0dc90d-c53b-4367-8429-b647198b4d2f
     m_ActionName: UI/TrackedDevicePosition
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 836ffac1-8ade-475c-b14e-84c9051f7fb6
+    m_ActionId: c504909f-b223-4c4a-8b37-1e6262013e5b
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1465830748}
-        m_TargetAssemblyTypeName: Button_Manager, Assembly-CSharp
-        m_MethodName: MenuCLOSE
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: b531a663-1021-4984-882f-695e57d3aa15
+      m_Calls: []
+    m_ActionId: 7ddf5ab5-09c5-4460-81a8-1c0b6cbf8678
     m_ActionName: UI/MenuCLOSE[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
@@ -4326,10 +4314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c49840e514af84f914601b56a426fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftCrossHairFull: {fileID: 0}
-  rightCrossHairFull: {fileID: 0}
-  leftCrossHairEmpty: {fileID: 0}
-  rightCrossHairEmpty: {fileID: 0}
   duration: 0.01
   intensity: 50
   returnDuration: 0.1
