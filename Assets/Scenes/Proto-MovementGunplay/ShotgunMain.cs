@@ -80,7 +80,7 @@ public class ShotgunMain : MonoBehaviour
         {
             Rigidbody physbody = player.physbody;
 
-            if (Vector3.Dot(camera.rotation * Vector3.forward, physbody.velocity) > 0 && Vector3.Dot(camera.rotation * Vector3.forward, physbody.velocity) + player.physbody.velocity.y >= 1f)
+            if (player.state == PlayerScript.PlayerState.Gameplay_Ground && Vector3.Dot(camera.rotation * Vector3.forward, physbody.velocity) > 0 && Vector3.Dot(camera.rotation * Vector3.forward, physbody.velocity) + player.physbody.velocity.y >= 1f)
             {
                 physbody.velocity = new(
                     0,
@@ -126,7 +126,7 @@ public class ShotgunMain : MonoBehaviour
         {
             Rigidbody physbody = player.physbody;
 
-            if (Vector3.Dot(camera.rotation * Vector3.forward, physbody.velocity) > 0 && Vector3.Dot(camera.rotation * Vector3.forward, physbody.velocity) + player.physbody.velocity.y >= 1f)
+            if (player.state == PlayerScript.PlayerState.Gameplay_Ground && Vector3.Dot(camera.rotation * Vector3.forward, physbody.velocity) > 0 && Vector3.Dot(camera.rotation * Vector3.forward, physbody.velocity) + player.physbody.velocity.y >= 1f)
             {
                 physbody.velocity = new(
                     0,

@@ -75,6 +75,17 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
+            Ray checkGroundHeight = new(new Vector3(transform.position.x, transform.position.y - (hitboxHeight * 0.5f), transform.position.z), Vector3.down);
+            RaycastHit hit;
+            if(Physics.Raycast(checkGroundHeight, out hit))
+            {
+                if(hit.distance > hitboxHeight * 1.5){
+                    state = PlayerState.Gameplay_Air;
+                }
+            } else
+            {
+                state = PlayerState.Gameplay_Air;
+            }
             physbody.drag = 0;
         }
 
