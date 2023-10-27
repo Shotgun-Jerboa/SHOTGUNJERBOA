@@ -6,6 +6,7 @@ using UnityEngine;
 public class DebugBasicShotgun : MonoBehaviour, IShotgun
 {
     [Header("Gun Stats")]
+    public int clip;
     public int ammoPerShot;
     public int maxClipSize;
     public float forceRecoil;
@@ -14,13 +15,14 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
     public float spread;
     public float maxRange;
 
-    [Header("Effects")]
+    public LayerMask interactWith;
+
+[Header("Effects")]
     [SerializeField] GameObject muzzleFlash; // Prefab for the muzzle flash effect.
     [SerializeField] GameObject BulletHoleEffect; // Prefab for the bullet hole effect.
     [SerializeField] TrailRenderer bulletTrail; // Prefab for the bullet trail effect.
 
     private Transform shootPoint;
-    private int clip;
     private bool isReloading = false;
 
     public void empty(ref int ammo)
@@ -33,6 +35,11 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
         return gameObject;
     }
 
+    public float[] getStats()
+    {
+        return new float[] { clip, maxClipSize };
+    }
+
     public bool isReady()
     {
         return clip >= ammoPerShot;
@@ -42,6 +49,19 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
     {
         if (clip < maxClipSize)
         {
+            int newClip;
+
+            if (ammo < maxClipSize)
+            {
+                newClip = ammo;
+                ammo -= newClip;
+            }
+            else
+            {
+                ammo -= (maxClipSize - clip);
+                newClip = maxClipSize;
+            }
+
             IEnumerator waitForReload()
             {
                 bool checkIsReloading()
@@ -56,9 +76,13 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
                     DebugBasicShotgun self = (DebugBasicShotgun)args[0];
                     Transform selfTransform = self.gameObject.transform;
 
-                    selfTransform.rotation = Quaternion.Euler(parent.curve.Evaluate(parent.elapsedTime), 0, 0);
+                    selfTransform.Rotate(
+                        parent.curve.Evaluate(parent.elapsedTime - Time.fixedDeltaTime) - parent.curve.Evaluate(parent.elapsedTime), 
+                        0, 
+                        0
+                    );
 
-                    if(parent.elapsedTime >= parent.curve[parent.curve.length].time)
+                    if(parent.elapsedTime >= parent.curve[parent.curve.length - 1].time)
                     {
                         self.isReloading = false;
                     }
@@ -82,20 +106,11 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
 
                 isReloading = true;
                 yield return new WaitWhile(checkIsReloading);
+
+                clip = newClip;
             }
 
             StartCoroutine(waitForReload());
-
-            if(ammo < maxClipSize)
-            {
-                clip = ammo;
-                ammo -= clip;
-            }
-            else
-            {
-                ammo -= (maxClipSize - clip);
-                clip = maxClipSize;
-            }
         }
     }
 
@@ -154,7 +169,7 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
             }
 
             RaycastHit hit;
-            if (Physics.Raycast(camera.position, camera.rotation * spreadDirection, out hit))
+            if (Physics.Raycast(camera.position, camera.rotation * spreadDirection, out hit, maxRange, interactWith))
             {
                 if(hit.distance > maxRange)
                 {
@@ -182,8 +197,36 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
             }
         }
 
-        
+        PlayerScript playerRef = Global.instance.sceneTree.Get("Player").GetComponent<PlayerScript>();
 
+        RaycastHit mainHit;
+        Ray ray = new(camera.position, camera.rotation * Vector3.forward);
+        if(Physics.Raycast(ray, out mainHit, maxRange, interactWith)){
+            if(mainHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            {
+                playerRef.physbody.AddForce(
+                    camera.rotation * -Vector3.forward * forceRecoil * 
+                    (1.5f - (Mathf.Clamp(mainHit.distance, 0.01f, 20f) / 20f))
+               );
+            }
+            else
+            {
+                playerRef.physbody.AddForce(camera.rotation * -Vector3.forward * forceRecoil * 0.75f);
+            }
+        } else
+        {
+            playerRef.physbody.AddForce(camera.rotation * -Vector3.forward * forceRecoil * 0.5f);
+        }
+
+        //camera.GetComponent<CamScript>().shake();
+
+
+        clip -= ammoUsed;
+
+        if(clip == 0)
+        {
+            reload(ref ammo);
+        }
     }
 
     void Start()

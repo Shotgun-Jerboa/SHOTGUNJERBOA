@@ -12,8 +12,8 @@ public class WorldVariables : MonoBehaviour
     [Header("Speed Properties")]
     public float moveSpeed; // Last set to 8
     public float sprintSpeedMultiplier; // Last set to 1.5f
-    [Range(0.0f, 1.0f)] public float midHopMultiplier = 1; // Keep this at 1 until it's fixed
-    [Range(0.0f, 1.0f)] public float airTimeMultiplier = 1; // Keep this at 1 until it's fixed
+    public float baseAcceleration; // Last set to 75
+    public float airTimeMultiplier; // Last set to 1.2
 
     [Header("Jump Info")]
     public float hopHeight; // Last set to 0.5f
