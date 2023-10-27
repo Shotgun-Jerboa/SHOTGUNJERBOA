@@ -168,16 +168,16 @@ public class PlayerScriptMERGE_EVENTS : MonoBehaviour
                         if (sprinting)
                         {
                             physbody.velocity = gameObjects["Orientation"].GetComponent<Transform>().rotation * new Vector3(
-                                moveDir.x * settings.worldVars.moveSpeed * settings.worldVars.sprintSpeedMultiplier * settings.worldVars.midHopMultiplier,
+                                moveDir.x * settings.worldVars.moveSpeed * settings.worldVars.sprintSpeedMultiplier,
                                 physbody.velocity.y,
-                                moveDir.y * settings.worldVars.moveSpeed * settings.worldVars.sprintSpeedMultiplier * settings.worldVars.midHopMultiplier
+                                moveDir.y * settings.worldVars.moveSpeed * settings.worldVars.sprintSpeedMultiplier
                             );
                         } else
                         {
                             physbody.velocity = gameObjects["Orientation"].GetComponent<Transform>().rotation * new Vector3(
-                                moveDir.x * settings.worldVars.moveSpeed * settings.worldVars.midHopMultiplier,
+                                moveDir.x * settings.worldVars.moveSpeed,
                                 physbody.velocity.y,
-                                moveDir.y * settings.worldVars.moveSpeed * settings.worldVars.midHopMultiplier
+                                moveDir.y * settings.worldVars.moveSpeed
                             );
                         }
                     }

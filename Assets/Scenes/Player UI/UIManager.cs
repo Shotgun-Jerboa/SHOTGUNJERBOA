@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     //[SerializeField] GameObject leftHand;
     //[SerializeField] GameObject rightHand;
     [SerializeField] GameObject player;
-    [SerializeField] Shotgun left;
+    [SerializeField] ShotgunMain shotgunMain;
     //[SerializeField] Shotgun right;
 
     public TextMeshProUGUI healthText;
@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
         /*if(left.bulletsLeft == 98){
             dot.SetActive(false);
         }*/
-        ammo = left.ammo;
+        ammo = shotgunMain.ammo;
         healthText.text = "Health: " + health;
         ammoText.text = "Ammo: " + ammo;
         if(Input.GetKey(KeyCode.P)){
