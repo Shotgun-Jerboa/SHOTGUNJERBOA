@@ -14,7 +14,7 @@ public class CamScript : MonoBehaviour
 
     private float initialFOV;
     private Rigidbody playerPhybody;
-    public AnimationCurve fovCurve;
+    private AnimationCurve fovCurve;
 
     private void Awake()
     {
