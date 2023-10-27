@@ -128,7 +128,6 @@ public class ShotgunMERGE_EVENTS : MonoBehaviour
                             AmmoCounter.text = "Ammo: " + playerRef.Ammo;
                         }
                         if (rayHit.rigidbody != null)
-=======
                     for (int i = 0; i < bulletsPerTap; i++)
                     {
                         float x = Random.Range(-spread, spread);

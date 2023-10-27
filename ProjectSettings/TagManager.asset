@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Pistachio
-  - Bullet
+  - Ground
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -13,7 +13,7 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
+  - Wall
   - 
   - 
   - 
