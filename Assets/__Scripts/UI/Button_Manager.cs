@@ -124,8 +124,8 @@ public class Button_Manager : MonoBehaviour
 
     public void ChangeSensitivity()
     {
-        sensitivity.CamSensitivityX = sliderVal2.value * 2;
-        sensitivity.CamSensitivityY = sliderVal2.value * 2;
+        sensitivity.CamSensitivityX = sliderVal2.value * 5;
+        sensitivity.CamSensitivityY = sliderVal2.value * 5;
     }
 
     public void ToOptions()

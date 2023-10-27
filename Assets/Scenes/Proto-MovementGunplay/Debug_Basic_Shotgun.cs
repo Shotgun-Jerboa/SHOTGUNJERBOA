@@ -46,7 +46,7 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
 
     public void reload(ref int ammo)
     {
-        if (clip < maxClipSize)
+        if (clip < maxClipSize && !isReloading)
         {
             int newClip;
 
@@ -57,7 +57,7 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
             }
             else
             {
-                ammo -= (maxClipSize - clip);
+                ammo -= maxClipSize - clip;
                 newClip = maxClipSize;
             }
 
@@ -172,7 +172,6 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
             {
                 if(hit.distance > maxRange)
                 {
-                    Vector3 maxTrailPosition = camera.transform.position + (camera.rotation * spreadDirection);
                     TrailRenderer trail = Instantiate(bulletTrail, shootPoint.position, Quaternion.identity);
                     StartCoroutine(SpawnTrailVector(trail, spreadDirection, camera.rotation));
                 } else
@@ -190,7 +189,6 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
             }
             else
             {
-                Vector3 maxTrailPosition = camera.transform.position + (camera.rotation * spreadDirection);
                 TrailRenderer trail = Instantiate(bulletTrail, shootPoint.position, Quaternion.identity);
                 StartCoroutine(SpawnTrailVector(trail, spreadDirection, camera.rotation));
             }
@@ -218,7 +216,6 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
         }
 
         //camera.GetComponent<CamScript>().shake();
-
 
         clip -= ammoUsed;
 
