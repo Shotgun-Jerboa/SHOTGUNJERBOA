@@ -136,7 +136,8 @@ PlayerSettings:
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
   bundleVersion: 0.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 11400000, guid: 077cab5806bbb3b4d8d0719008d26434, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -749,11 +750,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 830493c7-f4b0-4bc6-8fe1-36e72add9eb0
+  cloudProjectId: 9a6e211a-055a-4eb4-a863-7396fe8f5c81
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: prototype_jerboa
-  organizationId: megamatt9103
+  organizationId: maxherovt123
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

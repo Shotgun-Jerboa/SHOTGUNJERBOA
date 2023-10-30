@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+// using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 #nullable enable
@@ -25,10 +25,10 @@ public class Global : MonoBehaviour
         interpolate = new();
     }
 
-    public void Quit(int exitCode = 0)
+    public static void Quit(int exitCode = 0)
     {
         Debug.Break();
-        EditorApplication.isPlaying = false;
+        // EditorApplication.isPlaying = false;
         Application.Quit(exitCode);
     }
 

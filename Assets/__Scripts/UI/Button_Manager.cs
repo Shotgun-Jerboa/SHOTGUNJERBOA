@@ -23,6 +23,7 @@ public class Button_Manager : MonoBehaviour
     protected int width;
     protected int height;
     protected string test;
+    public GameObject canvas;
 
     public static bool GameIsPaused = false;
     public bool inOptions = false;
@@ -82,6 +83,7 @@ public class Button_Manager : MonoBehaviour
         GameIsPaused = true;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+        canvas.SetActive(false);
     }
 
     public void Resume()
@@ -92,6 +94,7 @@ public class Button_Manager : MonoBehaviour
         GameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        canvas.SetActive(true);
     }
 
     public void MainMenu(int sceneID)
@@ -121,8 +124,8 @@ public class Button_Manager : MonoBehaviour
 
     public void ChangeSensitivity()
     {
-        sensitivity.CamSensitivityX = sliderVal2.value * 8;
-        sensitivity.CamSensitivityY = sliderVal2.value * 8;
+        sensitivity.CamSensitivityX = sliderVal2.value * 5;
+        sensitivity.CamSensitivityY = sliderVal2.value * 5;
     }
 
     public void ToOptions()

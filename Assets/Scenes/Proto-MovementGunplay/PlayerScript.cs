@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static System.Security.Cryptography.ECCurve;
 
 public class PlayerScript : MonoBehaviour
 {
     public enum PlayerState
     {
         Gameplay_Ground,
-        Gameplay_Air
+        Gameplay_Air,
+        UI_Pause
     }
     public PlayerState state = PlayerState.Gameplay_Ground;
 
@@ -274,6 +273,9 @@ public class PlayerScript : MonoBehaviour
             multiplier = jumpMagnitudeMultiplier;
         }
 
+        height = Mathf.Clamp(height * multiplier, 0.5f * height, Mathf.Infinity);
+        time = Mathf.Clamp(time * multiplier, 0.5f * time, Mathf.Infinity);
+
         System.Action<Global.Interpolate, object[]> func = (parent, args) =>
         {
             PlayerScript playerRef = (PlayerScript) args[0];
@@ -295,19 +297,19 @@ public class PlayerScript : MonoBehaviour
             {
                 Vector3 velocity = new Vector3(
                     0,
-                    (parent.curve.Evaluate(parent.elapsedTime) * multiplier) + (-Physics.gravity.y * Time.fixedDeltaTime * settings.worldVars.playerGravityMultiplier),
+                    parent.curve.Evaluate(parent.elapsedTime) + (-Physics.gravity.y * Time.fixedDeltaTime * settings.worldVars.playerGravityMultiplier),
                     0
                 );
                 playerRef.physbody.velocity += velocity;
             }
             else
             {
-                Vector3 velocityOld = new Vector3(0, parent.curve.Evaluate(parent.elapsedTime) * multiplier, 0);
+                Vector3 velocityOld = new Vector3(0, parent.curve.Evaluate(parent.elapsedTime), 0);
                 playerRef.physbody.velocity -= velocityOld;
                 parent.elapsedTime += Time.fixedDeltaTime;
                 Vector3 velocityNew = new Vector3(
                     0,
-                    (parent.curve.Evaluate(parent.elapsedTime) * multiplier) + (-Physics.gravity.y * Time.fixedDeltaTime * settings.worldVars.playerGravityMultiplier),
+                    parent.curve.Evaluate(parent.elapsedTime) + (-Physics.gravity.y * Time.fixedDeltaTime * settings.worldVars.playerGravityMultiplier),
                     0
                 );
                 playerRef.physbody.velocity += velocityNew;

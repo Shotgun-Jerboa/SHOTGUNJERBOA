@@ -37,8 +37,20 @@ public class ShotgunMain : MonoBehaviour
             ammo = 0x7FFFFFFF;
         }
 
+        if(settings.input.Gameplay.MenuOPEN.WasPressedThisFrame()){
+            player.state = PlayerScript.PlayerState.UI_Pause;
+        } else if(settings.input.UI.MenuCLOSE.WasPressedThisFrame()){
+            if(player.onGround){
+                player.state = PlayerScript.PlayerState.Gameplay_Ground;
+            } else {
+                player.state = PlayerScript.PlayerState.Gameplay_Air;
+            }
+        }
+
         switch (player.state)
         {
+            case PlayerScript.PlayerState.UI_Pause:
+                break;
             case PlayerScript.PlayerState.Gameplay_Air:
             case PlayerScript.PlayerState.Gameplay_Ground:
                 if (shotguns.Length > 1)
@@ -117,6 +129,10 @@ public class ShotgunMain : MonoBehaviour
                 crosshairManager.LeftCrossHairInteraction();
                 crosshairManager.RigthCrossHairInteraction();
             }
+        } else {
+            if(ammo > 0){
+                shotguns[gunHand].reload(ref ammo);
+            }
         }
     }
     public void shoot(gunHand gunHand)
@@ -163,6 +179,10 @@ public class ShotgunMain : MonoBehaviour
             {
                 crosshairManager.LeftCrossHairInteraction();
                 crosshairManager.RigthCrossHairInteraction();
+            }
+        } else {
+            if(ammo > 0){
+                shotguns[(int)gunHand].reload(ref ammo);
             }
         }
     }
