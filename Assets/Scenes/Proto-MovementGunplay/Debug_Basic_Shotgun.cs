@@ -5,6 +5,7 @@ using UnityEngine;
 public class DebugBasicShotgun : MonoBehaviour, IShotgun
 {
     [Header("Gun Stats")]
+    public int gunDamage;
     public int clip;
     public int ammoPerShot;
     public int maxClipSize;
@@ -13,6 +14,7 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
     public float bulletsPerShot;
     public float spread;
     public float maxRange;
+    public float impulseForce; //This is for knockback force when the Enemy is defeated
 
     public LayerMask interactWith;
 
@@ -179,12 +181,38 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
                     TrailRenderer trail = Instantiate(bulletTrail, shootPoint.position, Quaternion.identity);
                     StartCoroutine(SpawnTrailRayhit(trail, hit));
 
-                    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                    if (hit.collider != null)
                     {
-                        Quaternion impactRotation = Quaternion.LookRotation(hit.normal);
-                        GameObject impact = Instantiate(BulletHoleEffect, hit.point, impactRotation);
-                        impact.transform.parent = hit.transform;
+                        if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                        {
+                            Quaternion impactRotation = Quaternion.LookRotation(hit.normal);
+                            GameObject impact = Instantiate(BulletHoleEffect, hit.point, impactRotation);
+                            impact.transform.parent = hit.transform;
+                        }
+
+                        //ENEMY INTERACTION WHEN BEING SHOT
+                        //PARTICLE EFFECT, DAMAGE DEALTH, EFFECTS 
+                        if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                        {
+                            //DEAL DAMAGE TO ENEMY
+                            hit.collider.gameObject.GetComponent<EnemyAI>().TakeDamage(gunDamage);
+
+                            Rigidbody enemyRb = hit.collider.gameObject.GetComponent<Rigidbody>();
+                            if (enemyRb != null)
+                            {
+                                if (hit.collider.gameObject.GetComponent<EnemyAI>().health <=0 && hit.collider.gameObject.GetComponent<EnemyAI>().isDefeated)
+                                {
+                                    Vector3 forceDirection = (hit.point - camera.position).normalized; // Calculate direction of the force
+                                    enemyRb.AddForce(forceDirection * impulseForce, ForceMode.Impulse); // Apply the force as an impulse
+                                }
+                            }
+                            // IMPACT EFFECT ON ENEMY
+                                Quaternion impactRotation = Quaternion.LookRotation(hit.normal);
+                            GameObject impact = Instantiate(BulletHoleEffect, hit.point, Quaternion.identity);
+                            impact.transform.parent = hit.transform;
+                        }
                     }
+                   
                 }
             }
             else
