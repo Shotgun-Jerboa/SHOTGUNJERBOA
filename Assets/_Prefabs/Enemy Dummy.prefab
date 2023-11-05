@@ -156,7 +156,7 @@ MonoBehaviour:
   patrolDelay: 5
   stoppingDistance: 3
   chasingSpeed: 6
-  attackRange: 5
+  attackRange: 3
   timeBetweenAttacks: 0
   damageCollider: {fileID: 5606064689463671698}
   sleepEffect: {fileID: 4470534839348773180}

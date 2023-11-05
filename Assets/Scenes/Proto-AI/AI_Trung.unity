@@ -4492,6 +4492,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6092178477871021168, guid: e7027d73917dc6744b9271a504f1fc80, type: 3}
+      propertyPath: crossfadeTime
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4630,6 +4634,10 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[24].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2142720968}
+    - target: {fileID: 9116006635704960685, guid: c22e3485a93372e46ac569b89dcc9217, type: 3}
+      propertyPath: timeToExitBattle
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

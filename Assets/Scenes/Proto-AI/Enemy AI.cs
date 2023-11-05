@@ -21,7 +21,6 @@ public class EnemyAI : MonoBehaviour
     private bool walkPointSet;
     public float patrolDelay = 5f; // The delay between reaching a point and moving to the next one
     private bool isPatrolling = false; // New flag to check whether the coroutine is running
-    [SerializeField] float stoppingDistance = 3;
     public float chasingSpeed;
 
     [Header("Attacking")]
@@ -70,9 +69,9 @@ public class EnemyAI : MonoBehaviour
                     Vector3 directionToPlayer = fieldOfView.playerRef.transform.position - transform.position;
                     float distanceToPlayer = directionToPlayer.magnitude;
 
-                    if (distanceToPlayer > stoppingDistance) // Only move towards the player if outside the stopping distance
+                    if (distanceToPlayer > attackRange) // Only move towards the player if outside the stopping distance
                     {
-                        agent.stoppingDistance = stoppingDistance;
+                        agent.stoppingDistance = attackRange;
                     }
                     else
                     {
@@ -180,7 +179,7 @@ public class EnemyAI : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        
+        fieldOfView.hasSpottedPlayer = true;
     }
 
     private IEnumerator DisableEnemy()
@@ -194,5 +193,13 @@ public class EnemyAI : MonoBehaviour
         // Replace with the correct layer name so the player can't interact with the Enemy
         // after they're defeated
         gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
+    }
+    
+    //To Visualize the attack range (not important, can be deleted)
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+
     }
 }
