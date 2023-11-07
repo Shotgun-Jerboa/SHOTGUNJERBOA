@@ -159,7 +159,6 @@ MonoBehaviour:
   ButtonPressed: 0
   wallScript: {fileID: 659821776}
   playerRef: {fileID: 484013134}
-  gunScript: {fileID: 0}
   anim: {fileID: 529672395}
   buttonAnim: {fileID: 1865489480}
 --- !u!4 &26917267
@@ -2174,7 +2173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd59597e3277314e8eb151d361737cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunScript: {fileID: 2106022850}
   WallHealth: 2
 --- !u!65 &659821777
 BoxCollider:
@@ -3629,7 +3627,6 @@ MonoBehaviour:
   timeBetweenShots: 0
   bulletsPerTap: 1
   bulletsLeft: 100
-  timeSinceLastShot: 0
   isRecoil: 1
   muzzleFlash: {fileID: 2957657415812638113, guid: b63ecd71e261612418280ca5cb3d9b41, type: 3}
   BulletHoleEffect: {fileID: 1000010844420130, guid: 944d85b2fc8f86e4a8c273d3c93c548a, type: 3}
@@ -4778,7 +4775,6 @@ GameObject:
   - component: {fileID: 1865489476}
   - component: {fileID: 1865489475}
   - component: {fileID: 1865489474}
-  - component: {fileID: 1865489479}
   - component: {fileID: 1865489478}
   - component: {fileID: 1865489480}
   m_Layer: 0
@@ -4970,21 +4966,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1865489479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865489472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3bf69f91f263d418deeefc1a5de6af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  txtToDisplay: {fileID: 259979955}
-  ButtonPressed: 0
-  anim: {fileID: 529672395}
 --- !u!95 &1865489480
 Animator:
   serializedVersion: 5
@@ -5502,7 +5483,6 @@ MonoBehaviour:
   timeBetweenShots: 0
   bulletsPerTap: 1
   bulletsLeft: 100
-  timeSinceLastShot: 0
   isRecoil: 1
   muzzleFlash: {fileID: 2957657415812638113, guid: b63ecd71e261612418280ca5cb3d9b41, type: 3}
   BulletHoleEffect: {fileID: 1000010844420130, guid: 944d85b2fc8f86e4a8c273d3c93c548a, type: 3}

@@ -60,15 +60,13 @@ public class SelectionManager : MonoBehaviour
                 }
                 
                 
-                if ((Input.GetMouseButtonDown(0) | Input.GetMouseButtonDown(1)) /*& (Ammo >= 1)*/)           //if button is clicked and ammo is left
+                if ((Input.GetMouseButtonDown(0) | Input.GetMouseButtonDown(1)) & (playerRef.Ammo >= 1))           //if button is clicked and ammo is left
 
                 {
 
                     ButtonPressed = true;
 
                     //gameObject.GetComponent<AudioSource>().Play();
-
-                    //gameObject.GetComponent<Animator>().Play("switch");
                 }
                 
                 if (ButtonPressed)
