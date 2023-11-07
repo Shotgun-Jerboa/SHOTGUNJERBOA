@@ -52,6 +52,7 @@ public class PlayerScript : MonoBehaviour
 
     
     public int Ammo = 3;
+    public int Health = 100;
 
     void Start()
     {

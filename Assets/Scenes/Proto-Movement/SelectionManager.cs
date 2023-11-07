@@ -13,6 +13,7 @@ public class SelectionManager : MonoBehaviour
     public bool ButtonPressed;
 
     public WallHealthScript wallScript;
+    public PlayerScript playerRef;
 
     public Animator anim;
     public Animator buttonAnim;

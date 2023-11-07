@@ -21,14 +21,15 @@ public class WallHealthScript : MonoBehaviour
 
     public void DamageWall()
     {
-        if (WallHealth >= 1)
-        {
-            WallHealth--;
-        }
+        
+            if (WallHealth >= 1)
+            {
+                WallHealth--;
+            }
 
-        if (WallHealth == 0)
-        {
-            Destroy(gameObject);
-        }
+            if (WallHealth == 0)
+            {
+                Destroy(gameObject);
+            }
     }
 }

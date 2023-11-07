@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Pistachio
   - Bullet
+  - Wall
+  - Button
+  - Ground
   layers:
   - Default
   - TransparentFX

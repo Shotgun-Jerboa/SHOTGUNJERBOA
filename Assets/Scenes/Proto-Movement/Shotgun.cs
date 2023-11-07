@@ -18,7 +18,7 @@ public class Shotgun : MonoBehaviour
     //Particle Effects
     [SerializeField] GameObject muzzleFlash;
     [SerializeField] GameObject BulletHoleEffect;
-    [SerializeField] TrailRenderer bulletTrail;
+    //[SerializeField] TrailRenderer bulletTrail;
 
     // Bools 
     bool readyToShoot, reloading;
@@ -134,8 +134,8 @@ public class Shotgun : MonoBehaviour
                         Vector3 bulletDirection = direction + new Vector3(x, y, 0); // Random direction for bullet
                         if (Physics.Raycast(fpsCam.transform.position, bulletDirection, out rayHit, range, whatIsEnemy))
                         {
-                            TrailRenderer trail = Instantiate(bulletTrail, shootingPoint.position, Quaternion.identity);
-                            StartCoroutine(SpawnTrail(trail, rayHit));
+                            //TrailRenderer trail = Instantiate(bulletTrail, shootingPoint.position, Quaternion.identity);
+                            //StartCoroutine(SpawnTrail(trail, rayHit));
 
                             if (rayHit.collider.CompareTag("Ground") || rayHit.collider.CompareTag("Wall"))
                             {
@@ -218,7 +218,7 @@ public class Shotgun : MonoBehaviour
             Invoke("ResetShot", reloadTime);
         }
     }
-    IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
+    /*IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
     {
         float time = 0;
         Vector3 startPos = trail.transform.position;
@@ -231,5 +231,5 @@ public class Shotgun : MonoBehaviour
         trail.transform.position = hit.point;
         Destroy(trail.gameObject, trail.time);
 
-    }
+    }*/
 }
