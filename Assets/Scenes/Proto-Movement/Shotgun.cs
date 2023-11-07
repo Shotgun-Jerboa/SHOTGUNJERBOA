@@ -127,8 +127,6 @@ public class Shotgun : MonoBehaviour
                             playerRef.Ammo--;
                             AmmoCounter.text = "Ammo: " + playerRef.Ammo;
                         }
-                        if (rayHit.rigidbody != null)
-=======
                     for (int i = 0; i < bulletsPerTap; i++)
                     {
                         float x = Random.Range(-spread, spread);

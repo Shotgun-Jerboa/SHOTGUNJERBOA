@@ -9,7 +9,7 @@ public class DoorScript : MonoBehaviour
 
     public GameObject Button;
 
-    public lightonoff script;
+    public SelectionManager script;
 
     // Start is called before the first frame update
     void Start()
