@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public TextMeshPro GameOver;
+    public TextMeshProUGUI GameOver;
 
     //not implemented yet, for orbiting around player corpse >
     private Camera m_MainCamera;

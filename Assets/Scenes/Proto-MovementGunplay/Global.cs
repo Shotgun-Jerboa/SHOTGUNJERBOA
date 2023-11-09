@@ -339,4 +339,27 @@ public class Global : MonoBehaviour
             }
         }
     }
+
+    //fixing crashing hopefully!
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ResetGlobalState();
+    }
+
+    public void ResetGlobalState()
+    {
+        // Reset or clear the necessary variables when a new scene is loaded
+        sceneTree = new SceneHeirarchy();
+        interpolate.Clear();
+    }
 }
