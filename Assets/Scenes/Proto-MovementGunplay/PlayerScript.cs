@@ -425,8 +425,22 @@ public class PlayerScript : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("DamageCollider"))
         {
-            health -= other.GetComponent<DamageDealer>().damage;
-            healthUIAnimator.SetTrigger("Damage");
+            DamageDealer damageDealer = other.GetComponent<DamageDealer>();
+            if (damageDealer && !damageDealer.HasDealtDamage)
+            {
+                health -= damageDealer.damage;
+                healthUIAnimator.SetTrigger("Damage");
+                damageDealer.HasDealtDamage = true; // Set the flag to true after dealing damage
+
+                // Optionally, you can start a coroutine or set a timer to reset this flag after a certain cooldown period
+                StartCoroutine(ResetDamageDealer(damageDealer));
+            }
         }
+    }
+
+    IEnumerator ResetDamageDealer(DamageDealer damageDealer)
+    {
+        yield return new WaitForSeconds(damageDealer.cooldown); // Assuming DamageDealer has a cooldown property
+        damageDealer.HasDealtDamage = false; // Reset the flag
     }
 }

@@ -34,6 +34,9 @@ public class EnemyAI : MonoBehaviour
     private bool sleepEffectSpawned = false; // Add a flag to check if the sleep effect has been spawned
     public bool isDefeated = false;
 
+    [Header("Animation Control")]
+    Animator animator;
+
 
     [Header("Layers")]
     public LayerMask whatIsGround, whatIsPlayer;
@@ -42,6 +45,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         fieldOfView = GetComponent<FieldOfView>();
@@ -61,9 +65,12 @@ public class EnemyAI : MonoBehaviour
 
             if (fieldOfView.hasSpottedPlayer)
             {
-
+                patrolDelay = 0;
                 agent.destination = fieldOfView.playerRef.transform.position;
                 agent.speed = chasingSpeed;
+                // Set "Run" to true while chasing the player
+                animator.SetBool("Run", agent.remainingDistance > attackRange);
+
                 if (!playerInAttackRange)
                 {
                     Vector3 directionToPlayer = fieldOfView.playerRef.transform.position - transform.position;
@@ -80,7 +87,7 @@ public class EnemyAI : MonoBehaviour
 
                     directionToPlayer.y = 0; // This line keeps the AI from tilting head up or down
                     Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Adjust the 5f value to make rotation faster or slower
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10); // Adjust the 5f value to make rotation faster or slower
                     StopCoroutine(Patrolling()); // Stop the patrolling
                     isPatrolling = false;
                 }
@@ -94,11 +101,7 @@ public class EnemyAI : MonoBehaviour
             }
             if (fieldOfView.playerInSightRange && fieldOfView.playerInSightRange)
             {
-                // agent.isStopped = true; // Stop the agent from moving
-
-                //Play the attack animation here
-                //Or
-                //Set the parameter in animator to trigger animation
+                AttackPlayer();
 
             }
         }
@@ -126,14 +129,19 @@ public class EnemyAI : MonoBehaviour
 
             if (!walkPointSet) SearchWalkPoint(); // Find a new patrol point if not already set
 
-
             agent.SetDestination(walkPoint); // Set the enemy's destination to the walk point
+            // Set "Run" to true while moving to the walk point
+            animator.SetBool("Run", true);
 
             // Check if the enemy is close to the walk point
-            if (Vector3.Distance(transform.position, walkPoint) < 1)
+            if (Vector3.Distance(transform.position, walkPoint) < 0.5f)
             {
+
                 walkPointSet = false; // Reset walk point for the next loop
                 agent.isStopped = true; // Stop the agent
+                // Set Run parameter to false when waiting at a patrol point
+                animator.SetBool("Run", false);
+
                 yield return new WaitForSeconds(patrolDelay); // Wait for 1 second before finding the next point
                 if (agent.enabled && agent.isOnNavMesh)
                 {
@@ -146,6 +154,9 @@ public class EnemyAI : MonoBehaviour
                 yield return new WaitForEndOfFrame(); // If not at the walk point, wait for the next frame
             }
         }
+
+        // Set "Run" to false when patrolling stops because the player was spotted
+        animator.SetBool("Run", true);
         isPatrolling = false; // Reset the flag when the coroutine finishes
     }
 
@@ -153,6 +164,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (health <= 0)
         {
+            animator.SetBool("Death", true);
             // Check the flag before spawning the sleep effect
             if (!sleepEffectSpawned)
             {
@@ -186,7 +198,7 @@ public class EnemyAI : MonoBehaviour
     {
         isDefeated = true;
         agent.enabled = false;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         // Reset any current movement and rotational velocity.
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
@@ -194,7 +206,25 @@ public class EnemyAI : MonoBehaviour
         // after they're defeated
         gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
     }
-    
+
+    private void AttackPlayer()
+    {
+        // Call this method when it's time for the enemy to attack the player
+        if (playerInAttackRange && !alreadyAttacked)
+        {
+            // Trigger the Bite animation
+            animator.Play("Bite");
+
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        // Reset the attack flag so the enemy can attack again
+        alreadyAttacked = false;
+    }
     //To Visualize the attack range (not important, can be deleted)
     private void OnDrawGizmos()
     {
