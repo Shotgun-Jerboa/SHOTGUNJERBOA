@@ -97,7 +97,7 @@ public class PlayerScript : MonoBehaviour
     {
         sprinting = settings.input.Gameplay.Sprint.IsPressed();
 
-        if (Input.GetKeyDown("z"))
+        if (Input.GetKeyDown("t"))
         {
             Health = Health + 10;
             HealthCounter.text = "Health: " + Health;
