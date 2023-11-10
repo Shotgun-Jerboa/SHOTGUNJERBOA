@@ -17,7 +17,6 @@ public class PistachioScript : MonoBehaviour
     }
 
     public Text AmmoCounter;
-    public Text HealthCounter;
 
     
 
@@ -28,8 +27,6 @@ public class PistachioScript : MonoBehaviour
             Destroy(other.gameObject);
             playerRef.Ammo++;
             AmmoCounter.text = "Ammo: " + playerRef.Ammo;
-            playerRef.Health = playerRef.Health + 10;
-            HealthCounter.text = "Health: " + playerRef.Health;
         }
     
     }

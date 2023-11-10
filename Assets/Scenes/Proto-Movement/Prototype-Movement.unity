@@ -726,6 +726,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  HealthCounter: {fileID: 642535243}
+  AmmoCounter: {fileID: 1181658207}
   onGround: 0
   Ammo: 3
   Health: 100
@@ -743,7 +745,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRef: {fileID: 484013134}
   AmmoCounter: {fileID: 1181658207}
-  HealthCounter: {fileID: 642535243}
 --- !u!1 &529672394
 GameObject:
   m_ObjectHideFlags: 0

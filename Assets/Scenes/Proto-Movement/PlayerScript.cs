@@ -12,6 +12,9 @@ public class PlayerScript : MonoBehaviour
     private Dictionary<string, GameObject> gameObjects;
     public LayerMask groundLayer;
 
+    public Text HealthCounter;
+    public Text AmmoCounter;
+
     private Rigidbody physbody;
     private float height;
     public bool onGround = false;
@@ -93,6 +96,14 @@ public class PlayerScript : MonoBehaviour
     private void Update()
     {
         sprinting = settings.input.Gameplay.Sprint.IsPressed();
+
+        if (Input.GetKeyDown("z"))
+        {
+            Health = Health + 10;
+            HealthCounter.text = "Health: " + Health;
+            Ammo--;
+            AmmoCounter.text = "Ammo: " + Ammo;
+        }
     }
 
     private void FixedUpdate()
