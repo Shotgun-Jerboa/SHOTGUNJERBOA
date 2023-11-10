@@ -4599,7 +4599,7 @@ Transform:
   m_GameObject: {fileID: 2855679672448834607}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: -0.54699993}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6585,7 +6585,7 @@ Transform:
   m_GameObject: {fileID: 3840791770291612306}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: -0.54699993}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9762,7 +9762,7 @@ Transform:
   m_GameObject: {fileID: 5531671443734456432}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -0, y: 0, z: -0.547}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16983,7 +16983,7 @@ Transform:
   m_GameObject: {fileID: 6985521414840811879}
   serializedVersion: 2
   m_LocalRotation: {x: 0.50000006, y: 0.49999997, z: 0.50000006, w: -0.49999997}
-  m_LocalPosition: {x: 0, y: 0, z: -0.54699993}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18007,7 +18007,7 @@ Rigidbody:
   m_GameObject: {fileID: 7509091969625678286}
   serializedVersion: 4
   m_Mass: 3
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -18034,7 +18034,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7509091969625678286}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.28
   m_Speed: 3.5
   m_Acceleration: 99
   avoidancePriority: 50
@@ -18066,7 +18066,7 @@ MonoBehaviour:
   patrolRadius: 5
   patrolDelay: 5
   chasingSpeed: 6
-  attackRange: 2.4
+  attackRange: 2
   timeBetweenAttacks: 1
   damageCollider: {fileID: 8342451381610058306}
   sleepEffect: {fileID: 6114865437523280620}
@@ -18108,7 +18108,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7509091969625678286}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 89b8cdffa294c4b8b81ac96f6f62c233, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -18120,10 +18120,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.62
+  m_Radius: 0.37
   m_Height: 2.19
   m_Direction: 2
-  m_Center: {x: 0, y: 0.83, z: -0.66}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &7512323460478908997
 GameObject:
   m_ObjectHideFlags: 0

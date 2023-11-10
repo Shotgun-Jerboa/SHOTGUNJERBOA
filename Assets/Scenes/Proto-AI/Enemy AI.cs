@@ -70,7 +70,10 @@ public class EnemyAI : MonoBehaviour
                 agent.speed = chasingSpeed;
                 // Set "Run" to true while chasing the player
                 animator.SetBool("Run", agent.remainingDistance > attackRange);
+                isPatrolling = false;
+                agent.isStopped = false; // Allow the agent to move
 
+                StopCoroutine(Patrolling()); // Stop the patrolling
                 if (!playerInAttackRange)
                 {
                     Vector3 directionToPlayer = fieldOfView.playerRef.transform.position - transform.position;
@@ -123,7 +126,7 @@ public class EnemyAI : MonoBehaviour
     {
         isPatrolling = true; // Set the flag when the coroutine starts
 
-        while (!fieldOfView.hasSpottedPlayer || !agent.isOnNavMesh)
+        if (!fieldOfView.hasSpottedPlayer || !agent.isOnNavMesh)
         {
             if (!agent.enabled) yield break; // Exit if the agent is disabled
 
@@ -198,10 +201,7 @@ public class EnemyAI : MonoBehaviour
     {
         isDefeated = true;
         agent.enabled = false;
-        yield return new WaitForSeconds(2);
-        // Reset any current movement and rotational velocity.
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        yield return new WaitForSeconds(3);
         // Replace with the correct layer name so the player can't interact with the Enemy
         // after they're defeated
         gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
