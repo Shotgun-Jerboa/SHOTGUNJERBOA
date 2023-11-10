@@ -18066,6 +18066,10 @@ MonoBehaviour:
   patrolRadius: 5
   patrolDelay: 5
   chasingSpeed: 6
+  alertingRadius: 7
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
   attackRange: 2
   timeBetweenAttacks: 1
   damageCollider: {fileID: 8342451381610058306}

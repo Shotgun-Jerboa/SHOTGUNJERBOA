@@ -23,6 +23,11 @@ public class EnemyAI : MonoBehaviour
     private bool isPatrolling = false; // New flag to check whether the coroutine is running
     public float chasingSpeed;
 
+    [Header("Alerting")]
+    public float alertingRadius;
+    private GameObject alertAgents;
+    public LayerMask enemyLayer;
+
     [Header("Attacking")]
     public float attackRange;
     public float timeBetweenAttacks;
@@ -55,6 +60,11 @@ public class EnemyAI : MonoBehaviour
     private void Update()
     {
         healthCheck();
+        if (fieldOfView.hasSpottedPlayer)
+        {
+            AlertNearbyEnemies(); // Call this when the enemy spots the player
+        }
+
     }
     private void FixedUpdate()
     {
@@ -220,6 +230,26 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    public void AlertNearbyEnemies()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, alertingRadius, enemyLayer);
+        foreach (var hitCollider in hitColliders)
+        {
+            EnemyAI enemyAI = hitCollider.GetComponent<EnemyAI>();
+            if (enemyAI != null && enemyAI != this) // Make sure not to alert itself
+            {
+                enemyAI.BecomeAlerted();
+            }
+        }
+    }
+
+    public void BecomeAlerted()
+    {
+        if (!fieldOfView.hasSpottedPlayer)
+        {
+            fieldOfView.hasSpottedPlayer = true;
+        }
+    }
     private void ResetAttack()
     {
         // Reset the attack flag so the enemy can attack again
@@ -230,6 +260,10 @@ public class EnemyAI : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, alertingRadius);
+
 
     }
 }
