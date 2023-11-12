@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -409,7 +409,6 @@ Transform:
   - {fileID: 857398082}
   - {fileID: 102919573}
   - {fileID: 645152816}
-  - {fileID: 940157913}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &484013134
@@ -424,11 +423,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b6c4e06d32bf041b8fc1ff0c664083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   settings: {fileID: 815642482}
-  jumpCurve: []
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  physbody: {fileID: 0}
   onGround: 0
 --- !u!1 &540243824
 GameObject:
@@ -1824,6 +1824,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CamSensitivityX: 400
   CamSensitivityY: 400
+  FrameRate: 60
   worldVars: {fileID: 955112013}
 --- !u!4 &815642483
 Transform:
@@ -1970,6 +1971,7 @@ GameObject:
   - component: {fileID: 940157909}
   - component: {fileID: 940157915}
   - component: {fileID: 940157916}
+  - component: {fileID: 940157917}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -2086,11 +2088,11 @@ Transform:
   m_GameObject: {fileID: 940157908}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.8953476, y: 0.37, z: 45.9}
+  m_LocalPosition: {x: -4.8953476, y: 1.47, z: 40.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 484013133}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &940157915
 NavMeshAgent:
@@ -2102,11 +2104,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -2126,21 +2128,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2f7b82315c5e41fba05c82146969f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 568236527}
+  player: {fileID: 484013133}
+  fieldOfView: {fileID: 0}
+  health: 1
+  walkPointRange: 10
+  patrolRadius: 4
+  patrolDelay: 3
+  attackRange: 2
+  timeBetweenAttacks: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 1
-  health: 1
-  walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 10
-  timeBetweenAttacks: 1
-  sightRange: 25
-  attackRange: 4
+    m_Bits: 257
+--- !u!114 &940157917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940157908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e1d0c4d22e198449c5e4f38b1ef5f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 256
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 64
+  radius: 3.61
+  angle: 90
   playerInSightRange: 0
-  playerInAttackRange: 0
+  playerRef: {fileID: 0}
 --- !u!1 &955112011
 GameObject:
   m_ObjectHideFlags: 0
@@ -2186,8 +2209,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
+  sprintSpeedMultiplier: 0
+  baseAcceleration: 0
+  airTimeMultiplier: 0
   hopHeight: 5
+  hopTimeToPeak: 0
+  sprintHopHeight: 0
+  sprintTimeToPeak: 0
+  jumpHeight: 0
+  jumpTimeToPeak: 0
+  jumpWaitForGround: 0
+  jumpGroundThreshold: 0
   groundDrag: 10
+  playerGravityMultiplier: 0
 --- !u!1 &959550291
 GameObject:
   m_ObjectHideFlags: 0
@@ -2710,6 +2744,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings: {fileID: 815642482}
   orientation: {fileID: 102919573}
+  duration: 0
+  magnitude: 0
+  rotationalMagnitude: 0
+  returnDuration: 0
 --- !u!1 &1004135065
 GameObject:
   m_ObjectHideFlags: 0
@@ -2873,6 +2911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c41223694ef4f142b7d778d0ea9d25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputActions: {fileID: 0}
   damage: 20
   timeBetweenShooting: 1
   spread: 0.1
@@ -2882,16 +2921,22 @@ MonoBehaviour:
   bulletsPerTap: 1
   bulletsLeft: 100
   isRecoil: 1
+  muzzleFlash: {fileID: 0}
+  BulletHoleEffect: {fileID: 0}
+  bulletTrail: {fileID: 0}
+  fpsCam: {fileID: 0}
   shootingPoint: {fileID: 484013133}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 9
-  playerRef: {fileID: 484013134}
+  playerRef: {fileID: 0}
+  AmmoCounter: {fileID: 0}
   recoilForce: 10
   shakeDuration: 0.3
   shakeStrength: 0.3
   impactForce: 100
   isShooting: 0
+  angleThreshold: 0.4
   inputMethod: 2
 --- !u!1 &1176395608
 GameObject:
@@ -3103,7 +3148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1522702761}
-  - component: {fileID: 1522702760}
+  - component: {fileID: 1522702762}
   m_Layer: 0
   m_Name: NavMesh Surface
   m_TagString: Untagged
@@ -3111,7 +3156,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1522702760
+--- !u!4 &1522702761
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522702759}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.8953476, y: -7.8393326, z: 10.386629}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1522702762
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3140,23 +3200,8 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 37ff678dd802345a0b47bd1967cf2184, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 49fc1fabc89eca94d8f8606b491b4deb, type: 2}
   m_BuildHeightMesh: 0
---- !u!4 &1522702761
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522702759}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.8953476, y: -7.8393326, z: 10.386629}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1711926650
 Mesh:
   m_ObjectHideFlags: 0
@@ -4273,6 +4318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c41223694ef4f142b7d778d0ea9d25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputActions: {fileID: 0}
   damage: 20
   timeBetweenShooting: 1
   spread: 0.1
@@ -4282,16 +4328,22 @@ MonoBehaviour:
   bulletsPerTap: 1
   bulletsLeft: 100
   isRecoil: 1
+  muzzleFlash: {fileID: 0}
+  BulletHoleEffect: {fileID: 0}
+  bulletTrail: {fileID: 0}
+  fpsCam: {fileID: 0}
   shootingPoint: {fileID: 776173337}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 9
-  playerRef: {fileID: 484013134}
+  playerRef: {fileID: 0}
+  AmmoCounter: {fileID: 0}
   recoilForce: 10
   shakeDuration: 0.3
   shakeStrength: 0.3
   impactForce: 100
   isShooting: 0
+  angleThreshold: 0.4
   inputMethod: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -4301,5 +4353,6 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 1270469871}
   - {fileID: 140563946}
+  - {fileID: 940157913}
   - {fileID: 484013133}
   - {fileID: 1522702761}

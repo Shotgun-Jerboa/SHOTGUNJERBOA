@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    [Header("Stats")]
+    public float health;
+    public float maxHealth = 100;
+
+    [Header("UI Effect")]
+    private Animator healthUIAnimator;
+
     public enum PlayerState
     {
         Gameplay_Ground,
@@ -31,11 +38,14 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
+        health = maxHealth;
         physbody = gameObject.GetComponent<Rigidbody>();
         children = new(gameObject);
         settings = Global.instance.sceneTree.Get("Settings").GetComponent<SettingVars>();
         hitboxHeight = children.Get("Collision").GetComponent<CapsuleCollider>().height;
         maxAirMagnitude = Mathf.Sqrt(Mathf.Pow(settings.worldVars.moveSpeed, 2) + Mathf.Pow(settings.worldVars.moveSpeed, 2)) * settings.worldVars.sprintSpeedMultiplier;
+        healthUIAnimator = Global.instance.sceneTree.Get("Canvas/Canvas/Health").GetComponent<Animator>();
+
 
         movementMagnitude = new AnimationCurve(new Keyframe[] {
             new Keyframe()
@@ -62,6 +72,7 @@ public class PlayerScript : MonoBehaviour
     private void Update()
     {
         sprinting = settings.input.Gameplay.Sprint.IsPressed();
+        HealthCheck();
     }
 
     private void FixedUpdate()
@@ -400,5 +411,36 @@ public class PlayerScript : MonoBehaviour
                 ));
                 break;
         }
+    }
+
+    void HealthCheck()
+    {
+        if (health <=0)
+        {
+            Debug.Log("Game Over!");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("DamageCollider"))
+        {
+            DamageDealer damageDealer = other.GetComponent<DamageDealer>();
+            if (damageDealer && !damageDealer.HasDealtDamage)
+            {
+                health -= damageDealer.damage;
+                healthUIAnimator.SetTrigger("Damage");
+                damageDealer.HasDealtDamage = true; // Set the flag to true after dealing damage
+
+                // Optionally, you can start a coroutine or set a timer to reset this flag after a certain cooldown period
+                StartCoroutine(ResetDamageDealer(damageDealer));
+            }
+        }
+    }
+
+    IEnumerator ResetDamageDealer(DamageDealer damageDealer)
+    {
+        yield return new WaitForSeconds(damageDealer.cooldown); // Assuming DamageDealer has a cooldown property
+        damageDealer.HasDealtDamage = false; // Reset the flag
     }
 }

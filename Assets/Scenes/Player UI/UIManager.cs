@@ -16,7 +16,6 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI ammoText;
 
     //[SerializeField] GameObject dot;
-    // public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +38,7 @@ public class UIManager : MonoBehaviour
         /*if(left.bulletsLeft == 98){
             dot.SetActive(false);
         }*/
-        healthText.text = "Health: " + "100";
+        healthText.text = "Health: " + Global.instance.sceneTree.Get("Player").GetComponent<PlayerScript>().health;
         ammoText.text = "Ammo: " + shotgunMain.ammo;
         // if(Input.GetKey(KeyCode.P)){
         //     animator.SetTrigger("Damage");
