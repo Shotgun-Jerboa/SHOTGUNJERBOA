@@ -4667,7 +4667,7 @@ MonoBehaviour:
   screenType: {fileID: 0}
   see: 0
   dropdownName: 
-  canvas: {fileID: 0}
+  canvas: {fileID: 904635169}
   inOptions: 0
   anim: {fileID: 2142720969}
 --- !u!114 &2099446478
