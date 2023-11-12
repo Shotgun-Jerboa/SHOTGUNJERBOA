@@ -26,6 +26,8 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
     private Transform shootPoint;
     private bool isReloading = false;
 
+    public AudioSource gunSoundPlayer;
+
     public void empty(ref int ammo)
     {
         throw new System.NotImplementedException();
@@ -125,6 +127,11 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
         } else
         {
             ammoUsed = ammoPerShot;
+        }
+
+        if (gunSoundPlayer != null && gunSoundPlayer.clip != null)
+        {
+            gunSoundPlayer.Play();
         }
 
         GameObject MuzzleFlashInstance = Instantiate(muzzleFlash, shootPoint);
