@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641228, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -183,6 +183,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 2957657415812638113, guid: b63ecd71e261612418280ca5cb3d9b41, type: 3}
   BulletHoleEffect: {fileID: 1000010844420130, guid: 944d85b2fc8f86e4a8c273d3c93c548a, type: 3}
   bulletTrail: {fileID: 5190539650505738729, guid: af8b2bd9e038c1443bca0dc76c4e3971, type: 3}
+  gunSoundPlayer: {fileID: 1453071120}
 --- !u!1001 &25927606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191,6 +192,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 820f7c0f0116f04418cd8a3a4f542f7d, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: 820f7c0f0116f04418cd8a3a4f542f7d, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutfour
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (12)
@@ -353,6 +394,46 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3b0df9907e012ad429a2f39e6d7cda07, type: 2}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 820f7c0f0116f04418cd8a3a4f542f7d, type: 3}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: 820f7c0f0116f04418cd8a3a4f542f7d, type: 3}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutfour
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -513,6 +594,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: f3ee9cb104e16c44b8b4f3d28a203f3b, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: f3ee9cb104e16c44b8b4f3d28a203f3b, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutthree
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (2)
@@ -753,7 +874,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1158697070256562983, guid: 9ace5933df9cea147aeec7a1607588c8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -63.361
+      value: 108
       objectReference: {fileID: 0}
     - target: {fileID: 1158697070256562983, guid: 9ace5933df9cea147aeec7a1607588c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -881,7 +1002,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5370907492499333275, guid: 9ace5933df9cea147aeec7a1607588c8, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 841093887}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ace5933df9cea147aeec7a1607588c8, type: 3}
 --- !u!114 &299378264 stripped
@@ -946,6 +1070,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: a4c15b1adf698964aa53095a52a3fbd7, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: a4c15b1adf698964aa53095a52a3fbd7, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutfive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (7)
@@ -1189,6 +1353,46 @@ PrefabInstance:
     - target: {fileID: 4418841791536408343, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: a4c15b1adf698964aa53095a52a3fbd7, type: 3}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: a4c15b1adf698964aa53095a52a3fbd7, type: 3}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutfive
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172854219219035909, guid: d5c8e265fc79f704f8a1d81ee85a9b27, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1505,6 +1709,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: ddb56f1f06d0dcd44baf2e9b658a1ba9, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: ddb56f1f06d0dcd44baf2e9b658a1ba9, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutone
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (4)
@@ -1567,6 +1811,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: f3ee9cb104e16c44b8b4f3d28a203f3b, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: f3ee9cb104e16c44b8b4f3d28a203f3b, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutthree
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (16)
@@ -2058,6 +2342,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840194416}
   m_CullTransparentMesh: 1
+--- !u!1 &841093886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 841093887}
+  - component: {fileID: 841093889}
+  - component: {fileID: 841093888}
+  m_Layer: 5
+  m_Name: Image (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &841093887
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841093886}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 479.65323}
+  m_LocalScale: {x: 0.52166665, y: 0.52166665, z: 0.52166665}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 903703256}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -1117, y: -119.61478}
+  m_SizeDelta: {x: 1423, y: 26.63}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &841093888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841093886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 0b97c7563a0d5174789385fed6de3e49, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &841093889
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841093886}
+  m_CullTransparentMesh: 1
 --- !u!1 &869320839
 GameObject:
   m_ObjectHideFlags: 0
@@ -2089,6 +2448,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1492661791}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &903703256 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5370907492499333275, guid: 9ace5933df9cea147aeec7a1607588c8, type: 3}
+  m_PrefabInstance: {fileID: 299378263}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &904635169
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,6 +2713,134 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 921733330}
   m_CullTransparentMesh: 1
+--- !u!1 &934823618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 934823620}
+  - component: {fileID: 934823619}
+  m_Layer: 0
+  m_Name: Audio Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &934823619
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934823618}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &934823620
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934823618}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &955088834
 GameObject:
   m_ObjectHideFlags: 0
@@ -2531,6 +3023,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3180c1f69392542419e78f487709640f, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: 3180c1f69392542419e78f487709640f, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nuttwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (6)
@@ -2593,6 +3125,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: a4c15b1adf698964aa53095a52a3fbd7, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: a4c15b1adf698964aa53095a52a3fbd7, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutfive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (19)
@@ -2833,6 +3405,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: f3ee9cb104e16c44b8b4f3d28a203f3b, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: f3ee9cb104e16c44b8b4f3d28a203f3b, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutthree
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (10)
@@ -2985,6 +3597,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: ddb56f1f06d0dcd44baf2e9b658a1ba9, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: ddb56f1f06d0dcd44baf2e9b658a1ba9, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutone
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (13)
@@ -3055,6 +3707,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: a4c15b1adf698964aa53095a52a3fbd7, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: a4c15b1adf698964aa53095a52a3fbd7, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutfive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (15)
@@ -3336,6 +4028,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3180c1f69392542419e78f487709640f, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: 3180c1f69392542419e78f487709640f, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nuttwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (3)
@@ -3398,6 +4130,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 820f7c0f0116f04418cd8a3a4f542f7d, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: 820f7c0f0116f04418cd8a3a4f542f7d, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutfour
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (9)
@@ -3460,6 +4232,134 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7583684417359175574, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
   m_PrefabInstance: {fileID: 1446846719}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1453071119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1453071121}
+  - component: {fileID: 1453071120}
+  m_Layer: 0
+  m_Name: GunSoundPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1453071120
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453071119}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 7116368ae6e2e784d81218d3c2987012, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1453071121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453071119}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1492661790
 GameObject:
   m_ObjectHideFlags: 0
@@ -3520,6 +4420,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 2957657415812638113, guid: b63ecd71e261612418280ca5cb3d9b41, type: 3}
   BulletHoleEffect: {fileID: 1000010844420130, guid: 944d85b2fc8f86e4a8c273d3c93c548a, type: 3}
   bulletTrail: {fileID: 5190539650505738729, guid: af8b2bd9e038c1443bca0dc76c4e3971, type: 3}
+  gunSoundPlayer: {fileID: 1453071120}
 --- !u!1001 &1504270857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3528,6 +4429,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: a4c15b1adf698964aa53095a52a3fbd7, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: a4c15b1adf698964aa53095a52a3fbd7, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutfive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (5)
@@ -3590,6 +4531,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 820f7c0f0116f04418cd8a3a4f542f7d, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: 820f7c0f0116f04418cd8a3a4f542f7d, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutfour
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (8)
@@ -3704,6 +4685,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3180c1f69392542419e78f487709640f, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: 3180c1f69392542419e78f487709640f, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nuttwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (14)
@@ -3966,6 +4987,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3180c1f69392542419e78f487709640f, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: 3180c1f69392542419e78f487709640f, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nuttwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (18)
@@ -4209,6 +5270,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: ddb56f1f06d0dcd44baf2e9b658a1ba9, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: ddb56f1f06d0dcd44baf2e9b658a1ba9, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutone
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (11)
@@ -4584,7 +5685,7 @@ MonoBehaviour:
   screenType: {fileID: 0}
   see: 0
   dropdownName: 
-  canvas: {fileID: 0}
+  canvas: {fileID: 904635169}
   inOptions: 0
   anim: {fileID: 2142720969}
 --- !u!114 &2099446478
@@ -4674,6 +5775,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: f3ee9cb104e16c44b8b4f3d28a203f3b, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: f3ee9cb104e16c44b8b4f3d28a203f3b, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutthree
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (17)
@@ -5028,6 +6169,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581398700}
     m_Modifications:
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: collectedAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: ddb56f1f06d0dcd44baf2e9b658a1ba9, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: ddb56f1f06d0dcd44baf2e9b658a1ba9, type: 3}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: nutone
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103475202331698983, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
+      propertyPath: onPistachioCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7094709144722834732, guid: 8b28c29c9dccc9f4298ef2281e13344c, type: 3}
       propertyPath: m_Name
       value: Pistachio (1)
@@ -5098,3 +6279,5 @@ SceneRoots:
   - {fileID: 2142720965}
   - {fileID: 824370876}
   - {fileID: 375701863}
+  - {fileID: 1453071121}
+  - {fileID: 934823620}

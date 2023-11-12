@@ -1,97 +1,269 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform player;
+    [Header("Components")]
     private NavMeshAgent agent;
+    private Rigidbody rb;
+    public Transform player;
+    public FieldOfView fieldOfView;
 
-
-    public LayerMask whatIsGround, whatIsPlayer;
-
+    [Header("Health")]
     public float health;
 
-
-    //Patroling
-    public Vector3 walkPoint;
-    bool walkPointSet;
+    [Header("Patroling")]
+    Vector3 walkPoint;
     public float walkPointRange;
+    public float patrolRadius;
+    private Vector3 patrolCenter;
+    private bool walkPointSet;
+    public float patrolDelay = 5f; // The delay between reaching a point and moving to the next one
+    private bool isPatrolling = false; // New flag to check whether the coroutine is running
+    public float chasingSpeed;
 
-    //Attacking
+    [Header("Alerting")]
+    public float alertingRadius;
+    private GameObject alertAgents;
+    public LayerMask enemyLayer;
+
+    [Header("Attacking")]
+    public float attackRange;
     public float timeBetweenAttacks;
-    bool alreadyAttacked;
-    
+    private bool alreadyAttacked;
+    public Collider damageCollider;
 
-    //States
-    public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
+    [Header("Defeat Effect")]
+    [SerializeField] GameObject sleepEffect;
+    private bool sleepEffectSpawned = false; // Add a flag to check if the sleep effect has been spawned
+    public bool isDefeated = false;
 
-    
-    // Start is called before the first frame update
-    void Start()
+    [Header("Animation Control")]
+    Animator animator;
+
+
+    [Header("Layers")]
+    public LayerMask whatIsGround, whatIsPlayer;
+
+    private bool playerInAttackRange;
+
+    private void Start()
     {
+        animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        
+        rb = GetComponent<Rigidbody>();
+        fieldOfView = GetComponent<FieldOfView>();
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        patrolCenter = transform.position; // Set the patrol center to the enemy's starting position
+    }
+    private void Update()
+    {
+        healthCheck();
+        if (fieldOfView.hasSpottedPlayer)
+        {
+            AlertNearbyEnemies(); // Call this when the enemy spots the player
+        }
+
+    }
+    private void FixedUpdate()
+    {
+        if(health >0)
+        {
+            // Check for sight and attack range
+            playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+            if (fieldOfView.hasSpottedPlayer)
+            {
+                patrolDelay = 0;
+                agent.destination = fieldOfView.playerRef.transform.position;
+                agent.speed = chasingSpeed;
+                // Set "Run" to true while chasing the player
+                animator.SetBool("Run", agent.remainingDistance > attackRange);
+                isPatrolling = false;
+                agent.isStopped = false; // Allow the agent to move
+
+                StopCoroutine(Patrolling()); // Stop the patrolling
+                if (!playerInAttackRange)
+                {
+                    Vector3 directionToPlayer = fieldOfView.playerRef.transform.position - transform.position;
+                    float distanceToPlayer = directionToPlayer.magnitude;
+
+                    if (distanceToPlayer > attackRange) // Only move towards the player if outside the stopping distance
+                    {
+                        agent.stoppingDistance = attackRange;
+                    }
+                    else
+                    {
+                        agent.isStopped = true; // Stop the agent from moving
+                    }
+
+                    directionToPlayer.y = 0; // This line keeps the AI from tilting head up or down
+                    Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10); // Adjust the 5f value to make rotation faster or slower
+                    StopCoroutine(Patrolling()); // Stop the patrolling
+                    isPatrolling = false;
+                }
+            }
+
+            else if (!fieldOfView.playerInSightRange && !playerInAttackRange && !isPatrolling)
+            {
+                agent.stoppingDistance = 0; // Reset the stopping distance when not chasing the player
+                agent.isStopped = false; // Allow the agent to move
+                StartCoroutine(Patrolling());
+            }
+            if (fieldOfView.playerInSightRange && fieldOfView.playerInSightRange)
+            {
+                AttackPlayer();
+
+            }
+        }
         
     }
+
+    // This method will be called by the animation event at the start of the animation
+    public void EnableDamageCollider()
+    {
+        damageCollider.enabled = true;
+    }
+
+    // This method will be called by the animation event at the end of the animation
+    public void DisableDamageCollider()
+    {
+        damageCollider.enabled = false;
+    }
+    IEnumerator Patrolling()
+    {
+        isPatrolling = true; // Set the flag when the coroutine starts
+
+        if (!fieldOfView.hasSpottedPlayer || !agent.isOnNavMesh)
+        {
+            if (!agent.enabled) yield break; // Exit if the agent is disabled
+
+            if (!walkPointSet) SearchWalkPoint(); // Find a new patrol point if not already set
+
+            agent.SetDestination(walkPoint); // Set the enemy's destination to the walk point
+            // Set "Run" to true while moving to the walk point
+            animator.SetBool("Run", true);
+
+            // Check if the enemy is close to the walk point
+            if (Vector3.Distance(transform.position, walkPoint) < 0.5f)
+            {
+
+                walkPointSet = false; // Reset walk point for the next loop
+                agent.isStopped = true; // Stop the agent
+                // Set Run parameter to false when waiting at a patrol point
+                animator.SetBool("Run", false);
+
+                yield return new WaitForSeconds(patrolDelay); // Wait for 1 second before finding the next point
+                if (agent.enabled && agent.isOnNavMesh)
+                {
+                    agent.isStopped = false; // Resume the agent if it's safe to do so
+                }
+            }
+
+            else
+            {
+                yield return new WaitForEndOfFrame(); // If not at the walk point, wait for the next frame
+            }
+        }
+
+        // Set "Run" to false when patrolling stops because the player was spotted
+        animator.SetBool("Run", true);
+        isPatrolling = false; // Reset the flag when the coroutine finishes
+    }
+
+    void healthCheck()
+    {
+        if (health <= 0)
+        {
+            animator.SetBool("Death", true);
+            // Check the flag before spawning the sleep effect
+            if (!sleepEffectSpawned)
+            {
+                sleepEffect.gameObject.SetActive(true);
+                sleepEffectSpawned = true; // Set the flag to true to avoid spawning the effect again
+            }
+            StartCoroutine(DisableEnemy());
+        }
+    }
+
+    void SearchWalkPoint()
+    {
+        float randomAngle = Random.Range(0, 2 * Mathf.PI);
+        float randomRadius = Random.Range(0, patrolRadius);
+        float x = patrolCenter.x + randomRadius * Mathf.Cos(randomAngle);
+        float z = patrolCenter.z + randomRadius * Mathf.Sin(randomAngle);
+
+        walkPoint = new Vector3(x, transform.position.y, z);
+
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+            walkPointSet = true;
+    }
+
     public void TakeDamage(int damage)
-        {
-            health -= damage;
-
-            if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
-        }
-    private void DestroyEnemy()
     {
-        Destroy(gameObject);
-    }        
-    // Update is called once per frame
-    void Update()
+        health -= damage;
+        fieldOfView.hasSpottedPlayer = true;
+    }
+
+    private IEnumerator DisableEnemy()
     {
-        
-        void Patroling()
+        isDefeated = true;
+        agent.enabled = false;
+        yield return new WaitForSeconds(3);
+        // Replace with the correct layer name so the player can't interact with the Enemy
+        // after they're defeated
+        gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
+    }
+
+    private void AttackPlayer()
+    {
+        // Call this method when it's time for the enemy to attack the player
+        if (playerInAttackRange && !alreadyAttacked)
         {
-            if (!walkPointSet) SearchWalkPoint();
+            // Trigger the Bite animation
+            animator.Play("Bite");
 
-            if (walkPointSet)
-                agent.SetDestination(walkPoint);
-
-            Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-            //Walkpoint reached
-            if (distanceToWalkPoint.magnitude < 1f)
-                walkPointSet = false;
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
-        void SearchWalkPoint()
+    }
+
+    public void AlertNearbyEnemies()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, alertingRadius, enemyLayer);
+        foreach (var hitCollider in hitColliders)
         {
-            //Calculate random point in range
-            float randomZ = Random.Range(-walkPointRange, walkPointRange);
-            float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-            walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-            if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-                walkPointSet = true;
+            EnemyAI enemyAI = hitCollider.GetComponent<EnemyAI>();
+            if (enemyAI != null && enemyAI != this) // Make sure not to alert itself
+            {
+                enemyAI.BecomeAlerted();
+            }
         }
-        void ResetAttack()
+    }
+
+    public void BecomeAlerted()
+    {
+        if (!fieldOfView.hasSpottedPlayer)
         {
-            alreadyAttacked = false;
+            fieldOfView.hasSpottedPlayer = true;
         }
+    }
+    private void ResetAttack()
+    {
+        // Reset the attack flag so the enemy can attack again
+        alreadyAttacked = false;
+    }
+    //To Visualize the attack range (not important, can be deleted)
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
 
-        
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, alertingRadius);
 
-
-        
-        //Check for sight and attack range
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-
-        if (!playerInSightRange && !playerInAttackRange) Patroling();
-        if (playerInSightRange && !playerInAttackRange) agent.destination = player.position;
-        
-        //if (playerInAttackRange && playerInSightRange) AttackPlayer();
-        
 
     }
 }

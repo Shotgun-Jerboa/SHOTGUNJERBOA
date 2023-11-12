@@ -31,16 +31,6 @@ public class Button_Manager : MonoBehaviour
 
     [SerializeField] Animator anim;
 
-    private void Awake()
-    {
-
-    }
-
-    public void Update()
-    {
-
-    }
-
 
 
     public void Quit_Game()
@@ -83,7 +73,7 @@ public class Button_Manager : MonoBehaviour
         GameIsPaused = true;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-        canvas.SetActive(false);
+
     }
 
     public void Resume()
@@ -94,7 +84,6 @@ public class Button_Manager : MonoBehaviour
         GameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        canvas.SetActive(true);
     }
 
     public void MainMenu(int sceneID)
@@ -118,7 +107,7 @@ public class Button_Manager : MonoBehaviour
     public void ChangeVol()
     {
         setVolume = sliderVal1.value;
-        setVolume = setVolume / 100;
+        setVolume /= 100;
         AudioListener.volume = setVolume;
     }
 
@@ -179,6 +168,18 @@ public class Button_Manager : MonoBehaviour
         else
         {
             Debug.Log("Not a valid screen type");
+        }
+    }
+
+    public void ShowUI()
+    {
+        if (canvas.activeInHierarchy && GameIsPaused)
+        {
+            canvas.SetActive(false);
+        }
+        else
+        {
+            canvas.SetActive(true);
         }
     }
 }
