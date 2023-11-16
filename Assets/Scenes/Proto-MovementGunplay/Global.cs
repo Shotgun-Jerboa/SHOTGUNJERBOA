@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 // using UnityEditor;
 using UnityEngine;
@@ -18,9 +17,7 @@ public class Global : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
         DontDestroyOnLoad(gameObject);
-
         sceneTree = new();
         interpolate = new();
     }
@@ -338,5 +335,26 @@ public class Global : MonoBehaviour
                 return count;
             }
         }
+    }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ResetGlobalState();
+    }
+
+    public void ResetGlobalState()
+    {
+        // Reset or clear the necessary variables when a new scene is loaded
+        sceneTree = new SceneHeirarchy();
+        interpolate.Clear();
     }
 }
