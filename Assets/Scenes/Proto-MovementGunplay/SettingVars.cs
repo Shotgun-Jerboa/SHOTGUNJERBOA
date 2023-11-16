@@ -21,7 +21,7 @@ public class SettingVars : MonoBehaviour
         Application.targetFrameRate = FrameRate;
     }
 
-    private void OnEnable()
+    public void OnEnable()
     {
         foreach (var action in input)
         {
@@ -29,7 +29,7 @@ public class SettingVars : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         foreach (var action in input)
         {
