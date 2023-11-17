@@ -152,13 +152,22 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""73b92ad3-90e7-4bef-a6c3-a0c2eef600ac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""942c2f27-634f-4f1f-9fa3-1e9e859f7a31"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -268,7 +277,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""23ded073-7ec6-4a6d-b061-d550c5771398"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -467,7 +476,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""ce044cf6-ab16-457f-87f9-b92ec5e12f2d"",
                     ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MenuOPEN"",
@@ -493,6 +502,28 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MenuOPEN"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61bab15b-a5fa-4800-ad8c-4ac1d163ff96"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4be34503-9064-4c71-8310-5f7b3ff7d826"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1025,7 +1056,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""e58e5499-8ceb-47e3-9bc1-8c1734d93f82"",
                     ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MenuCLOSE"",
@@ -1075,6 +1106,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         m_Gameplay_LeftShoot = m_Gameplay.FindAction("LeftShoot", throwIfNotFound: true);
         m_Gameplay_RightShoot = m_Gameplay.FindAction("RightShoot", throwIfNotFound: true);
         m_Gameplay_MenuOPEN = m_Gameplay.FindAction("MenuOPEN", throwIfNotFound: true);
+        m_Gameplay_Restart = m_Gameplay.FindAction("Restart", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1163,6 +1195,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_LeftShoot;
     private readonly InputAction m_Gameplay_RightShoot;
     private readonly InputAction m_Gameplay_MenuOPEN;
+    private readonly InputAction m_Gameplay_Restart;
     public struct GameplayActions
     {
         private @PlayerInputSystem m_Wrapper;
@@ -1181,6 +1214,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         public InputAction @LeftShoot => m_Wrapper.m_Gameplay_LeftShoot;
         public InputAction @RightShoot => m_Wrapper.m_Gameplay_RightShoot;
         public InputAction @MenuOPEN => m_Wrapper.m_Gameplay_MenuOPEN;
+        public InputAction @Restart => m_Wrapper.m_Gameplay_Restart;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1232,6 +1266,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @MenuOPEN.started += instance.OnMenuOPEN;
             @MenuOPEN.performed += instance.OnMenuOPEN;
             @MenuOPEN.canceled += instance.OnMenuOPEN;
+            @Restart.started += instance.OnRestart;
+            @Restart.performed += instance.OnRestart;
+            @Restart.canceled += instance.OnRestart;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -1278,6 +1315,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @MenuOPEN.started -= instance.OnMenuOPEN;
             @MenuOPEN.performed -= instance.OnMenuOPEN;
             @MenuOPEN.canceled -= instance.OnMenuOPEN;
+            @Restart.started -= instance.OnRestart;
+            @Restart.performed -= instance.OnRestart;
+            @Restart.canceled -= instance.OnRestart;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -1437,6 +1477,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         void OnLeftShoot(InputAction.CallbackContext context);
         void OnRightShoot(InputAction.CallbackContext context);
         void OnMenuOPEN(InputAction.CallbackContext context);
+        void OnRestart(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

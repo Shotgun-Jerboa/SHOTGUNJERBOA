@@ -13,6 +13,9 @@ public class EnemyAI : MonoBehaviour
     [Header("Health")]
     public float health;
 
+    [Header("Stationary")]
+    public bool isStationary = false; // Add this flag to decide whether the enemy should patrol or remain stationary
+
     [Header("Patroling")]
     Vector3 walkPoint;
     public float walkPointRange;
@@ -42,6 +45,7 @@ public class EnemyAI : MonoBehaviour
     [Header("Animation Control")]
     Animator animator;
 
+    public PlayerScript playerScript;
 
     [Header("Layers")]
     public LayerMask whatIsGround, whatIsPlayer;
@@ -56,19 +60,29 @@ public class EnemyAI : MonoBehaviour
         fieldOfView = GetComponent<FieldOfView>();
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
         patrolCenter = transform.position; // Set the patrol center to the enemy's starting position
+        playerScript = Global.instance.sceneTree.Get("Player").GetComponent<PlayerScript>();
     }
     private void Update()
     {
         healthCheck();
+
         if (fieldOfView.hasSpottedPlayer)
         {
+            isStationary = false;
             AlertNearbyEnemies(); // Call this when the enemy spots the player
         }
 
     }
     private void FixedUpdate()
     {
-        if(health >0)
+
+        if (playerScript.health <= 0)
+        {
+            // Player is defeated, stop chasing and attacking
+            return;
+        }
+
+        if (health >0 && !isStationary)
         {
             // Check for sight and attack range
             playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
@@ -118,7 +132,7 @@ public class EnemyAI : MonoBehaviour
 
             }
         }
-        
+
     }
 
     // This method will be called by the animation event at the start of the animation
@@ -135,6 +149,11 @@ public class EnemyAI : MonoBehaviour
     IEnumerator Patrolling()
     {
         isPatrolling = true; // Set the flag when the coroutine starts
+
+        if (isStationary)
+        {
+            yield break; // Exit the coroutine if the enemy is stationary
+        }
 
         if (!fieldOfView.hasSpottedPlayer || !agent.isOnNavMesh)
         {

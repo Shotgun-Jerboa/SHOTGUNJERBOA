@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class HealthShake : MonoBehaviour
 {
-    // public UIManager uIManager;
-    // // Start is called before the first frame update
-    // void Start()
-    // {
+    Animator animator;
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+    public void shake(){
         
-    // }
-
-    // // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
-    // public void shake(){
-    //     uIManager.damage();
-    // }
+    }
 }

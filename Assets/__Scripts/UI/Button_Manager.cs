@@ -11,6 +11,7 @@ public class Button_Manager : MonoBehaviour
     [SerializeField] GameObject gameMusic;
     [SerializeField] SettingVars inputActions;
     [SerializeField] PlayerInput playerInput;
+    [SerializeField] PlayerInputSystem playerInputSystem;
     [SerializeField] SettingVars sensitivity;
     public float setVolume;
     public int gameStartScene;
@@ -24,14 +25,26 @@ public class Button_Manager : MonoBehaviour
     protected int height;
     protected string test;
     public GameObject canvas;
+    public InputAction action;
 
-    public static bool GameIsPaused = false;
+    protected float time = .2f;
+    public bool GameIsPaused = false;
     public bool inOptions = false;
     public UnityEngine.UIElements.Button resume;
 
     [SerializeField] Animator anim;
 
+    public void OnEnable()
+    {
+        playerInput.actions["MenuOPEN"].performed += MenuOPEN;
+        playerInput.actions["MenuCLOSE"].performed += MenuCLOSE;
+    }
 
+    public void OnDisable()
+    {
+        playerInput.actions["MenuOPEN"].performed -= MenuOPEN;
+        playerInput.actions["MenuCLOSE"].performed -= MenuCLOSE;
+    }
 
     public void Quit_Game()
     {
@@ -40,29 +53,28 @@ public class Button_Manager : MonoBehaviour
 
     public void MenuOPEN(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+
+        if (!GameIsPaused)
         {
-            if (!GameIsPaused)
-            {
-                Pause();
-            }
+            Pause();
         }
+
 
     }
 
+
     public void MenuCLOSE(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+
+        if (GameIsPaused && !inOptions)
         {
-            if (GameIsPaused && !inOptions)
-            {
-                Resume();
-            }
-            if (inOptions)
-            {
-                CloseOptions();
-            }
+            Resume();
         }
+        if (inOptions)
+        {
+            CloseOptions();
+        }
+
     }
 
     public void Pause()
