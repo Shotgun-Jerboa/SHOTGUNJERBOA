@@ -34,12 +34,9 @@ public class UIManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        /*if(left.bulletsLeft == 98){
-            dot.SetActive(false);
-        }*/
-        healthText.text = "Health: " + Global.instance.sceneTree.Get("Player").GetComponent<PlayerScript>().health;
-        ammoText.text = "Ammo: " + shotgunMain.ammo;
+   {
+        healthText.text = "" + Global.instance.sceneTree.Get("Player").GetComponent<PlayerScript>().health;
+        ammoText.text = "" + shotgunMain.ammo;
         // if(Input.GetKey(KeyCode.P)){
         //     animator.SetTrigger("Damage");
         // }
