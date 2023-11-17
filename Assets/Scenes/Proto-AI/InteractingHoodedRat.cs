@@ -10,7 +10,7 @@ public class InteractingHoodedRat : MonoBehaviour
     [SerializeField] Vector3 zoneSize;
     [SerializeField] LayerMask playerLayer;
     private Interactable interactable;
-    private DialogueManager dialogueManager;
+    public DialogueManager dialogueManager;
 
     private bool hasTalk = false;
     public bool isPlayerInZone;
@@ -21,7 +21,6 @@ public class InteractingHoodedRat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dialogueManager = Global.instance.sceneTree.Get("DialogueManager").GetComponent<DialogueManager>();
         interactable = GetComponent<Interactable>();
         animator = GetComponent<Animator>();
         playerScript = Global.instance.sceneTree.Get("Player").GetComponent<PlayerScript>();

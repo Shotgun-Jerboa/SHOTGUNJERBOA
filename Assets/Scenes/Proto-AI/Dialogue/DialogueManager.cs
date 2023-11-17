@@ -19,8 +19,8 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nameText = Global.instance.sceneTree.Get("Main Canvas/Dialogue Box/Name").GetComponent<TextMeshProUGUI>();
-        dialogueText = Global.instance.sceneTree.Get("Main Canvas/Dialogue Box/InteractText").GetComponent<TextMeshProUGUI>();
+        nameText = Global.instance.sceneTree.Get("Main Canvas/Dialogue Box/Cloud/Name").GetComponent<TextMeshProUGUI>();
+        dialogueText = Global.instance.sceneTree.Get("Main Canvas/Dialogue Box/Cloud/InteractText").GetComponent<TextMeshProUGUI>();
         animator = Global.instance.sceneTree.Get("Main Canvas/Dialogue Box").GetComponent<Animator>();
 
         sentences = new Queue<string>();

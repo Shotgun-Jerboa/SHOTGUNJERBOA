@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 947727884675587388}
   - component: {fileID: 6146115246413796171}
   - component: {fileID: 9116006635704960685}
+  - component: {fileID: 7340387225148259202}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -222,7 +223,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1445659897751282262}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -308,6 +309,16 @@ MonoBehaviour:
   see: 0
   dropdownName: 
   canvas: {fileID: 0}
+  action:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e30d2d4f-968e-4e91-a5e8-7f5dbf3184a7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  GameIsPaused: 0
   inOptions: 0
   anim: {fileID: 0}
 --- !u!114 &6146115246413796171
@@ -459,6 +470,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7ddf5ab5-09c5-4460-81a8-1c0b6cbf8678
     m_ActionName: UI/MenuCLOSE[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a5fe3bfb-c756-40f3-b790-ccbb468349ff
+    m_ActionName: Gameplay/Restart[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -477,7 +492,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 10
-  timeToExitBattle: 2
+  timeToExitBattle: 5
+--- !u!114 &7340387225148259202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445659897751282262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 320e5b3449deae34186eea67104e6185, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camScript: {fileID: 0}
 --- !u!1 &2041584813664015808
 GameObject:
   m_ObjectHideFlags: 0
