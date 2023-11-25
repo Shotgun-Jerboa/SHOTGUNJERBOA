@@ -29,6 +29,8 @@ public class PlayerScript : MonoBehaviour
     private bool sprinting = false;
     private float jumpDelay = 0f;
 
+    private int jumpCount = 0;
+
     private AnimationCurve movementMagnitude;
     private float jumpMagnitudeMultiplier = 1f;
     private Vector2 moveDir;
@@ -167,11 +169,11 @@ public class PlayerScript : MonoBehaviour
                         physbody.drag = 0;
                         if (sprinting)
                         {
-                            jump(settings.worldVars.sprintHopHeight, settings.worldVars.sprintTimeToPeak, "log", 0f);
+                            jump(settings.worldVars.sprintHopHeight, settings.worldVars.sprintTimeToPeak, "log", 0f, true);
                         }
                         else
                         {
-                            jump(settings.worldVars.hopHeight, settings.worldVars.hopTimeToPeak, "log", 0f);
+                            jump(settings.worldVars.hopHeight, settings.worldVars.hopTimeToPeak, "log", 0f, true);
                         }
                     }
                     else
@@ -260,8 +262,14 @@ public class PlayerScript : MonoBehaviour
         ));
     }
 
-    public void jump(float height, float time, string curveType = "linear", float strMultiplier = 0f)
+    public void jump(float height, float time, string curveType = "linear", float strMultiplier = 0f, bool isHop=false)
     {
+        if(jumpCount > 0 && isHop)
+        {
+            return;
+        }
+        jumpCount++;
+
         if (strMultiplier < 0)
         {
             strMultiplier = 0f;
@@ -324,6 +332,10 @@ public class PlayerScript : MonoBehaviour
                     0
                 );
                 playerRef.physbody.velocity += velocityNew;
+            }
+            if (parent.elapsedTime >= parent.curve[1].time)
+            {
+                playerRef.jumpCount--;
             }
         };
 
