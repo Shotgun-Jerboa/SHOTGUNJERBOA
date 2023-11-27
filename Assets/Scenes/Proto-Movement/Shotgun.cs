@@ -21,7 +21,7 @@ public class Shotgun : MonoBehaviour
     //[SerializeField] TrailRenderer bulletTrail;
 
     // Bools 
-    bool readyToShoot, reloading;
+    public bool readyToShoot, reloading;
 
     // Reference
     [SerializeField]Camera fpsCam;

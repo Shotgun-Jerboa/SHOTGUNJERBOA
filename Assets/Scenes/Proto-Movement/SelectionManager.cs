@@ -14,6 +14,8 @@ public class SelectionManager : MonoBehaviour
 
     public WallHealthScript wallScript;
     public PlayerScript playerRef;
+    public Shotgun leftshotgunScript;
+    public Shotgun rightshotgunScript;
 
     public Animator anim;
     public Animator buttonAnim;
@@ -46,7 +48,7 @@ public class SelectionManager : MonoBehaviour
             var selection = hit.transform;
             if (selection.CompareTag(wallTag))
             {
-                if ((Input.GetMouseButtonDown(0) | Input.GetMouseButtonDown(1)) /*& (Ammo >= 1)*/)
+                if ((Input.GetMouseButtonDown(0) | Input.GetMouseButtonDown(1)) & (playerRef.Ammo >= 1) /*& ((leftshotgunScript.readyToShoot) | (rightshotgunScript.readyToShoot))*/)
                 {
                     wallScript.DamageWall();
                 }
@@ -60,17 +62,12 @@ public class SelectionManager : MonoBehaviour
                 }
                 
                 
-                if ((Input.GetMouseButtonDown(0) | Input.GetMouseButtonDown(1)) & (playerRef.Ammo >= 1))           //if button is clicked and ammo is left
+                if ((Input.GetMouseButtonDown(0) | Input.GetMouseButtonDown(1)) & (playerRef.Ammo >= 1) /*& ((!leftshotgunScript.reloading & leftshotgunScript.readyToShoot) | (!rightshotgunScript.reloading & rightshotgunScript.readyToShoot))*/)           //if button is clicked and ammo is left
 
                 {
 
                     ButtonPressed = true;
-
-                    //gameObject.GetComponent<AudioSource>().Play();
-                }
-                
-                if (ButtonPressed)
-                {
+                    playerRef.Ammo--;
                     anim.SetBool("ButtonPressed", true);
                     buttonAnim.SetBool("ButtonPressed", true);
                 }

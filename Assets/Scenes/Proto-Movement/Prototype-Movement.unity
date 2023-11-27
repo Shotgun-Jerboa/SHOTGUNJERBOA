@@ -159,6 +159,8 @@ MonoBehaviour:
   ButtonPressed: 0
   wallScript: {fileID: 659821776}
   playerRef: {fileID: 484013134}
+  leftshotgunScript: {fileID: 2106022850}
+  rightshotgunScript: {fileID: 1150121328}
   anim: {fileID: 529672395}
   buttonAnim: {fileID: 1865489480}
 --- !u!4 &26917267
@@ -3626,6 +3628,8 @@ MonoBehaviour:
   isRecoil: 1
   muzzleFlash: {fileID: 2957657415812638113, guid: b63ecd71e261612418280ca5cb3d9b41, type: 3}
   BulletHoleEffect: {fileID: 1000010844420130, guid: 944d85b2fc8f86e4a8c273d3c93c548a, type: 3}
+  readyToShoot: 0
+  reloading: 0
   fpsCam: {fileID: 963194227}
   shootingPoint: {fileID: 484013133}
   whatIsEnemy:
@@ -5450,6 +5454,8 @@ MonoBehaviour:
   isRecoil: 1
   muzzleFlash: {fileID: 2957657415812638113, guid: b63ecd71e261612418280ca5cb3d9b41, type: 3}
   BulletHoleEffect: {fileID: 1000010844420130, guid: 944d85b2fc8f86e4a8c273d3c93c548a, type: 3}
+  readyToShoot: 0
+  reloading: 0
   fpsCam: {fileID: 963194227}
   shootingPoint: {fileID: 776173337}
   whatIsEnemy:
