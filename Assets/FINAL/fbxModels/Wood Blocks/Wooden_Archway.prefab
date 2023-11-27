@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6772235270739936233
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d646a3614cecb714facd441097a33c93, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 177.80594
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d646a3614cecb714facd441097a33c93, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d646a3614cecb714facd441097a33c93, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 208.1189
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d646a3614cecb714facd441097a33c93, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d646a3614cecb714facd441097a33c93, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d646a3614cecb714facd441097a33c93, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d646a3614cecb714facd441097a33c93, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d646a3614cecb714facd441097a33c93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d646a3614cecb714facd441097a33c93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d646a3614cecb714facd441097a33c93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3231378692612140346, guid: d646a3614cecb714facd441097a33c93, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d91502c8fc6eb41439f3df342ef352cc, type: 2}
+    - target: {fileID: 919132149155446097, guid: d646a3614cecb714facd441097a33c93, type: 3}
+      propertyPath: m_Name
+      value: Wooden_Archway
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271782569467734148, guid: d646a3614cecb714facd441097a33c93, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: -8700617353114198275, guid: d646a3614cecb714facd441097a33c93, type: 3}
+    - {fileID: 65702495048144492, guid: d646a3614cecb714facd441097a33c93, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6271782569467734148, guid: d646a3614cecb714facd441097a33c93, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3507435003992202036}
+  m_SourcePrefab: {fileID: 100100000, guid: d646a3614cecb714facd441097a33c93, type: 3}
+--- !u!1 &788702907289512813 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6271782569467734148, guid: d646a3614cecb714facd441097a33c93, type: 3}
+  m_PrefabInstance: {fileID: 6772235270739936233}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &3507435003992202036
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788702907289512813}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1155697680123631651, guid: d646a3614cecb714facd441097a33c93, type: 3}
