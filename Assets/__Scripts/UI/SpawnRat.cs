@@ -16,6 +16,7 @@ public class SpawnRat : MonoBehaviour
     private float yLevel;
     public Canvas canvas;
     public RectTransform panel;
+    private int multiplyer = 17;
 
     public Camera mainCamera;
     public Vector3 pos;
@@ -51,28 +52,32 @@ public class SpawnRat : MonoBehaviour
     public void RatSpawn()
     {
 
-        yLevel = UnityEngine.Random.Range((30 * canvas.transform.localScale.y), Screen.height / 2);
+        yLevel = UnityEngine.Random.Range((multiplyer * canvas.transform.localScale.y), Screen.height / 2);
         position.y = yLevel;
         GameObject newRat = Instantiate(rat, position, Quaternion.Euler(rotation)) as GameObject;
 
         newRat.transform.SetParent(this.transform, false);
-        if (yLevel > signs[4].transform.position.y - (30 * canvas.transform.localScale.y * signs[4].transform.localScale.y))
+        if (yLevel > signs[5].transform.position.y - (multiplyer * canvas.transform.localScale.y * signs[5].transform.localScale.y))
+        {
+            newRat.transform.SetParent(signs[5].transform);
+        }
+        else if (yLevel > signs[4].transform.position.y - (multiplyer * canvas.transform.localScale.y * signs[4].transform.localScale.y))
         {
             newRat.transform.SetParent(signs[4].transform);
         }
-        else if (yLevel > signs[3].transform.position.y - (30 * canvas.transform.localScale.y * signs[3].transform.localScale.y))
+        else if (yLevel > signs[3].transform.position.y - (multiplyer * canvas.transform.localScale.y * signs[3].transform.localScale.y))
         {
             newRat.transform.SetParent(signs[3].transform);
         }
-        else if (yLevel > signs[2].transform.position.y - (30 * canvas.transform.localScale.y * signs[2].transform.localScale.y))
+        else if (yLevel > signs[2].transform.position.y - (multiplyer * canvas.transform.localScale.y * signs[2].transform.localScale.y))
         {
             newRat.transform.SetParent(signs[2].transform);
         }
-        else if (yLevel > signs[1].transform.position.y - (30 * canvas.transform.localScale.y * signs[1].transform.localScale.y))
+        else if (yLevel > signs[1].transform.position.y - (multiplyer * canvas.transform.localScale.y * signs[1].transform.localScale.y))
         {
             newRat.transform.SetParent(signs[1].transform);
         }
-        else if (yLevel > signs[0].transform.position.y - (30 * canvas.transform.localScale.y * signs[0].transform.localScale.y))
+        else if (yLevel > signs[0].transform.position.y - (multiplyer * canvas.transform.localScale.y * signs[0].transform.localScale.y))
         {
 
             newRat.transform.SetParent(signs[0].transform);
@@ -82,7 +87,7 @@ public class SpawnRat : MonoBehaviour
             newRat.transform.SetParent(this.transform, false);
         }
         movement = newRat.GetComponent<RatMovement>();
-        if (right)
+        /*if (right)
         {
             movement.onLeft = false;
             right = false;
@@ -92,6 +97,7 @@ public class SpawnRat : MonoBehaviour
             movement.onLeft = true;
             right = true;
         }
+        */
         movement.yLevel = yLevel;
     }
 
