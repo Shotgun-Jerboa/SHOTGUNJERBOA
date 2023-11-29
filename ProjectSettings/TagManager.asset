@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Pistachio
   - Weapon
+  - Button
   layers:
   - Default
   - TransparentFX
