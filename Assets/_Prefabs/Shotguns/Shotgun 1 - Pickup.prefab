@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6452002967327589399}
   - component: {fileID: 7798424695374189341}
   - component: {fileID: 4156547015079340453}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Shotgun 1 - Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
