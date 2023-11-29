@@ -26,6 +26,7 @@ public class Button_Manager : MonoBehaviour
     protected string test;
     public GameObject canvas;
     public InputAction action;
+    public GameObject credits;
 
     protected float time = .2f;
     public bool GameIsPaused = false;
@@ -194,5 +195,14 @@ public class Button_Manager : MonoBehaviour
         {
             canvas.SetActive(true);
         }
+    }
+
+    public void ShowCredits()
+    {
+        credits.SetActive(true);
+    }
+    public void RemoveCredits()
+    {
+        credits.SetActive(false);
     }
 }
