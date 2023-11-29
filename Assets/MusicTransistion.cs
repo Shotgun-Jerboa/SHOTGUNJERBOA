@@ -5,8 +5,12 @@ using UnityEngine;
 
 public class MusicTransistion : MonoBehaviour
 {
-    public AudioSource defaultMusicSource;
-    public AudioSource battleMusicSource;
+    public List<AudioSource> chillMusicSources;
+    public List<AudioSource> battleMusicSources;
+
+    private AudioSource currentChillMusic;
+    private AudioSource currentBattleMusic;
+
     public float crossfadeTime = 2.0f; // Time in seconds to crossfade music
     private Coroutine currentCrossfadeCoroutine;
 
@@ -14,61 +18,100 @@ public class MusicTransistion : MonoBehaviour
 
     private void Start()
     {
-        // Start with default music
-        defaultMusicSource.Play();
-        battleMusicSource.Play();
-        battleMusicSource.Pause(); // Pause battle music immediately after it starts playing
-        battleMusicSource.volume = 0f; // Ensure battle music starts muted
+        // Preload and pause all chill music sources
+        foreach (var source in chillMusicSources)
+        {
+            if (source.clip != null)
+            {
+                source.Play();
+                source.Pause();
+            }
+        }
+
+        // Preload and pause all battle music sources
+        foreach (var source in battleMusicSources)
+        {
+            if (source.clip != null)
+            {
+                source.Play();
+                source.Pause();
+            }
+        }
+
+        currentChillMusic = GetRandomMusic(chillMusicSources);
+        currentBattleMusic = GetRandomMusic(battleMusicSources);
+
+        if (currentChillMusic != null)
+        {
+            currentChillMusic.UnPause();  // Unpause the selected track
+        }
+
+        if (currentBattleMusic != null && currentBattleMusic != currentChillMusic)
+        {
+            currentBattleMusic.Pause();  // Ensure it remains paused
+        }
+        PlayMusic(currentChillMusic, true);
+        PlayMusic(currentBattleMusic, false);
 
         GameStateManager.Instance.OnBattleStateChanged += HandleBattleStateChanged;
-
     }
+
+    private AudioSource GetRandomMusic(List<AudioSource> sources)
+    {
+        if (sources == null || sources.Count == 0) return null;
+        int randomIndex = UnityEngine.Random.Range(0, sources.Count);
+        return sources[randomIndex];
+    }
+
+    private void PlayMusic(AudioSource source, bool play)
+    {
+        if (source != null)
+        {
+            if (play)
+            {
+                if (source.isPlaying)
+                {
+                    // If the source is already playing, just continue
+                    Debug.Log("Continuing music: " + source.clip.name);
+                }
+                else
+                {
+                    // If the source is not playing, unpause it to continue from where it was stopped
+                    Debug.Log("Resuming music: " + source.clip.name);
+                    source.UnPause();
+                }
+            }
+            else
+            {
+                Debug.Log("Pausing music: " + source.clip.name);
+                source.Pause();
+                source.volume = 0f;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Attempted to play a null AudioSource");
+        }
+    }
+
 
     private void HandleBattleStateChanged(bool isInBattle)
     {
         if (isCrossfading)
         {
-            // Immediately stop the current crossfade if a new state change occurs
             StopCoroutine(currentCrossfadeCoroutine);
-            // Reset volumes to appropriate states before starting a new crossfade
-            if (isInBattle)
-            {
-                defaultMusicSource.volume = 1f;
-                battleMusicSource.volume = 0f;
-                battleMusicSource.UnPause();
-            }
-            else
-            {
-                defaultMusicSource.volume = 0f;
-                battleMusicSource.volume = 1f;
-                defaultMusicSource.UnPause();
-            }
             isCrossfading = false;
         }
 
         if (isInBattle)
         {
-            currentCrossfadeCoroutine = StartCoroutine(CrossfadeMusic(defaultMusicSource, battleMusicSource, true));
+            currentBattleMusic = GetRandomMusic(battleMusicSources);
+            currentCrossfadeCoroutine = StartCoroutine(CrossfadeMusic(currentChillMusic, currentBattleMusic, true));
         }
         else
         {
-            currentCrossfadeCoroutine = StartCoroutine(CrossfadeMusic(battleMusicSource, defaultMusicSource, false));
-        }
-    }
-
-    public void CrossfadeToBattleMusic()
-    {
-        if (!isCrossfading)
-        {
-            StartCoroutine(CrossfadeMusic(defaultMusicSource, battleMusicSource, resume: true));
-        }
-    }    
-    
-    public void CrossfadeToDefaultMusic()
-    {
-        if (!isCrossfading)
-        {
-            StartCoroutine(CrossfadeMusic(battleMusicSource, defaultMusicSource, resume: false));
+            currentChillMusic = GetRandomMusic(chillMusicSources);
+            currentCrossfadeCoroutine = StartCoroutine(CrossfadeMusic(currentBattleMusic, currentChillMusic, false));
         }
     }
 
@@ -77,42 +120,32 @@ public class MusicTransistion : MonoBehaviour
         isCrossfading = true;
 
         float timer = 0;
-
-        //Get current volume levels
         float startVolumeFadeOut = fadeOutSource.volume;
         float startVolumeFadeIn = fadeInSource.volume;
 
-        // Resume paused music or just continue if it's already playing
-        if (resume)
-        {
-            fadeInSource.UnPause();
-        }
+        fadeInSource.Play();
 
         while (timer < crossfadeTime)
         {
             timer += Time.deltaTime;
-            //Lerp volune levels based on timer
             fadeOutSource.volume = Mathf.Lerp(startVolumeFadeOut, 0, timer / crossfadeTime);
             fadeInSource.volume = Mathf.Lerp(startVolumeFadeIn, 1, timer / crossfadeTime);
-
             yield return null;
         }
 
-        // Ensure final volumes are set correctly
         fadeOutSource.volume = 0;
         fadeInSource.volume = 1f;
 
-        // Only pause the fadeOutSource if it's the battle music that's fading out
         if (!resume)
         {
             fadeOutSource.Pause();
         }
+
         isCrossfading = false;
     }
 
     void OnDestroy()
     {
-        // Unsubscribe to prevent memory leaks
         GameStateManager.Instance.OnBattleStateChanged -= HandleBattleStateChanged;
     }
 }

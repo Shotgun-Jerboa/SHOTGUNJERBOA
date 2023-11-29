@@ -42,6 +42,13 @@ public class EnemyAI : MonoBehaviour
     private bool sleepEffectSpawned = false; // Add a flag to check if the sleep effect has been spawned
     public bool isDefeated = false;
 
+    [Header("Item Drop")]
+    [SerializeField] GameObject pistachioDrop;
+    private bool pistachiosSpawned = false; // Flag to ensure pistachios spawn only once
+    [SerializeField] private float spawnRadius = 3.0f; // Outer radius for spawning
+    [SerializeField] private float noSpawnRadius = 1.0f; // Inner radius where no spawning occurs
+    [SerializeField] float YspawnOffset;
+
     [Header("Animation Control")]
     Animator animator;
 
@@ -82,7 +89,7 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        if (health >0 && !isStationary)
+        if (health > 0 && !isStationary)
         {
             // Check for sight and attack range
             playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
@@ -203,6 +210,12 @@ public class EnemyAI : MonoBehaviour
                 sleepEffect.gameObject.SetActive(true);
                 sleepEffectSpawned = true; // Set the flag to true to avoid spawning the effect again
             }
+
+            if (!pistachiosSpawned)
+            {
+                SpawnPistachios();
+                pistachiosSpawned = true;
+            }
             StartCoroutine(DisableEnemy());
         }
     }
@@ -234,6 +247,7 @@ public class EnemyAI : MonoBehaviour
         // Replace with the correct layer name so the player can't interact with the Enemy
         // after they're defeated
         gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
+
     }
 
     private void AttackPlayer()
@@ -274,15 +288,33 @@ public class EnemyAI : MonoBehaviour
         // Reset the attack flag so the enemy can attack again
         alreadyAttacked = false;
     }
+
+    private void SpawnPistachios()
+    {
+        int numberOfPistachios = UnityEngine.Random.Range(2,4);
+
+        for (int i = 0; i < numberOfPistachios; i++)
+        {
+            Vector3 spawnPosition;
+            do
+            {
+                spawnPosition = Random.insideUnitSphere * spawnRadius + transform.position;
+                spawnPosition.y = transform.position.y + YspawnOffset; // Keep the y coordinate the same to spawn on the ground
+
+            } while (Vector3.Distance(transform.position, spawnPosition) < noSpawnRadius);
+
+            Instantiate(pistachioDrop, spawnPosition, Quaternion.identity);
+
+        }
+    }
+
     //To Visualize the attack range (not important, can be deleted)
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, spawnRadius);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, alertingRadius);
-
-
+        Gizmos.DrawWireSphere(transform.position, noSpawnRadius);
     }
 }

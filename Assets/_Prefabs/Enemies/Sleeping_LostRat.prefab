@@ -18076,6 +18076,7 @@ MonoBehaviour:
   damageCollider: {fileID: 8342451381610058306}
   sleepEffect: {fileID: 6114865437523280620}
   isDefeated: 0
+  pistachioDrop: {fileID: 4063802379288062586, guid: bdf43dfbf8b72ba4da741832d6de4f12, type: 3}
   playerScript: {fileID: 0}
   whatIsGround:
     serializedVersion: 2

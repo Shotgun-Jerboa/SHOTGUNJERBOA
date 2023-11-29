@@ -30,7 +30,7 @@ public class InteractingHighLight : MonoBehaviour
         {
             var selection = hit.transform;
 
-            if (selection.transform.gameObject.layer == LayerMask.NameToLayer("Button"))
+            if (selection.CompareTag("Button"))
             {
                 var selectionRenderer = selection.GetComponent<Renderer>();
 
