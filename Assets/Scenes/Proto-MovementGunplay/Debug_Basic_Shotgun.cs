@@ -218,6 +218,23 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
                             GameObject impact = Instantiate(BulletHoleEffect, hit.point, Quaternion.identity);
                             impact.transform.parent = hit.transform;
                         }
+
+                        if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
+                        {
+                            if (hit.collider.gameObject.GetComponent<WallHealthScript>()!= null)
+                            {
+                                hit.collider.gameObject.GetComponent<WallHealthScript>().DamageWall(gunDamage);
+                            }
+
+                            if (hit.collider.gameObject.GetComponent<DoorButton>() != null)
+                            {
+                                hit.collider.gameObject.GetComponent<DoorButton>().isPressed = true;
+                            }
+                            Quaternion impactRotation = Quaternion.LookRotation(hit.normal);
+                            GameObject impact = Instantiate(BulletHoleEffect, hit.point, impactRotation);
+                            impact.transform.parent = hit.transform;
+                        }
+
                     }
                    
                 }

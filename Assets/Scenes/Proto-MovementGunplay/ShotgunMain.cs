@@ -12,9 +12,10 @@ public class ShotgunMain : MonoBehaviour
 
     private SettingVars settings;
     private PlayerScript player;
-    private IShotgun[] shotguns;
+    public IShotgun[] shotguns;
     private new Transform camera;
     private CrossHairManager crosshairManager;
+    public bool isShootingAllowed = true; // Add this flag
 
     public enum gunHand {
         right,
@@ -47,34 +48,48 @@ public class ShotgunMain : MonoBehaviour
             }
         }
 
+        if (ammo <=0)
+        {
+            
+        }
+
         switch (player.state)
         {
             case PlayerScript.PlayerState.UI_Pause:
                 break;
             case PlayerScript.PlayerState.Gameplay_Air:
             case PlayerScript.PlayerState.Gameplay_Ground:
-                if (shotguns.Length > 1)
+                if (!isShootingAllowed)
                 {
-                    if (settings.input.Gameplay.LeftShoot.WasPressedThisFrame())
-                    {
-                        shoot(gunHand.left);
-                    }
-                    if (settings.input.Gameplay.RightShoot.WasPressedThisFrame())
-                    {
-                        shoot(gunHand.right);
-                    }
+
+                    return;
                 }
-                else if (shotguns.Length == 1)
+                else
                 {
-                    if (
-                        settings.input.Gameplay.LeftShoot.WasPressedThisFrame() ||
-                        settings.input.Gameplay.RightShoot.WasPressedThisFrame()
-                    )
+                    if (shotguns.Length > 1)
                     {
-                        shoot();
+                        if (settings.input.Gameplay.LeftShoot.WasPressedThisFrame())
+                        {
+                            shoot(gunHand.left);
+                        }
+                        if (settings.input.Gameplay.RightShoot.WasPressedThisFrame())
+                        {
+                            shoot(gunHand.right);
+                        }
                     }
+                    else if (shotguns.Length == 1)
+                    {
+                        if (
+                            settings.input.Gameplay.LeftShoot.WasPressedThisFrame() ||
+                            settings.input.Gameplay.RightShoot.WasPressedThisFrame()
+                        )
+                        {
+                            shoot();
+                        }
+                    }
+                    break;
                 }
-                break;
+                
         }
 
         for(int i = 0; i < shotguns.Length; i++)
@@ -310,7 +325,7 @@ public class ShotgunMain : MonoBehaviour
     }
 }
 
-interface IShotgun
+public interface IShotgun
 {
     bool isReady();
     GameObject getObj();
@@ -318,4 +333,5 @@ interface IShotgun
     void reload(ref int ammo);
     void empty(ref int ammo);
     float[] getStats();
+
 }

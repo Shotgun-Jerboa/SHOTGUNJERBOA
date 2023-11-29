@@ -161,6 +161,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Eat"",
+                    ""type"": ""Button"",
+                    ""id"": ""0eebda70-9e1e-458b-9fde-c2b80d7149fd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -524,6 +533,17 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e96e40af-d8cc-4bf9-8cc8-cda764775605"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eat"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1107,6 +1127,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         m_Gameplay_RightShoot = m_Gameplay.FindAction("RightShoot", throwIfNotFound: true);
         m_Gameplay_MenuOPEN = m_Gameplay.FindAction("MenuOPEN", throwIfNotFound: true);
         m_Gameplay_Restart = m_Gameplay.FindAction("Restart", throwIfNotFound: true);
+        m_Gameplay_Eat = m_Gameplay.FindAction("Eat", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1196,6 +1217,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_RightShoot;
     private readonly InputAction m_Gameplay_MenuOPEN;
     private readonly InputAction m_Gameplay_Restart;
+    private readonly InputAction m_Gameplay_Eat;
     public struct GameplayActions
     {
         private @PlayerInputSystem m_Wrapper;
@@ -1215,6 +1237,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         public InputAction @RightShoot => m_Wrapper.m_Gameplay_RightShoot;
         public InputAction @MenuOPEN => m_Wrapper.m_Gameplay_MenuOPEN;
         public InputAction @Restart => m_Wrapper.m_Gameplay_Restart;
+        public InputAction @Eat => m_Wrapper.m_Gameplay_Eat;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1269,6 +1292,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @Restart.started += instance.OnRestart;
             @Restart.performed += instance.OnRestart;
             @Restart.canceled += instance.OnRestart;
+            @Eat.started += instance.OnEat;
+            @Eat.performed += instance.OnEat;
+            @Eat.canceled += instance.OnEat;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -1318,6 +1344,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @Restart.started -= instance.OnRestart;
             @Restart.performed -= instance.OnRestart;
             @Restart.canceled -= instance.OnRestart;
+            @Eat.started -= instance.OnEat;
+            @Eat.performed -= instance.OnEat;
+            @Eat.canceled -= instance.OnEat;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -1478,6 +1507,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         void OnRightShoot(InputAction.CallbackContext context);
         void OnMenuOPEN(InputAction.CallbackContext context);
         void OnRestart(InputAction.CallbackContext context);
+        void OnEat(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
