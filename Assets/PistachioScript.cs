@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PistachioScript : MonoBehaviour
 {
+    public int ammoValue = 1;
     private ShotgunMain shotgunsRef;
     public List<AudioClip> collectedAudioClips;
 
@@ -26,7 +27,7 @@ public class PistachioScript : MonoBehaviour
 
             // Destroy the GameObject
             Destroy(gameObject);
-            shotgunsRef.ammo++;
+            shotgunsRef.ammo+= ammoValue;
         }
     }
 }

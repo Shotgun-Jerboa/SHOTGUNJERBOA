@@ -6,9 +6,8 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
-    public NPCInteract CurrentInteractingNPC { get; set; }
-
     private Queue<string> sentences;
+    private string currentSentence;
 
     private TextMeshProUGUI nameText;
     private TextMeshProUGUI dialogueText;
@@ -54,9 +53,16 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        string sentence = sentences.Dequeue();
+        if (isTyping)
+        {
+            CompleteSentence();
+            return;
+        }
+
+        currentSentence = sentences.Dequeue();
+        Debug.Log("Displaying Sentence: " + currentSentence); // Debug log
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
+        StartCoroutine(TypeSentence(currentSentence));
     }
 
     IEnumerator TypeSentence(string sentence)
@@ -67,17 +73,18 @@ public class DialogueManager : MonoBehaviour
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed); // Wait between each character
-            if (!isTyping) break;
         }
         isTyping = false;
-        dialogueText.text = sentence; // Ensure full sentence is displayed
+        Debug.Log("Finished Typing Sentence: " + sentence); // Debug log
     }
 
     public void CompleteSentence()
     {
+        StopAllCoroutines(); // Stop the typing coroutine
         isTyping = false;
+        dialogueText.text = currentSentence; // Display the full current sentence
     }
-    public void EndDialogue()
+        public void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
         endDialogue = true;

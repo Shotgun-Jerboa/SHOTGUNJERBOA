@@ -45,6 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endDialogue: 0
-  typingSpeed: 0.05
+  typingSpeed: 0.1
   isTyping: 0
-  animator: {fileID: 0}
