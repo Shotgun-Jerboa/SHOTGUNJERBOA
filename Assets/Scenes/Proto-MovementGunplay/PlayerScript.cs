@@ -56,7 +56,7 @@ public class PlayerScript : MonoBehaviour
         maxAirMagnitude = Mathf.Sqrt(Mathf.Pow(settings.worldVars.moveSpeed, 2) + Mathf.Pow(settings.worldVars.moveSpeed, 2)) * settings.worldVars.sprintSpeedMultiplier;
         healthUIAnimator = Global.instance.sceneTree.Get("Canvas/Canvas/Health").GetComponent<Animator>();
         shotgunMain = Global.instance.sceneTree.Get("Camera/Main Camera/Weapons").GetComponent<ShotgunMain>();
-        eatingAnimator = Global.instance.sceneTree.Get("Main Canvas/Eating Overlay").GetComponent<Animator>();
+                eatingAnimator = Global.instance.sceneTree.Get("Main Canvas/Eating Overlay").GetComponent<Animator>();
 
 
         movementMagnitude = new AnimationCurve(new Keyframe[] {

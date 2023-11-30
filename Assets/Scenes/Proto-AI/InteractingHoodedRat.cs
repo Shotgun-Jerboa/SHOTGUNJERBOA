@@ -19,7 +19,7 @@ public class InteractingHoodedRat : NPCInteract
     {
         base.Update(); // Call base class update method
 
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyUp(KeyCode.T))
         {
             if (dialogueManager.isTyping)
             {
@@ -28,10 +28,11 @@ public class InteractingHoodedRat : NPCInteract
             else
             {
                 dialogueManager.DisplayNextSentence();
-                if (dialogueManager.endDialogue)
+                if (dialogueManager.endDialogue && interactable.IsInDialogue)
                 {
                     animator.SetBool("GiveGun", true);
                     playerScript.enabled = true;
+                    interactable.EndDialogue(); // Indicate that dialogue has ended
                 }
             }
         }

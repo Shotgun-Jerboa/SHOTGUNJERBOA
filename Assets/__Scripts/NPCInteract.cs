@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NPCInteract : MonoBehaviour
 {
+    SettingVars setting;
     [SerializeField] protected Vector3 interactZoneOffset;
     [SerializeField] protected Vector3 zoneSize = Vector3.one;
     [SerializeField] protected LayerMask playerLayer;
@@ -26,6 +27,7 @@ public class NPCInteract : MonoBehaviour
         playerScript = Global.instance.sceneTree.Get("Player").GetComponent<PlayerScript>();
         playerRb = Global.instance.sceneTree.Get("Player").GetComponent<Rigidbody>();
         dialogueManager = Global.instance.sceneTree.Get("DialogueManager").GetComponent<DialogueManager>();
+        setting = Global.instance.sceneTree.Get("Settings").GetComponent<SettingVars>();
     }
 
     // Update is called once per frame
@@ -60,7 +62,7 @@ public class NPCInteract : MonoBehaviour
                 interactionCount++; // Increment interaction count after each interaction
             }
         }
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyUp(KeyCode.T))
         {
             if (dialogueManager.isTyping)
             {
