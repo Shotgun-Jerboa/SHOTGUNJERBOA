@@ -11,6 +11,10 @@ public class PlayerScript : MonoBehaviour
     [Header("UI Effect")]
     private Animator healthUIAnimator;
 
+
+
+    ShotgunMain shotgunMain;
+
     public enum PlayerState
     {
         Gameplay_Ground,
@@ -47,7 +51,6 @@ public class PlayerScript : MonoBehaviour
         hitboxHeight = children.Get("Collision").GetComponent<CapsuleCollider>().height;
         maxAirMagnitude = Mathf.Sqrt(Mathf.Pow(settings.worldVars.moveSpeed, 2) + Mathf.Pow(settings.worldVars.moveSpeed, 2)) * settings.worldVars.sprintSpeedMultiplier;
         healthUIAnimator = Global.instance.sceneTree.Get("Canvas/Canvas/Health").GetComponent<Animator>();
-
 
         movementMagnitude = new AnimationCurve(new Keyframe[] {
             new Keyframe()
@@ -431,7 +434,13 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log("Game Over!");
         }
+        if (health >maxHealth)
+        {
+            health = maxHealth;
+        }
     }
+
+ 
 
     private void OnTriggerEnter(Collider other)
     {

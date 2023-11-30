@@ -47,7 +47,6 @@ public class EnemyAI : MonoBehaviour
     private bool pistachiosSpawned = false; // Flag to ensure pistachios spawn only once
     [SerializeField] private float spawnRadius = 3.0f; // Outer radius for spawning
     [SerializeField] private float noSpawnRadius = 1.0f; // Inner radius where no spawning occurs
-    [SerializeField] float YspawnOffset;
 
     [Header("Animation Control")]
     Animator animator;
@@ -299,7 +298,7 @@ public class EnemyAI : MonoBehaviour
             do
             {
                 spawnPosition = Random.insideUnitSphere * spawnRadius + transform.position;
-                spawnPosition.y = transform.position.y + YspawnOffset; // Keep the y coordinate the same to spawn on the ground
+                spawnPosition.y = transform.position.y + 1; // Keep the y coordinate the same to spawn on the ground
 
             } while (Vector3.Distance(transform.position, spawnPosition) < noSpawnRadius);
 
