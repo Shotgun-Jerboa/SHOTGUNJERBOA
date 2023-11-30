@@ -5,9 +5,24 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     public Dialogue1 dialogue;
+    public Dialogue1 secondDialogue;
 
     public void TriggerDialogue()
     {
-        FindAnyObjectByType<DialogueManager>().StartDialogue(dialogue);
+    }
+
+    public void TriggerDialogue(int interactionCount)
+    {
+        dialogueManager.CurrentInteractingNPC = this;
+        if (interactionCount == 0)
+        {
+            // Display first dialogue
+            FindAnyObjectByType<DialogueManager>().StartDialogue(dialogue);
+        }
+        else
+        {
+            // Display second dialogue for all subsequent interactions
+            FindAnyObjectByType<DialogueManager>().StartDialogue(secondDialogue);
+        }
     }
 }

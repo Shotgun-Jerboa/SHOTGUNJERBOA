@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 6146115246413796171}
   - component: {fileID: 9116006635704960685}
   - component: {fileID: 7340387225148259202}
+  - component: {fileID: 298084658653143867}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -310,7 +311,7 @@ MonoBehaviour:
   dropdownName: 
   canvas: {fileID: 0}
   action:
-    m_Name: 
+    m_Name: Action
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: e30d2d4f-968e-4e91-a5e8-7f5dbf3184a7
@@ -318,6 +319,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  credits: {fileID: 0}
   GameIsPaused: 0
   inOptions: 0
   anim: {fileID: 0}
@@ -472,8 +474,12 @@ MonoBehaviour:
     m_ActionName: UI/MenuCLOSE[/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: a5fe3bfb-c756-40f3-b790-ccbb468349ff
+    m_ActionId: 73b92ad3-90e7-4bef-a6c3-a0c2eef600ac
     m_ActionName: Gameplay/Restart[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0eebda70-9e1e-458b-9fde-c2b80d7149fd
+    m_ActionName: Gameplay/Eat[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -506,6 +512,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camScript: {fileID: 0}
+--- !u!114 &298084658653143867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445659897751282262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e38c5bf33f0fcc249a83394ecc0fcc88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2041584813664015808
 GameObject:
   m_ObjectHideFlags: 0

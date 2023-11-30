@@ -38,6 +38,7 @@ public class ShotgunMain : MonoBehaviour
             ammo = 0x7FFFFFFF;
         }
 
+
         if(settings.input.Gameplay.MenuOPEN.WasPressedThisFrame()){
             player.state = PlayerScript.PlayerState.UI_Pause;
         } else if(settings.input.UI.MenuCLOSE.WasPressedThisFrame()){

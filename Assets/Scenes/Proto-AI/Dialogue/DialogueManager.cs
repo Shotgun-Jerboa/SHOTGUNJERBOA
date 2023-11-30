@@ -6,6 +6,8 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    public NPCInteract CurrentInteractingNPC { get; set; }
+
     private Queue<string> sentences;
 
     private TextMeshProUGUI nameText;
@@ -15,7 +17,8 @@ public class DialogueManager : MonoBehaviour
     public bool isTyping = false;
 
 
-    public Animator animator;
+
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {

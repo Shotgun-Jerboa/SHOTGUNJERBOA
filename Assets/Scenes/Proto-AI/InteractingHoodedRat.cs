@@ -3,52 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class InteractingHoodedRat : MonoBehaviour
+public class InteractingHoodedRat : NPCInteract
 {
     [SerializeField] GameObject shotgun;
-    [SerializeField] Transform interactZone;
-    [SerializeField] Vector3 zoneSize;
-    [SerializeField] LayerMask playerLayer;
-    private Interactable interactable;
-    public DialogueManager dialogueManager;
-
-    private bool hasTalk = false;
-    public bool isPlayerInZone;
     Animator animator;
-    private Rigidbody playerRb;
 
-    private PlayerScript playerScript;
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        interactable = GetComponent<Interactable>();
+        base.Start(); // Call base class start method
         animator = GetComponent<Animator>();
-        playerScript = Global.instance.sceneTree.Get("Player").GetComponent<PlayerScript>();
-        playerRb = Global.instance.sceneTree.Get("Player").GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        Collider[] hitColliders = Physics.OverlapBox(interactZone.position, zoneSize / 2, Quaternion.identity, playerLayer);
-        isPlayerInZone = hitColliders.Length > 0;
+        base.Update(); // Call base class update method
 
-        if (isPlayerInZone && !hasTalk)
-        {
-            //Stop Player from moving when in dialogue
-            playerScript.enabled = false;
-            playerRb.velocity = Vector3.zero;
-
-            interactable.TriggerDialogue();
-            hasTalk = true;
-        }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             if (dialogueManager.isTyping)
             {
                 dialogueManager.CompleteSentence();
             }
-
             else
             {
                 dialogueManager.DisplayNextSentence();
@@ -59,7 +35,7 @@ public class InteractingHoodedRat : MonoBehaviour
                 }
             }
         }
-        if (shotgun == null || Time.timeScale ==0)
+        if (shotgun == null || Time.timeScale == 0)
         {
             animator.SetBool("GiveGun", false);
         }
@@ -71,12 +47,5 @@ public class InteractingHoodedRat : MonoBehaviour
         {
             shotgun.SetActive(true);
         }
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        // Draw a wireframe box in the editor to show interact zone
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(interactZone.position, zoneSize);
     }
 }
