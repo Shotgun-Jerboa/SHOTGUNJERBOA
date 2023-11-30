@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 837ac58ea7dec2c42a3647a352ac35a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammoValue: 1
   collectedAudioClips:
   - {fileID: 8300000, guid: a4c15b1adf698964aa53095a52a3fbd7, type: 3}
   - {fileID: 8300000, guid: 820f7c0f0116f04418cd8a3a4f542f7d, type: 3}
