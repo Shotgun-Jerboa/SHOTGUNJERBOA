@@ -8,6 +8,10 @@ public class PlayerScript : MonoBehaviour
     public float health;
     public float maxHealth = 100;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip[] damageSounds;
+
     [Header("UI Effect")]
     private Animator healthUIAnimator;
 
@@ -79,6 +83,7 @@ public class PlayerScript : MonoBehaviour
                 outTangent = 0
             }
         });
+        audioSource = GetComponent<AudioSource>(); 
     }
 
     private void Update()
@@ -466,9 +471,24 @@ public class PlayerScript : MonoBehaviour
                 healthUIAnimator.SetTrigger("Damage");
                 damageDealer.HasDealtDamage = true; // Set the flag to true after dealing damage
 
+                // Play a random damage sound
+                PlayRandomDamageSound();
+
                 // Optionally, you can start a coroutine or set a timer to reset this flag after a certain cooldown period
                 StartCoroutine(ResetDamageDealer(damageDealer));
             }
+        }
+    }
+
+    void PlayRandomDamageSound()
+    {
+        if (damageSounds.Length > 0 && audioSource != null)
+        {
+            // Choose a random damage sound from the array
+            AudioClip randomSound = damageSounds[Random.Range(0, damageSounds.Length)];
+
+            // Play the chosen sound
+            audioSource.PlayOneShot(randomSound);
         }
     }
 
