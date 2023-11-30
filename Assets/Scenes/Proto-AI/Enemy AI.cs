@@ -50,6 +50,7 @@ public class EnemyAI : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip alertSound;
+    public AudioClip[] damageSounds;
     private AudioSource audioSource;
 
     [Header("Animation Control")]
@@ -242,6 +243,16 @@ public class EnemyAI : MonoBehaviour
     {
         health -= damage;
         fieldOfView.hasSpottedPlayer = true;
+        PlayRandomDamageSound();
+    }
+
+    private void PlayRandomDamageSound()
+    {
+        if (audioSource != null && damageSounds.Length  > 0)
+        {
+            int randomIndex = Random.Range(0, damageSounds.Length);
+            audioSource.PlayOneShot(damageSounds[randomIndex]);
+        }
     }
 
     private IEnumerator DisableEnemy()

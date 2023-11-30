@@ -17309,6 +17309,22 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 4752760110058032933}
+    - target: {fileID: 8664879963339238406, guid: 50fea96695709744bb8c6116e4112007, type: 3}
+      propertyPath: damageSounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8664879963339238406, guid: 50fea96695709744bb8c6116e4112007, type: 3}
+      propertyPath: damageSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: c443f7a7e80bd194e82773f78ef7378a, type: 3}
+    - target: {fileID: 8664879963339238406, guid: 50fea96695709744bb8c6116e4112007, type: 3}
+      propertyPath: damageSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 79b0586c1f462724b90f5e9f21f56133, type: 3}
+    - target: {fileID: 8664879963339238406, guid: 50fea96695709744bb8c6116e4112007, type: 3}
+      propertyPath: damageSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 877a55e0200471940b51cdd528250cb7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
