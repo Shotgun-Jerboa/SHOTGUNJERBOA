@@ -48,6 +48,10 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float spawnRadius = 3.0f; // Outer radius for spawning
     [SerializeField] private float noSpawnRadius = 1.0f; // Inner radius where no spawning occurs
 
+    [Header("Audio")]
+    public AudioClip alertSound;
+    private AudioSource audioSource;
+
     [Header("Animation Control")]
     Animator animator;
 
@@ -67,6 +71,8 @@ public class EnemyAI : MonoBehaviour
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
         patrolCenter = transform.position; // Set the patrol center to the enemy's starting position
         playerScript = Global.instance.sceneTree.Get("Player").GetComponent<PlayerScript>();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = alertSound;
     }
     private void Update()
     {
@@ -280,8 +286,18 @@ public class EnemyAI : MonoBehaviour
         if (!fieldOfView.hasSpottedPlayer)
         {
             fieldOfView.hasSpottedPlayer = true;
+            PlayAlertSound();
         }
     }
+
+    private void PlayAlertSound()
+    {
+        if (audioSource != null && alertSound != null)
+        {
+            audioSource.PlayOneShot(alertSound);
+        }
+    }
+
     private void ResetAttack()
     {
         // Reset the attack flag so the enemy can attack again
