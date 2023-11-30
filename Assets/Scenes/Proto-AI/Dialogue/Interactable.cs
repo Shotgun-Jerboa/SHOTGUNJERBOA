@@ -13,7 +13,7 @@ public class Interactable : MonoBehaviour
 
     public void TriggerDialogue(int interactionCount)
     {
-        dialogueManager.CurrentInteractingNPC = this;
+
         if (interactionCount == 0)
         {
             // Display first dialogue
