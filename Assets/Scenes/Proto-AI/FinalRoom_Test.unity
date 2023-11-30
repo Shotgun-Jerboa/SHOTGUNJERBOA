@@ -50325,6 +50325,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4121131337911125078, guid: c22e3485a93372e46ac569b89dcc9217, type: 3}
+      propertyPath: damageSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4121131337911125078, guid: c22e3485a93372e46ac569b89dcc9217, type: 3}
+      propertyPath: damageSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 84f35f431c15fc0499cb8348040e13d3, type: 3}
     - target: {fileID: 7340387225148259202, guid: c22e3485a93372e46ac569b89dcc9217, type: 3}
       propertyPath: camScript
       value: 
