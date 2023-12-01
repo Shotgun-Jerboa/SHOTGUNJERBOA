@@ -3595,7 +3595,7 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras: []
-  m_RendererIndex: -1
+  m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -36722,8 +36722,7 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras:
-  - {fileID: 1032050790}
+  m_Cameras: []
   m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -38390,7 +38389,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 960.00006, y: 518.3099}
+  m_AnchoredPosition: {x: 960, y: 518.3099}
   m_SizeDelta: {x: 799.99994, y: 431.92493}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &955088836
@@ -40355,7 +40354,7 @@ GameObject:
   - component: {fileID: 1032050792}
   - component: {fileID: 1032050790}
   - component: {fileID: 1032050791}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Ui Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40436,7 +40435,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -77355,6 +77354,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3082824787375568490, guid: e98413eabd7fef749b0a3d58a14bc55a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082824787375568490, guid: e98413eabd7fef749b0a3d58a14bc55a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.6999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082824787375568490, guid: e98413eabd7fef749b0a3d58a14bc55a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 99.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082824787375568490, guid: e98413eabd7fef749b0a3d58a14bc55a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.96303004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082824787375568490, guid: e98413eabd7fef749b0a3d58a14bc55a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.2693939
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082824787375568490, guid: e98413eabd7fef749b0a3d58a14bc55a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -31.256
+      objectReference: {fileID: 0}
     - target: {fileID: 3146095311709699579, guid: e98413eabd7fef749b0a3d58a14bc55a, type: 3}
       propertyPath: m_Layer
       value: 13
@@ -77389,11 +77412,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7791797904460349230, guid: e98413eabd7fef749b0a3d58a14bc55a, type: 3}
       propertyPath: m_Depth
-      value: 4
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791797904460349230, guid: e98413eabd7fef749b0a3d58a14bc55a, type: 3}
+      propertyPath: field of view
+      value: 60.000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791797904460349230, guid: e98413eabd7fef749b0a3d58a14bc55a, type: 3}
+      propertyPath: m_FocalLength
+      value: 20.78461
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791797904460349230, guid: e98413eabd7fef749b0a3d58a14bc55a, type: 3}
+      propertyPath: m_OcclusionCulling
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7791797904460349230, guid: e98413eabd7fef749b0a3d58a14bc55a, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 3071
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791797904460349230, guid: e98413eabd7fef749b0a3d58a14bc55a, type: 3}
+      propertyPath: m_projectionMatrixMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9213520520595146222, guid: e98413eabd7fef749b0a3d58a14bc55a, type: 3}
       propertyPath: ammo
