@@ -578,8 +578,5 @@ public class PlayerScript : MonoBehaviour
         shotgunMain.isShootingAllowed = true;
 
     }
-    void OnDisable()
-    {
-        health = 0;
-    }
+
 }
