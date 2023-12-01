@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4702634598822139533}
   - component: {fileID: 9156994972813475379}
   - component: {fileID: 3307054982365829875}
+  - component: {fileID: 3262939611923069197}
   m_Layer: 0
   m_Name: Pistachio Impact
   m_TagString: Untagged
@@ -4830,6 +4831,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &3262939611923069197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5001011874085694781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21bfffbc8cbbb1746bade0d9613bd839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToDestroy: 0
 --- !u!1 &5764375712398499382
 GameObject:
   m_ObjectHideFlags: 0
