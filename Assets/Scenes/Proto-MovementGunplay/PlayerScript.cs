@@ -451,6 +451,7 @@ public class PlayerScript : MonoBehaviour
         if (health <=0)
         {
             Debug.Log("Game Over!");
+            health = 0;
         }
         if (health >maxHealth)
         {
@@ -500,7 +501,7 @@ public class PlayerScript : MonoBehaviour
 
     void EatToHealManager()
     {
-        if (settings.input.Gameplay.Eat.IsPressed() && !isEating)
+        if (settings.input.Gameplay.Eat.IsPressed() && !isEating && health<maxHealth)
         {
             if (shotgunMain.ammo > 0)
             {
