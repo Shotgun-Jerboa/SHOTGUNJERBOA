@@ -38,25 +38,21 @@ public class MusicTransistion : MonoBehaviour
                 if (source.isPlaying)
                 {
                     // If the source is already playing, just continue
-                    Debug.Log("Continuing music: " + source.clip.name);
                 }
                 else
                 {
                     // If the source is not playing, unpause it to continue from where it was stopped
-                    Debug.Log("Resuming music: " + source.clip.name);
                     source.UnPause();
                 }
             }
             else
             {
-                Debug.Log("Pausing music: " + source.clip.name);
                 source.Pause();
                 source.volume = 0f;
             }
         }
         else
         {
-            Debug.LogWarning("Attempted to play a null AudioSource");
         }
     }
 

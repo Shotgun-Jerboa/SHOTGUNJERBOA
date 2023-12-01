@@ -93,20 +93,17 @@ public class EnemyAI : MonoBehaviour
         if (playerScript.health <= 0)
         {
             // Player is defeated, stop chasing and attacking
-            Debug.Log("Player is defeated. Enemy stops chasing and attacking.");
             return;
         }
 
         if (health > 0 && !isStationary)
         {
-            Debug.Log("Enemy is active and not stationary.");
 
             // Check for sight and attack range
             playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
             if (fieldOfView.hasSpottedPlayer)
             {
-                Debug.Log($"Chasing player. Destination set to {fieldOfView.playerRef.transform.position}");
                 patrolDelay = 0;
                 agent.destination = fieldOfView.playerRef.transform.position;
                 agent.speed = chasingSpeed;
@@ -155,7 +152,6 @@ public class EnemyAI : MonoBehaviour
 
             }
         }
-        Debug.Log($"NavMeshAgent isStopped: {agent.isStopped}, Rigidbody isKinematic: {rb.isKinematic}");
 
     }
 
@@ -172,7 +168,6 @@ public class EnemyAI : MonoBehaviour
     }
     IEnumerator Patrolling()
     {
-        Debug.Log("Starting patrol routine.");
 
         isPatrolling = true; // Set the flag when the coroutine starts
 
@@ -245,7 +240,6 @@ public class EnemyAI : MonoBehaviour
 
     void SearchWalkPoint()
     {
-        Debug.Log($"New walk point set: {walkPoint}");
 
         float randomAngle = Random.Range(0, 2 * Mathf.PI);
         float randomRadius = Random.Range(0, patrolRadius);
@@ -260,7 +254,6 @@ public class EnemyAI : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log($"Enemy took {damage} damage.");
 
         health -= damage;
         fieldOfView.hasSpottedPlayer = true;
@@ -327,7 +320,6 @@ public class EnemyAI : MonoBehaviour
         if (audioSource != null && alertSound != null)
         {
             audioSource.PlayOneShot(alertSound);
-            Debug.Log("Play");
         }
     }
 

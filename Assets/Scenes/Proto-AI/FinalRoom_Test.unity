@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4497367, g: 0.49692875, b: 0.5601782, a: 1}
+  m_IndirectSpecularColor: {r: 0.449737, g: 0.4969293, b: 0.56017864, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -685,63 +685,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15257933}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &18094895
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6368509144057489985, guid: a525053dfd3649440a525a41adee9b37, type: 3}
-      propertyPath: m_Name
-      value: Shotgun 1 - Pickup
-      objectReference: {fileID: 0}
-    - target: {fileID: 8607259075838457049, guid: a525053dfd3649440a525a41adee9b37, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 145.33784
-      objectReference: {fileID: 0}
-    - target: {fileID: 8607259075838457049, guid: a525053dfd3649440a525a41adee9b37, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 26.156
-      objectReference: {fileID: 0}
-    - target: {fileID: 8607259075838457049, guid: a525053dfd3649440a525a41adee9b37, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 115.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 8607259075838457049, guid: a525053dfd3649440a525a41adee9b37, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 8607259075838457049, guid: a525053dfd3649440a525a41adee9b37, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 8607259075838457049, guid: a525053dfd3649440a525a41adee9b37, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8607259075838457049, guid: a525053dfd3649440a525a41adee9b37, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8607259075838457049, guid: a525053dfd3649440a525a41adee9b37, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 8607259075838457049, guid: a525053dfd3649440a525a41adee9b37, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8607259075838457049, guid: a525053dfd3649440a525a41adee9b37, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a525053dfd3649440a525a41adee9b37, type: 3}
 --- !u!1001 &19735823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36764,7 +36707,7 @@ Canvas:
   m_GameObject: {fileID: 904635169}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 920912156}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
@@ -69517,7 +69460,7 @@ PrefabInstance:
       objectReference: {fileID: 920912156}
     - target: {fileID: 6304750865124559282, guid: 40c9988a4e31399429af924b27ecc179, type: 3}
       propertyPath: m_RenderMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6304750865124559282, guid: 40c9988a4e31399429af924b27ecc179, type: 3}
       propertyPath: m_UpdateRectTransformForStandalone
@@ -89320,7 +89263,6 @@ SceneRoots:
   - {fileID: 820269329}
   - {fileID: 799642142}
   - {fileID: 1288152671}
-  - {fileID: 18094895}
   - {fileID: 1081077652}
   - {fileID: 1389991992}
   - {fileID: 984930108}

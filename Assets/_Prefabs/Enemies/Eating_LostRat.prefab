@@ -2178,7 +2178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   fieldOfView: {fileID: 0}
-  health: 100
+  health: 50
   isStationary: 1
   walkPointRange: 5
   patrolRadius: 5
