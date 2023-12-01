@@ -61,7 +61,7 @@ MonoBehaviour:
     m_Value: 20
   scanlinesSpeed:
     m_OverrideState: 1
-    m_Value: -111.3
+    m_Value: 2
   noiseAmount:
     m_OverrideState: 1
     m_Value: 478.83
