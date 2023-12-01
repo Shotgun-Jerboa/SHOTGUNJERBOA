@@ -83,7 +83,7 @@ public class PlayerScript : MonoBehaviour
                 outTangent = 0
             }
         });
-        audioSource = GetComponent<AudioSource>(); 
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -243,7 +243,7 @@ public class PlayerScript : MonoBehaviour
                 {
                     airTimeLerp(xzVel);
                 }
-                
+
                 xzVel = Vector2.ClampMagnitude(xzVel, maxAirMagnitude);
                 break;
         }
@@ -459,7 +459,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
- 
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -512,6 +512,14 @@ public class PlayerScript : MonoBehaviour
 
                 StartCoroutine(ResetEating());
             }
+        }
+    }
+
+    void GetFreeAmmo()
+    {
+        if (settings.input.Gameplay.GetAmmo.IsPressed())
+        {
+            shotgunMain.ammo += 1;
         }
     }
 
@@ -578,8 +586,5 @@ public class PlayerScript : MonoBehaviour
         shotgunMain.isShootingAllowed = true;
 
     }
-    void OnDisable()
-    {
-        health = 0;
-    }
+
 }

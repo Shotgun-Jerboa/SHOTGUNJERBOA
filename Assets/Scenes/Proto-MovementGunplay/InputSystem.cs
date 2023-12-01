@@ -170,6 +170,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GetAmmo"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c24fa4b-2eaa-43af-a791-2d0fcd7c70e0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -544,6 +553,17 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Eat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""acd61f4a-039b-422e-a6db-7d89da51b4ee"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GetAmmo"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1128,6 +1148,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         m_Gameplay_MenuOPEN = m_Gameplay.FindAction("MenuOPEN", throwIfNotFound: true);
         m_Gameplay_Restart = m_Gameplay.FindAction("Restart", throwIfNotFound: true);
         m_Gameplay_Eat = m_Gameplay.FindAction("Eat", throwIfNotFound: true);
+        m_Gameplay_GetAmmo = m_Gameplay.FindAction("GetAmmo", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1218,6 +1239,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_MenuOPEN;
     private readonly InputAction m_Gameplay_Restart;
     private readonly InputAction m_Gameplay_Eat;
+    private readonly InputAction m_Gameplay_GetAmmo;
     public struct GameplayActions
     {
         private @PlayerInputSystem m_Wrapper;
@@ -1238,6 +1260,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         public InputAction @MenuOPEN => m_Wrapper.m_Gameplay_MenuOPEN;
         public InputAction @Restart => m_Wrapper.m_Gameplay_Restart;
         public InputAction @Eat => m_Wrapper.m_Gameplay_Eat;
+        public InputAction @GetAmmo => m_Wrapper.m_Gameplay_GetAmmo;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1295,6 +1318,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @Eat.started += instance.OnEat;
             @Eat.performed += instance.OnEat;
             @Eat.canceled += instance.OnEat;
+            @GetAmmo.started += instance.OnGetAmmo;
+            @GetAmmo.performed += instance.OnGetAmmo;
+            @GetAmmo.canceled += instance.OnGetAmmo;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -1347,6 +1373,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @Eat.started -= instance.OnEat;
             @Eat.performed -= instance.OnEat;
             @Eat.canceled -= instance.OnEat;
+            @GetAmmo.started -= instance.OnGetAmmo;
+            @GetAmmo.performed -= instance.OnGetAmmo;
+            @GetAmmo.canceled -= instance.OnGetAmmo;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -1508,6 +1537,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         void OnMenuOPEN(InputAction.CallbackContext context);
         void OnRestart(InputAction.CallbackContext context);
         void OnEat(InputAction.CallbackContext context);
+        void OnGetAmmo(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
