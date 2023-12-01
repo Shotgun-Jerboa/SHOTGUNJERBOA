@@ -36194,7 +36194,7 @@ Canvas:
   m_GameObject: {fileID: 904635169}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 920912156}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
@@ -67714,7 +67714,7 @@ PrefabInstance:
       objectReference: {fileID: 920912156}
     - target: {fileID: 6304750865124559282, guid: 40c9988a4e31399429af924b27ecc179, type: 3}
       propertyPath: m_RenderMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6304750865124559282, guid: 40c9988a4e31399429af924b27ecc179, type: 3}
       propertyPath: m_UpdateRectTransformForStandalone
@@ -67723,6 +67723,10 @@ PrefabInstance:
     - target: {fileID: 6308034113225521181, guid: 40c9988a4e31399429af924b27ecc179, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6327677011551208165, guid: 40c9988a4e31399429af924b27ecc179, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -10.900002
       objectReference: {fileID: 0}
     - target: {fileID: 6343318914372657994, guid: 40c9988a4e31399429af924b27ecc179, type: 3}
       propertyPath: m_Layer
