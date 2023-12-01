@@ -96,6 +96,8 @@ public class PlayerScript : MonoBehaviour
             StartCoroutine(EatingAction());
             EatToHealManager();
         }
+
+        GetFreeAmmo();
     }
 
     private void FixedUpdate()
@@ -517,7 +519,7 @@ public class PlayerScript : MonoBehaviour
 
     void GetFreeAmmo()
     {
-        if (settings.input.Gameplay.GetAmmo.IsPressed())
+        if (Input.GetKeyDown(KeyCode.P))
         {
             shotgunMain.ammo += 1;
         }

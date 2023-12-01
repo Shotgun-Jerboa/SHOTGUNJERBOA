@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4497367, g: 0.49692875, b: 0.5601782, a: 1}
+  m_IndirectSpecularColor: {r: 0.449737, g: 0.4969293, b: 0.56017864, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -37516,11 +37516,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1499103725327113703, guid: 72fbdc1698d07fc488627852472b0849, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3751414105463245767, guid: 72fbdc1698d07fc488627852472b0849, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3759286879404676908, guid: 72fbdc1698d07fc488627852472b0849, type: 3}
       propertyPath: m_Name
@@ -37532,11 +37532,11 @@ PrefabInstance:
       objectReference: {fileID: 402103905}
     - target: {fileID: 5453072005226326540, guid: 72fbdc1698d07fc488627852472b0849, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6246003478873040668, guid: 72fbdc1698d07fc488627852472b0849, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6690261591198584435, guid: 72fbdc1698d07fc488627852472b0849, type: 3}
       propertyPath: m_LocalScale.x
@@ -37592,11 +37592,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8442247288315130415, guid: 72fbdc1698d07fc488627852472b0849, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8561298888876261966, guid: 72fbdc1698d07fc488627852472b0849, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9052386010980063787, guid: 72fbdc1698d07fc488627852472b0849, type: 3}
       propertyPath: gunSoundPlayer

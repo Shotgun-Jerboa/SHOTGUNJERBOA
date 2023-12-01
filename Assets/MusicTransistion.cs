@@ -79,6 +79,10 @@ public class MusicTransistion : MonoBehaviour
 
     private IEnumerator CrossfadeMusic(AudioSource fadeOutSource, AudioSource fadeInSource, bool resume)
     {
+        if (fadeOutSource == fadeInSource)
+        {
+            yield break; // Exit the coroutine early
+        }
         isCrossfading = true;
 
         float timer = 0;
