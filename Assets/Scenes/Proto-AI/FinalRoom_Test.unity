@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.449737, g: 0.4969293, b: 0.56017864, a: 1}
+  m_IndirectSpecularColor: {r: 0.4497367, g: 0.49692875, b: 0.5601782, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1742,11 +1742,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 297968089022277375, guid: 01c358c02dcd92b4181455784fd65d6c, type: 3}
       propertyPath: zoneSize.z
-      value: 1.76
+      value: 3.33
       objectReference: {fileID: 0}
     - target: {fileID: 297968089022277375, guid: 01c358c02dcd92b4181455784fd65d6c, type: 3}
       propertyPath: interactZoneOffset.z
-      value: 3.68
+      value: 3.08
       objectReference: {fileID: 0}
     - target: {fileID: 2039228346681771159, guid: 01c358c02dcd92b4181455784fd65d6c, type: 3}
       propertyPath: m_LocalScale.x
@@ -1801,6 +1801,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3665860655013286043, guid: 01c358c02dcd92b4181455784fd65d6c, type: 3}
+      propertyPath: dialogue.name
+      value: HOODED RAT
+      objectReference: {fileID: 0}
+    - target: {fileID: 3665860655013286043, guid: 01c358c02dcd92b4181455784fd65d6c, type: 3}
       propertyPath: secondDialogue.name
       value: Hooded Rat
       objectReference: {fileID: 0}
@@ -1810,7 +1814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3665860655013286043, guid: 01c358c02dcd92b4181455784fd65d6c, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
-      value: My, my, you're PERFECT sonny!
+      value: My, my, you're PERFECT sonny! Yer gonna free us.
       objectReference: {fileID: 0}
     - target: {fileID: 3665860655013286043, guid: 01c358c02dcd92b4181455784fd65d6c, type: 3}
       propertyPath: dialogue.sentences.Array.data[1]
@@ -1826,7 +1830,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3665860655013286043, guid: 01c358c02dcd92b4181455784fd65d6c, type: 3}
       propertyPath: secondDialogue.sentences.Array.data[0]
-      value: Shoot the ground to jump higher!
+      value: Jump and shoot the ground to SHOTGUN JUMP!!!
       objectReference: {fileID: 0}
     - target: {fileID: 6639008501788778155, guid: 01c358c02dcd92b4181455784fd65d6c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5435,7 +5439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8193484918718546586, guid: 6dd589502031ebe4da2658389d2bd8c9, type: 3}
       propertyPath: dialogue.name
-      value: Tamagotchi
+      value: HOODED RAT
       objectReference: {fileID: 0}
     - target: {fileID: 8193484918718546586, guid: 6dd589502031ebe4da2658389d2bd8c9, type: 3}
       propertyPath: secondDialogue.name
@@ -29514,11 +29518,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8193484918718546586, guid: 6dd589502031ebe4da2658389d2bd8c9, type: 3}
       propertyPath: dialogue.name
-      value: Tamagotchi
+      value: HOODED RAT
       objectReference: {fileID: 0}
     - target: {fileID: 8193484918718546586, guid: 6dd589502031ebe4da2658389d2bd8c9, type: 3}
       propertyPath: secondDialogue.name
-      value: Tamagotchi
+      value: HOODED RAT
       objectReference: {fileID: 0}
     - target: {fileID: 8193484918718546586, guid: 6dd589502031ebe4da2658389d2bd8c9, type: 3}
       propertyPath: dialogue.sentences.Array.size
@@ -29526,15 +29530,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8193484918718546586, guid: 6dd589502031ebe4da2658389d2bd8c9, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
-      value: Hello
+      value: WHEW-WEE YOU SHOOT BETTER THAN MY PAW!
       objectReference: {fileID: 0}
     - target: {fileID: 8193484918718546586, guid: 6dd589502031ebe4da2658389d2bd8c9, type: 3}
       propertyPath: dialogue.sentences.Array.data[1]
-      value: I am Tamagotchi
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8193484918718546586, guid: 6dd589502031ebe4da2658389d2bd8c9, type: 3}
       propertyPath: dialogue.sentences.Array.data[2]
-      value: TEstt
+      value: PRESS E TO HEAL DARLIN'
       objectReference: {fileID: 0}
     - target: {fileID: 8193484918718546586, guid: 6dd589502031ebe4da2658389d2bd8c9, type: 3}
       propertyPath: secondDialogue.sentences.Array.size
@@ -29542,7 +29546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8193484918718546586, guid: 6dd589502031ebe4da2658389d2bd8c9, type: 3}
       propertyPath: secondDialogue.sentences.Array.data[0]
-      value: GO away.
+      value: PRESS E TO HEAL, THEY'RE GOOD FER YA!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -53949,7 +53953,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 246935901408292918, guid: 924c561c60af7b340b43a090738e2515, type: 3}
       propertyPath: m_LocalScale.x
-      value: 63.0296
+      value: 91.00844
       objectReference: {fileID: 0}
     - target: {fileID: 246935901408292918, guid: 924c561c60af7b340b43a090738e2515, type: 3}
       propertyPath: m_LocalScale.y
@@ -53965,11 +53969,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 246935901408292918, guid: 924c561c60af7b340b43a090738e2515, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.08
+      value: 19.05
       objectReference: {fileID: 0}
     - target: {fileID: 246935901408292918, guid: 924c561c60af7b340b43a090738e2515, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 84.8
+      value: 84.56
       objectReference: {fileID: 0}
     - target: {fileID: 246935901408292918, guid: 924c561c60af7b340b43a090738e2515, type: 3}
       propertyPath: m_LocalRotation.w
