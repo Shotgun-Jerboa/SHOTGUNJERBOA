@@ -60,7 +60,7 @@ public class PlayerScript : MonoBehaviour
         maxAirMagnitude = Mathf.Sqrt(Mathf.Pow(settings.worldVars.moveSpeed, 2) + Mathf.Pow(settings.worldVars.moveSpeed, 2)) * settings.worldVars.sprintSpeedMultiplier;
         healthUIAnimator = Global.instance.sceneTree.Get("Canvas/Canvas/Health").GetComponent<Animator>();
         shotgunMain = Global.instance.sceneTree.Get("Camera/Main Camera/Weapons").GetComponent<ShotgunMain>();
-                eatingAnimator = Global.instance.sceneTree.Get("Main Canvas/Eating Overlay").GetComponent<Animator>();
+        eatingAnimator = Global.instance.sceneTree.Get("Main Canvas/Eating Overlay").GetComponent<Animator>();
 
 
         movementMagnitude = new AnimationCurve(new Keyframe[] {
@@ -451,6 +451,7 @@ public class PlayerScript : MonoBehaviour
         if (health <=0)
         {
             Debug.Log("Game Over!");
+            health = 0;
         }
         if (health >maxHealth)
         {
@@ -500,7 +501,7 @@ public class PlayerScript : MonoBehaviour
 
     void EatToHealManager()
     {
-        if (settings.input.Gameplay.Eat.IsPressed() && !isEating)
+        if (settings.input.Gameplay.Eat.IsPressed() && !isEating && health<maxHealth)
         {
             if (shotgunMain.ammo > 0)
             {
@@ -584,5 +585,9 @@ public class PlayerScript : MonoBehaviour
         }
         shotgunMain.isShootingAllowed = true;
 
+    }
+    void OnDisable()
+    {
+        health = 0;
     }
 }

@@ -83,6 +83,7 @@ public class EnemyAI : MonoBehaviour
         {
             isStationary = false;
             AlertNearbyEnemies(); // Call this when the enemy spots the player
+            Debug.Log("Player spotted by enemy.");
         }
 
     }
@@ -92,16 +93,20 @@ public class EnemyAI : MonoBehaviour
         if (playerScript.health <= 0)
         {
             // Player is defeated, stop chasing and attacking
+            Debug.Log("Player is defeated. Enemy stops chasing and attacking.");
             return;
         }
 
         if (health > 0 && !isStationary)
         {
+            Debug.Log("Enemy is active and not stationary.");
+
             // Check for sight and attack range
             playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
             if (fieldOfView.hasSpottedPlayer)
             {
+                Debug.Log($"Chasing player. Destination set to {fieldOfView.playerRef.transform.position}");
                 patrolDelay = 0;
                 agent.destination = fieldOfView.playerRef.transform.position;
                 agent.speed = chasingSpeed;
@@ -109,6 +114,7 @@ public class EnemyAI : MonoBehaviour
                 animator.SetBool("Run", agent.remainingDistance > attackRange);
                 isPatrolling = false;
                 agent.isStopped = false; // Allow the agent to move
+                rb.isKinematic = true; // Disable Rigidbody physics
 
                 StopCoroutine(Patrolling()); // Stop the patrolling
                 if (!playerInAttackRange)
@@ -123,6 +129,8 @@ public class EnemyAI : MonoBehaviour
                     else
                     {
                         agent.isStopped = true; // Stop the agent from moving
+                        rb.isKinematic = false; // Enable Rigidbody physics
+
                     }
 
                     directionToPlayer.y = 0; // This line keeps the AI from tilting head up or down
@@ -137,6 +145,8 @@ public class EnemyAI : MonoBehaviour
             {
                 agent.stoppingDistance = 0; // Reset the stopping distance when not chasing the player
                 agent.isStopped = false; // Allow the agent to move
+                rb.isKinematic = true; // Disable Rigidbody physics
+
                 StartCoroutine(Patrolling());
             }
             if (fieldOfView.playerInSightRange && fieldOfView.playerInSightRange)
@@ -145,6 +155,7 @@ public class EnemyAI : MonoBehaviour
 
             }
         }
+        Debug.Log($"NavMeshAgent isStopped: {agent.isStopped}, Rigidbody isKinematic: {rb.isKinematic}");
 
     }
 
@@ -161,6 +172,8 @@ public class EnemyAI : MonoBehaviour
     }
     IEnumerator Patrolling()
     {
+        Debug.Log("Starting patrol routine.");
+
         isPatrolling = true; // Set the flag when the coroutine starts
 
         if (isStationary)
@@ -184,6 +197,8 @@ public class EnemyAI : MonoBehaviour
 
                 walkPointSet = false; // Reset walk point for the next loop
                 agent.isStopped = true; // Stop the agent
+                rb.isKinematic = false; // Disable Rigidbody physics
+
                 // Set Run parameter to false when waiting at a patrol point
                 animator.SetBool("Run", false);
 
@@ -191,6 +206,8 @@ public class EnemyAI : MonoBehaviour
                 if (agent.enabled && agent.isOnNavMesh)
                 {
                     agent.isStopped = false; // Resume the agent if it's safe to do so
+                    rb.isKinematic = true; // Disable Rigidbody physics
+
                 }
             }
 
@@ -228,6 +245,8 @@ public class EnemyAI : MonoBehaviour
 
     void SearchWalkPoint()
     {
+        Debug.Log($"New walk point set: {walkPoint}");
+
         float randomAngle = Random.Range(0, 2 * Mathf.PI);
         float randomRadius = Random.Range(0, patrolRadius);
         float x = patrolCenter.x + randomRadius * Mathf.Cos(randomAngle);
@@ -241,6 +260,8 @@ public class EnemyAI : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        Debug.Log($"Enemy took {damage} damage.");
+
         health -= damage;
         fieldOfView.hasSpottedPlayer = true;
         PlayRandomDamageSound();
