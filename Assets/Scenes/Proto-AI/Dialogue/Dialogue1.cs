@@ -9,6 +9,5 @@ public class Dialogue1
 
     [TextArea(3, 10)]
     public string[] sentences;
-    public AudioClip[] dialogueAudioClips; // Array of audio clips, one for each sentence
 
 }

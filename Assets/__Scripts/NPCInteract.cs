@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NPCInteract : MonoBehaviour
 {
+    [SerializeField] protected AudioSource DialogueMusic;
+    Transform AudioManager;
     SettingVars setting;
     [SerializeField] protected Vector3 interactZoneOffset;
     [SerializeField] protected Vector3 zoneSize = Vector3.one;
@@ -28,6 +30,12 @@ public class NPCInteract : MonoBehaviour
         playerRb = Global.instance.sceneTree.Get("Player").GetComponent<Rigidbody>();
         dialogueManager = Global.instance.sceneTree.Get("DialogueManager").GetComponent<DialogueManager>();
         setting = Global.instance.sceneTree.Get("Settings").GetComponent<SettingVars>();
+        DialogueMusic = Global.instance.sceneTree.Get("DialogueManager").GetComponent<AudioSource>();
+        DialogueMusic.Play();
+        DialogueMusic.Pause();
+        AudioManager = Global.instance.sceneTree.Get("Audio Manager").GetComponent<Transform>();
+
+
     }
 
     // Update is called once per frame
@@ -40,6 +48,8 @@ public class NPCInteract : MonoBehaviour
         {
             // Player just entered the zone
             isPlayerInZone = true;
+            DialogueMusic.Play();
+            AudioManager.gameObject.SetActive(false);
         }
 
         else if (!isCurrentlyInZone && isPlayerInZone)
@@ -47,10 +57,14 @@ public class NPCInteract : MonoBehaviour
             // Player just left the zone
             isPlayerInZone = false;
             hasTalk = false; // Reset the flag when the player leaves the zone
+            DialogueMusic.Pause();
+            AudioManager.gameObject.SetActive(true);
+
         }
 
         if (isPlayerInZone && !hasTalk)
         {
+            AudioManager.gameObject.SetActive(false);
             //Stop Player from moving when in dialogue
             playerScript.enabled = false;
             playerRb.velocity = Vector3.zero;
