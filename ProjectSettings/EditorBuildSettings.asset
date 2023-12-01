@@ -14,9 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu/MainMenu City Dupe.unity
     guid: e864b0f4770bcb746ba64345cf00ce0c
-  - enabled: 0
-    path: Assets/Scenes/Proto-AI/AI_Trung.unity
-    guid: 432507801ff73504fb47ed8a8a7ec356
   - enabled: 1
     path: Assets/Scenes/Proto-AI/FinalRoom_Test.unity
     guid: d9260d38d6ebb7644b3f2433eddecb41

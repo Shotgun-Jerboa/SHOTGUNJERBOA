@@ -49,4 +49,5 @@ public class InteractingHoodedRat : NPCInteract
             shotgun.SetActive(true);
         }
     }
+
 }
