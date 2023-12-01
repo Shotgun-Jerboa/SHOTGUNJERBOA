@@ -7,13 +7,23 @@ public class InteractingHoodedRat : NPCInteract
 {
     [SerializeField] GameObject shotgun;
     Animator animator;
+    private bool hasGivenGun = false; // Flag to track if gun has been given
 
     protected override void Start()
     {
         base.Start(); // Call base class start method
         animator = GetComponent<Animator>();
+        dialogueManager.OnDialogueComplete += HandleDialogueCompletion; // Subscribe to the event
     }
 
+    private void HandleDialogueCompletion()
+    {
+        // Check if it was the first dialogue
+        if (interactionCount == 1 && !hasGivenGun)
+        {
+            animator.SetBool("GiveGun", true);
+        }
+    }
     // Update is called once per frame
     protected override void Update()
     {
@@ -30,7 +40,6 @@ public class InteractingHoodedRat : NPCInteract
                 dialogueManager.DisplayNextSentence();
                 if (dialogueManager.endDialogue && interactable.IsInDialogue)
                 {
-                    animator.SetBool("GiveGun", true);
                     playerScript.enabled = true;
                     interactable.EndDialogue(); // Indicate that dialogue has ended
                 }
@@ -44,9 +53,11 @@ public class InteractingHoodedRat : NPCInteract
 
     public void GiveGun()
     {
-        if (shotgun != null)
+        if (shotgun != null && !hasGivenGun)
         {
             shotgun.SetActive(true);
+            hasGivenGun = true; // Ensure flag is set when gun is given
+
         }
     }
 

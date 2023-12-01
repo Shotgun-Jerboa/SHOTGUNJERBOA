@@ -6,6 +6,9 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    private AudioSource dialogueAudioSource;
+
+
     private Queue<string> sentences;
     private string currentSentence;
 
@@ -15,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     public float typingSpeed = 0.05f; // Adjust this value to change the speed
     public bool isTyping = false;
 
+    public event Action OnDialogueComplete;
 
 
     Animator animator;
@@ -88,5 +92,6 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetBool("IsOpen", false);
         endDialogue = true;
+        OnDialogueComplete?.Invoke(); // Invoke the event
     }
 }
