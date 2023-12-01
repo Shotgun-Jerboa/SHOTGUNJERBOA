@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4497367, g: 0.49692875, b: 0.5601782, a: 1}
+  m_IndirectSpecularColor: {r: 0.449737, g: 0.4969293, b: 0.56017864, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -31867,16 +31867,19 @@ PrefabInstance:
     - {fileID: 2875972317503416719, guid: 93f2c42814e61cb4391b51732f49479d, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4609154967420149309, guid: 93f2c42814e61cb4391b51732f49479d, type: 3}
-      insertIndex: 16
-      addedObject: {fileID: 1338326574}
+      insertIndex: 11
+      addedObject: {fileID: 1813495838}
     - targetCorrespondingSourceObject: {fileID: 4609154967420149309, guid: 93f2c42814e61cb4391b51732f49479d, type: 3}
       insertIndex: 17
-      addedObject: {fileID: 1506179611}
+      addedObject: {fileID: 1338326574}
     - targetCorrespondingSourceObject: {fileID: 4609154967420149309, guid: 93f2c42814e61cb4391b51732f49479d, type: 3}
       insertIndex: 18
-      addedObject: {fileID: 1286657037}
+      addedObject: {fileID: 1506179611}
     - targetCorrespondingSourceObject: {fileID: 4609154967420149309, guid: 93f2c42814e61cb4391b51732f49479d, type: 3}
       insertIndex: 19
+      addedObject: {fileID: 1286657037}
+    - targetCorrespondingSourceObject: {fileID: 4609154967420149309, guid: 93f2c42814e61cb4391b51732f49479d, type: 3}
+      insertIndex: 20
       addedObject: {fileID: 554572579}
     - targetCorrespondingSourceObject: {fileID: 4609154967420149309, guid: 93f2c42814e61cb4391b51732f49479d, type: 3}
       insertIndex: -1
@@ -51983,6 +51986,72 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41ee4889d6163c14b84f7711054e2763, type: 3}
+--- !u!1 &1813495837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1813495838}
+  - component: {fileID: 1813495840}
+  - component: {fileID: 1813495839}
+  m_Layer: 0
+  m_Name: Victory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1813495838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813495837}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.70308584, y: -0.07530196, z: -0.07530196, w: 0.7030857}
+  m_LocalPosition: {x: -7.31, y: -7.0600014, z: 11.84}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 930222396}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1813495839
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813495837}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.31
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1813495840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813495837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ca4684512e52cd4eaa2d1726a460ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1813569681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6278970900946388082, guid: bdf43dfbf8b72ba4da741832d6de4f12, type: 3}
