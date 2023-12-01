@@ -55,12 +55,12 @@ public class PlayerScript : MonoBehaviour
         health = maxHealth;
         physbody = gameObject.GetComponent<Rigidbody>();
         children = new(gameObject);
-        settings = Global.instance.sceneTree.Get("Settings").GetComponent<SettingVars>();
+        settings = GameObject.Find("Settings").GetComponent<SettingVars>();
         hitboxHeight = children.Get("Collision").GetComponent<CapsuleCollider>().height;
         maxAirMagnitude = Mathf.Sqrt(Mathf.Pow(settings.worldVars.moveSpeed, 2) + Mathf.Pow(settings.worldVars.moveSpeed, 2)) * settings.worldVars.sprintSpeedMultiplier;
-        healthUIAnimator = Global.instance.sceneTree.Get("Canvas/Canvas/Health").GetComponent<Animator>();
-        shotgunMain = Global.instance.sceneTree.Get("Camera/Main Camera/Weapons").GetComponent<ShotgunMain>();
-        eatingAnimator = Global.instance.sceneTree.Get("Main Canvas/Eating Overlay").GetComponent<Animator>();
+        healthUIAnimator = GameObject.Find("Canvas/Canvas/Health").GetComponent<Animator>();
+        shotgunMain = GameObject.Find("Camera/Main Camera/Weapons").GetComponent<ShotgunMain>();
+        eatingAnimator = GameObject.Find("Main Canvas/Eating Overlay").GetComponent<Animator>();
 
 
         movementMagnitude = new AnimationCurve(new Keyframe[] {
@@ -548,7 +548,7 @@ public class PlayerScript : MonoBehaviour
     }
     IEnumerator EatingAction()
     {
-        GameObject weaponsParent = Global.instance.sceneTree.Get("Camera/Main Camera/Weapons");
+        GameObject weaponsParent = GameObject.Find("Camera/Main Camera/Weapons");
 
         // Clear the list before adding new objects
         weaponObjects.Clear();

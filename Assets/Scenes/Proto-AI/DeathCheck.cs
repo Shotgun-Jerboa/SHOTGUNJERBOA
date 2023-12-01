@@ -14,12 +14,12 @@ public class DeathCheck : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerScript = Global.instance.sceneTree.Get("Player").GetComponent<PlayerScript>();
-        playerAnimator = Global.instance.sceneTree.Get("Camera").GetComponent<Animator>();
-        shotgunMain = Global.instance.sceneTree.Get("Camera/Main Camera/Weapons").GetComponent<ShotgunMain>();
-        deathScreen = Global.instance.sceneTree.Get("Main Canvas/DeathScreen").GetComponent<Animator>();
-        settingVars = Global.instance.sceneTree.Get("Settings").GetComponent<SettingVars>();
-        camScript = Global.instance.sceneTree.Get("Camera/Main Camera").GetComponent<CamScript>();
+        playerScript = GameObject.Find("Player").GetComponent<PlayerScript>();
+        playerAnimator = GameObject.Find("Camera").GetComponent<Animator>();
+        shotgunMain = GameObject.Find("Camera/Main Camera/Weapons").GetComponent<ShotgunMain>();
+        deathScreen = GameObject.Find("Main Canvas/DeathScreen").GetComponent<Animator>();
+        settingVars = GameObject.Find("Settings").GetComponent<SettingVars>();
+        camScript = GameObject.Find("Camera/Main Camera").GetComponent<CamScript>();
     }
 
     // Update is called once per frame

@@ -26,14 +26,14 @@ public class NPCInteract : MonoBehaviour
     protected virtual void Start()
     {
         interactable = GetComponent<Interactable>();
-        playerScript = Global.instance.sceneTree.Get("Player").GetComponent<PlayerScript>();
-        playerRb = Global.instance.sceneTree.Get("Player").GetComponent<Rigidbody>();
-        dialogueManager = Global.instance.sceneTree.Get("DialogueManager").GetComponent<DialogueManager>();
-        setting = Global.instance.sceneTree.Get("Settings").GetComponent<SettingVars>();
-        DialogueMusic = Global.instance.sceneTree.Get("DialogueManager").GetComponent<AudioSource>();
+        playerScript = GameObject.Find("Player").GetComponent<PlayerScript>();
+        playerRb = GameObject.Find("Player").GetComponent<Rigidbody>();
+        dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
+        setting = GameObject.Find("Settings").GetComponent<SettingVars>();
+        DialogueMusic = GameObject.Find("DialogueManager").GetComponent<AudioSource>();
         DialogueMusic.Play();
         DialogueMusic.Pause();
-        AudioManager = Global.instance.sceneTree.Get("Audio Manager").GetComponent<Transform>();
+        AudioManager = GameObject.Find("Audio Manager").GetComponent<Transform>();
 
 
     }

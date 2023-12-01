@@ -21,7 +21,7 @@ public class DialogueCamera : MonoBehaviour
         playerCamera = Camera.main;
         interactingHoodedRat = GetComponent<InteractingHoodedRat>();
         originalTransform = playerCamera.transform;
-        settingVars = Global.instance.sceneTree.Get("Settings").GetComponent<SettingVars>();
+        settingVars = GameObject.Find("Settings").GetComponent<SettingVars>();
 
     }
 

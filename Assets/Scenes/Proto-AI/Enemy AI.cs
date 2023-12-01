@@ -71,7 +71,7 @@ public class EnemyAI : MonoBehaviour
         fieldOfView = GetComponent<FieldOfView>();
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
         patrolCenter = transform.position; // Set the patrol center to the enemy's starting position
-        playerScript = Global.instance.sceneTree.Get("Player").GetComponent<PlayerScript>();
+        playerScript = GameObject.Find("Player").GetComponent<PlayerScript>();
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = alertSound;
     }

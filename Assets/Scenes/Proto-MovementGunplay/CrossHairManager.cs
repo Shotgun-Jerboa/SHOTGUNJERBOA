@@ -32,10 +32,10 @@ public class CrossHairManager : MonoBehaviour
 
     private void Start()
     {
-        leftCrossHairFull = Global.instance.sceneTree.Get("Canvas/Left_CrosshairFull");
-        rightCrossHairFull = Global.instance.sceneTree.Get("Canvas/Right_CrosshairFull");
-        leftCrossHairEmpty = Global.instance.sceneTree.Get("Canvas/Left_CrosshairEmpty");
-        rightCrossHairEmpty = Global.instance.sceneTree.Get("Canvas/Right_CrosshairEmpty");
+        leftCrossHairFull = GameObject.Find("Canvas/Left_CrosshairFull");
+        rightCrossHairFull = GameObject.Find("Canvas/Right_CrosshairFull");
+        leftCrossHairEmpty = GameObject.Find("Canvas/Left_CrosshairEmpty");
+        rightCrossHairEmpty = GameObject.Find("Canvas/Right_CrosshairEmpty");
     }
     private void Awake()
     {

@@ -22,7 +22,7 @@ public class FieldOfView : MonoBehaviour
     void Start()
     {
         StartCoroutine(FOVRoutine());
-        playerRef = Global.instance.sceneTree.Get("Player");
+        playerRef = GameObject.Find("Player");
     }
 
     // Update is called once per frame

@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         // player = Global.instance.sceneTree.Get("Player");
-        shotgunMain = Global.instance.sceneTree.Get("Camera/Main Camera/Weapons").GetComponent<ShotgunMain>();
+        shotgunMain = GameObject.Find("Camera/Main Camera/Weapons").GetComponent<ShotgunMain>();
 
         Global.SceneHeirarchy children = new(gameObject);
 
@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
    {
-        healthText.text = "" + Global.instance.sceneTree.Get("Player").GetComponent<PlayerScript>().health;
+        healthText.text = "" + GameObject.Find("Player").GetComponent<PlayerScript>().health;
         ammoText.text = "" + shotgunMain.ammo;
         // if(Input.GetKey(KeyCode.P)){
         //     animator.SetTrigger("Damage");

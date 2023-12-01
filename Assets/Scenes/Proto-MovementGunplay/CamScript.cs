@@ -41,8 +41,8 @@ public class CamScript : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        playerPhybody = Global.instance.sceneTree.Get("Player").GetComponent<Rigidbody>();
-        settings = Global.instance.sceneTree.Get("Settings").GetComponent<SettingVars>();
+        playerPhybody = GameObject.Find("Player").GetComponent<Rigidbody>();
+        settings = GameObject.Find("Settings").GetComponent<SettingVars>();
     }
 
     void Update()

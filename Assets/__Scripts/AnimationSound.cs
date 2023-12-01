@@ -11,7 +11,7 @@ public class AnimationSound : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        audioSource = Global.instance.sceneTree.Get("Audio Manager/SoundEffect").GetComponent<AudioSource>();
+        audioSource = GameObject.Find("Audio Manager/SoundEffect").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

@@ -24,10 +24,10 @@ public class ShotgunMain : MonoBehaviour
 
     void Start()
     {
-        settings = Global.instance.sceneTree.Get("Settings").GetComponent<SettingVars>();
-        player = Global.instance.sceneTree.Get("Player").GetComponent<PlayerScript>();
-        camera = Global.instance.sceneTree.Get("Camera/Main Camera").transform;
-        crosshairManager = Global.instance.sceneTree.Get("Canvas").GetComponent<CrossHairManager>();
+        settings = GameObject.Find("Settings").GetComponent<SettingVars>();
+        player = GameObject.Find("Player").GetComponent<PlayerScript>();
+        camera = GameObject.Find("Camera/Main Camera").transform;
+        crosshairManager = GameObject.Find("Canvas").GetComponent<CrossHairManager>();
         updateGuns();
     }
 
@@ -224,11 +224,11 @@ public class ShotgunMain : MonoBehaviour
 
         if(shotguns.Length > 0)
         {
-            shotguns[0].getObj().transform.position = Global.instance.sceneTree.Get("Camera/Main Camera/Weapons/RHandPointer").transform.position;
+            shotguns[0].getObj().transform.position = GameObject.Find("Camera/Main Camera/Weapons/RHandPointer").transform.position;
 
             if(shotguns.Length > 1)
             {
-                shotguns[1].getObj().transform.position = Global.instance.sceneTree.Get("Camera/Main Camera/Weapons/LHandPointer").transform.position;
+                shotguns[1].getObj().transform.position = GameObject.Find("Camera/Main Camera/Weapons/LHandPointer").transform.position;
             }
         }
     }

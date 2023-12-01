@@ -246,7 +246,7 @@ public class DebugBasicShotgun : MonoBehaviour, IShotgun
             }
         }
 
-        PlayerScript playerRef = Global.instance.sceneTree.Get("Player").GetComponent<PlayerScript>();
+        PlayerScript playerRef = GameObject.Find("Player").GetComponent<PlayerScript>();
 
         RaycastHit mainHit;
         Ray ray = new(camera.position, camera.rotation * Vector3.forward);

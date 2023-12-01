@@ -289,10 +289,10 @@ public class Global : MonoBehaviour
 
     void Update()
     {
-        if (sceneTree.objCount != getTreeCount())
+       /* if (sceneTree.objCount != getTreeCount())
         {
             sceneTree = new();
-        }
+        }*/
     }
 
     void FixedUpdate()

@@ -11,7 +11,7 @@ public class PistachioScript : MonoBehaviour
 
     void Start()
     {
-        shotgunsRef = Global.instance.sceneTree.Get("Camera/Main Camera/Weapons").GetComponent<ShotgunMain>();
+        shotgunsRef = GameObject.Find("Camera/Main Camera/Weapons").GetComponent<ShotgunMain>();
     }
 
     private void OnTriggerEnter(Collider other)

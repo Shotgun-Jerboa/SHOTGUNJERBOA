@@ -13,7 +13,7 @@ public class ShotgunPickup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         main = Global.instance.sceneTree.Get("Camera/Main Camera/Weapons").GetComponent<ShotgunMain>();
+         main = GameObject.Find("Camera/Main Camera/Weapons").GetComponent<ShotgunMain>();
     }
 
     private void OnTriggerEnter(Collider other)

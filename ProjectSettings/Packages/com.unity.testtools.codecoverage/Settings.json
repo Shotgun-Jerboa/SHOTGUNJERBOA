@@ -1,5 +1,31 @@
 {
     "m_Dictionary": {
-        "m_DictionaryValues": []
+        "m_DictionaryValues": [
+            {
+                "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "IncludeAssemblies",
+                "value": "{\"m_Value\":\"Assembly-CSharp,Assembly-CSharp-Editor,Cinemachine,com.unity.cinemachine.editor,PPv2URPConverters,Unity.2D.Sprite.Editor,Unity.AI.Navigation,Unity.AI.Navigation.Editor,Unity.AI.Navigation.Editor.ConversionSystem,Unity.AI.Navigation.Updater,Unity.Burst,Unity.Burst.CodeGen,Unity.Burst.Editor,Unity.CollabProxy.Editor,Unity.EditorCoroutines.Editor,Unity.InputSystem,Unity.InputSystem.ForUI,Unity.InputSystem.TestFramework,Unity.Mathematics,Unity.Mathematics.Editor,Unity.Performance.Profile-Analyzer.Editor,Unity.PlasticSCM.Editor,Unity.Postprocessing.Editor,Unity.Postprocessing.Runtime,Unity.ProBuilder,Unity.ProBuilder.AddOns.Editor,Unity.ProBuilder.AssetIdRemapUtility,Unity.ProBuilder.Csg,Unity.ProBuilder.Editor,Unity.ProBuilder.KdTree,Unity.ProBuilder.Poly2Tri,Unity.ProBuilder.Stl,Unity.RenderPipeline.Universal.ShaderLibrary,Unity.RenderPipelines.Core.Editor,Unity.RenderPipelines.Core.Runtime,Unity.RenderPipelines.Core.ShaderLibrary,Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary,Unity.RenderPipelines.Universal.Editor,Unity.RenderPipelines.Universal.Runtime,Unity.RenderPipelines.Universal.Shaders,Unity.Rider.Editor,Unity.Searcher.Editor,Unity.Settings.Editor,Unity.ShaderGraph.Editor,Unity.ShaderGraph.Utilities,Unity.TestTools.CodeCoverage.Editor,Unity.TestTools.CodeCoverage.Editor.OpenCover.Model,Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection,Unity.TextMeshPro,Unity.TextMeshPro.Editor,Unity.Timeline,Unity.Timeline.Editor,Unity.VisualScripting.Core,Unity.VisualScripting.Core.Editor,Unity.VisualScripting.Flow,Unity.VisualScripting.Flow.Editor,Unity.VisualScripting.SettingsProvider.Editor,Unity.VisualScripting.Shared.Editor,Unity.VisualScripting.State,Unity.VisualScripting.State.Editor,Unity.VisualStudio.Editor,Unity.VSCode.Editor,UnityEditor.TestRunner,UnityEditor.UI,UnityEngine.TestRunner,UnityEngine.UI\"}"
+            },
+            {
+                "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "Path",
+                "value": "{\"m_Value\":\"{ProjectPath}\"}"
+            },
+            {
+                "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "HistoryPath",
+                "value": "{\"m_Value\":\"{ProjectPath}\"}"
+            },
+            {
+                "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "PathsToInclude",
+                "value": "{\"m_Value\":\"{ProjectPath}/Assets/BattleStateCheck.cs\"}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "EnableCodeCoverage",
+                "value": "{\"m_Value\":false}"
+            }
+        ]
     }
 }
