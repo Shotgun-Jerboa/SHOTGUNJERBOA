@@ -306,6 +306,7 @@ public class EnemyAI : MonoBehaviour
         if (audioSource != null && alertSound != null)
         {
             audioSource.PlayOneShot(alertSound);
+            Debug.Log("Play");
         }
     }
 

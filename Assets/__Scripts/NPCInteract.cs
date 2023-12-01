@@ -33,7 +33,7 @@ public class NPCInteract : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        Collider[] hitColliders = Physics.OverlapBox(transform.position, zoneSize / 2, Quaternion.identity, playerLayer);
+        Collider[] hitColliders = Physics.OverlapBox(transform.position + interactZoneOffset, zoneSize / 2, Quaternion.identity, playerLayer);
         bool isCurrentlyInZone = hitColliders.Length > 0;
 
         if (isCurrentlyInZone && !isPlayerInZone)
@@ -84,9 +84,7 @@ public class NPCInteract : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Matrix4x4 rotationMatrix = Matrix4x4.TRS(transform.position + interactZoneOffset, transform.rotation, transform.localScale);
-        Gizmos.matrix = rotationMatrix;
-        Gizmos.DrawWireCube(Vector3.zero, zoneSize);
+        Gizmos.DrawWireCube(transform.position + interactZoneOffset, zoneSize);
     }
 
 }
