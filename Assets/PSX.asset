@@ -1,5 +1,30 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4348172087935562879
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea62842ddb6960488930897ba9ce398, type: 3}
+  m_Name: Dithering
+  m_EditorClassIdentifier: 
+  active: 1
+  patternIndex:
+    m_OverrideState: 1
+    m_Value: 0
+  ditherThreshold:
+    m_OverrideState: 1
+    m_Value: 512
+  ditherStrength:
+    m_OverrideState: 1
+    m_Value: 1
+  ditherScale:
+    m_OverrideState: 1
+    m_Value: 134.84
 --- !u!114 &-4065984438630120651
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -14,40 +39,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   screenBendX:
-    m_OverrideState: 0
-    m_Value: 1000
+    m_OverrideState: 1
+    m_Value: 1001.38
   screenBendY:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1000
   vignetteAmount:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   vignetteSize:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 2
   vignetteRounding:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 2
   vignetteSmoothing:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   scanlinesDensity:
-    m_OverrideState: 0
-    m_Value: 200
+    m_OverrideState: 1
+    m_Value: 20
   scanlinesSpeed:
-    m_OverrideState: 0
-    m_Value: -10
+    m_OverrideState: 1
+    m_Value: -111.3
   noiseAmount:
-    m_OverrideState: 0
-    m_Value: 250
+    m_OverrideState: 1
+    m_Value: 478.83
   chromaticRed:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {x: 0, y: 0}
   chromaticGreen:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {x: 0, y: 0}
   chromaticBlue:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {x: 0, y: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -63,3 +88,71 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - {fileID: -4065984438630120651}
+  - {fileID: 1065940994275353240}
+  - {fileID: -4348172087935562879}
+  - {fileID: 3564484546154500952}
+--- !u!114 &1065940994275353240
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35a1bd58dd7548198609eabd8ae2bb7d, type: 3}
+  m_Name: Pixelation
+  m_EditorClassIdentifier: 
+  active: 1
+  widthPixelation:
+    m_OverrideState: 1
+    m_Value: 512
+  heightPixelation:
+    m_OverrideState: 1
+    m_Value: 512
+  colorPrecision:
+    m_OverrideState: 1
+    m_Value: 32
+--- !u!114 &3564484546154500952
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32eb3b8fb939d9b41b04b5621e6d36dd, type: 3}
+  m_Name: Fog
+  m_EditorClassIdentifier: 
+  active: 1
+  fogDensity:
+    m_OverrideState: 1
+    m_Value: 1
+  fogDistance:
+    m_OverrideState: 1
+    m_Value: 10
+  fogColor:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  ambientColor:
+    m_OverrideState: 1
+    m_Value: {r: 0.1, g: 0.1, b: 0.1, a: 0.1}
+  fogNear:
+    m_OverrideState: 1
+    m_Value: 1
+  fogFar:
+    m_OverrideState: 1
+    m_Value: 100
+  fogAltScale:
+    m_OverrideState: 1
+    m_Value: 10
+  fogThinning:
+    m_OverrideState: 1
+    m_Value: 100
+  noiseScale:
+    m_OverrideState: 1
+    m_Value: 100
+  noiseStrength:
+    m_OverrideState: 1
+    m_Value: 0.05
