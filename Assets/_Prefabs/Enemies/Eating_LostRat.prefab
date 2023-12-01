@@ -2196,7 +2196,7 @@ MonoBehaviour:
   pistachioDrop: {fileID: 4063802379288062586, guid: bdf43dfbf8b72ba4da741832d6de4f12, type: 3}
   spawnRadius: 2.33
   noSpawnRadius: 1.73
-  alertSound: {fileID: 0}
+  alertSound: {fileID: 8300000, guid: fcd41834123febf4ca583571d0e5343f, type: 3}
   damageSounds: []
   playerScript: {fileID: 0}
   whatIsGround:
