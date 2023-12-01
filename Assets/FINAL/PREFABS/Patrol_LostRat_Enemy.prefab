@@ -209,7 +209,8 @@ MonoBehaviour:
   spawnRadius: 3
   noSpawnRadius: 1
   alertSound: {fileID: 0}
-  damageSounds: []
+  damageSounds:
+  - {fileID: 0}
   playerScript: {fileID: 0}
   whatIsGround:
     serializedVersion: 2

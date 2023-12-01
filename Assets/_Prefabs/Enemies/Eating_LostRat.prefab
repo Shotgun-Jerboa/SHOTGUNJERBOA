@@ -2198,9 +2198,8 @@ MonoBehaviour:
   noSpawnRadius: 1.73
   alertSound: {fileID: 8300000, guid: fcd41834123febf4ca583571d0e5343f, type: 3}
   damageSounds:
-  - {fileID: 8300000, guid: c443f7a7e80bd194e82773f78ef7378a, type: 3}
-  - {fileID: 8300000, guid: 79b0586c1f462724b90f5e9f21f56133, type: 3}
-  - {fileID: 8300000, guid: 877a55e0200471940b51cdd528250cb7, type: 3}
+  - {fileID: 8300000, guid: fcd41834123febf4ca583571d0e5343f, type: 3}
+  - {fileID: 8300000, guid: fcd41834123febf4ca583571d0e5343f, type: 3}
   playerScript: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
