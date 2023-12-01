@@ -18,42 +18,8 @@ public class MusicTransistion : MonoBehaviour
 
     private void Start()
     {
-        // Preload and pause all chill music sources
-        foreach (var source in chillMusicSources)
-        {
-            if (source.clip != null)
-            {
-                source.Play();
-                source.Pause();
-            }
-        }
 
-        // Preload and pause all battle music sources
-        foreach (var source in battleMusicSources)
-        {
-            if (source.clip != null)
-            {
-                source.Play();
-                source.Pause();
-            }
-        }
-
-        currentChillMusic = GetRandomMusic(chillMusicSources);
-        currentBattleMusic = GetRandomMusic(battleMusicSources);
-
-        if (currentChillMusic != null)
-        {
-            currentChillMusic.UnPause();  // Unpause the selected track
-        }
-
-        if (currentBattleMusic != null && currentBattleMusic != currentChillMusic)
-        {
-            currentBattleMusic.Pause();  // Ensure it remains paused
-        }
-        PlayMusic(currentChillMusic, true);
-        PlayMusic(currentBattleMusic, false);
-
-        GameStateManager.Instance.OnBattleStateChanged += HandleBattleStateChanged;
+        
     }
 
     private AudioSource GetRandomMusic(List<AudioSource> sources)
@@ -142,6 +108,52 @@ public class MusicTransistion : MonoBehaviour
         }
 
         isCrossfading = false;
+    }
+
+    private void OnEnable()
+    {
+        InitializeMusic();
+    }
+
+    private void InitializeMusic()
+    {
+        // Preload and pause all chill music sources
+        foreach (var source in chillMusicSources)
+        {
+            if (source.clip != null)
+            {
+                source.Play();
+                source.Pause();
+            }
+        }
+
+        // Preload and pause all battle music sources
+        foreach (var source in battleMusicSources)
+        {
+            if (source.clip != null)
+            {
+                source.Play();
+                source.Pause();
+            }
+        }
+
+        currentChillMusic = GetRandomMusic(chillMusicSources);
+        currentBattleMusic = GetRandomMusic(battleMusicSources);
+
+        if (currentChillMusic != null)
+        {
+            currentChillMusic.UnPause();  // Unpause the selected track
+        }
+
+        if (currentBattleMusic != null && currentBattleMusic != currentChillMusic)
+        {
+            currentBattleMusic.Pause();  // Ensure it remains paused
+        }
+        PlayMusic(currentChillMusic, true);
+        PlayMusic(currentBattleMusic, false);
+
+        // Subscribe to GameStateManager's event
+        GameStateManager.Instance.OnBattleStateChanged += HandleBattleStateChanged;
     }
 
     void OnDestroy()
