@@ -483,6 +483,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 0eebda70-9e1e-458b-9fde-c2b80d7149fd
     m_ActionName: Gameplay/Eat[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4c24fa4b-2eaa-43af-a791-2d0fcd7c70e0
+    m_ActionName: Gameplay/GetAmmo[/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
